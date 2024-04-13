@@ -28,7 +28,7 @@ for(let i=0; i < 1<<12; i++) {
     
 }
 spots[0].addEventListener('click', e => {
-    postfetch('/test',{color:[...arr]}).then((data)=>{
+    postfetch('/colors',{color:[...arr]}).then((data)=>{
         return data.color
     })
 })

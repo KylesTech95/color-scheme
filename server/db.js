@@ -12,10 +12,10 @@ const pool = new Pool({
     }
 
 })
-const getRows = async (pool) => {
-    const rows = await pool.query('select * from colors')
-    console.log(rows.rows);
-}
-getRows(pool)
+// const getRows = async (pool) => {
+//     const rows = await pool.query('select * from colors')
+//     console.log(rows.rows);
+// }
+// getRows(pool)
 
 module.exports = { pool };

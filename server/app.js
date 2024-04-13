@@ -1,4 +1,5 @@
 require('dotenv').config()
+const pool = require('./db.js').pool
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -9,7 +10,7 @@ const middleware = require('./../lib/middleware.js')
 
 
 middleware(app,express,cors,bodyParser)
-routes(app)
+routes(app,pool)
 
 
 
