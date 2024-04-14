@@ -17,6 +17,21 @@ const postfetch = async(api,d) => {
     // testing postFetch
     return response.json()
 }
+const rotateRight = (arr) => {
+    let take = arr.shift();
+    arr.push(take)
+    console.log(arr[0])
+    arr[0].classList.add('z-index')
+}
+const rotateLeft = (arr) => {
+    let take = arr.pop();
+    arr.unshift(take)
+    console.log(arr[0])
+    arr[0].classList.add('z-index')
+}
+const left_scroll = document.querySelectorAll('#scroll-container>.scroll')
+const right_scroll = document.querySelectorAll('#scroll-container2>.scroll')
+
 const api_colors = `/colors`
 
 let arr = []
@@ -30,16 +45,16 @@ for(let i=0; i < 1<<12; i++) {
     
 }
 
-insert_btn.style.left = `${document.body.clientWidth/2}px`
-insert_btn.addEventListener('click', e => {
-    postfetch(insert_color,{color:[...arr]}).then((data)=>{
-        return data.color
-    })
-})
+// insert_btn.style.left = `${document.body.clientWidth/2}px`
+// insert_btn.addEventListener('click', e => {
+//     postfetch(insert_color,{color:[...arr]}).then((data)=>{
+//         return data.color
+//     })
+// })
 
 
 
-window.onload=()=>{
+window.onload=()=>{    
     fetch(api_colors).then(res=>res.json()).then(data=>{
         spots.forEach(spot=>{
             // console.log(data.colors)
@@ -56,7 +71,6 @@ window.onload=()=>{
                             justify-content:center;
                             `
                     spot.appendChild(li)
-                    console.log(li)
                 // setTimeout(()=>{
                 //     spot.appendChild(li)
                 //     console.log(li)
@@ -64,7 +78,49 @@ window.onload=()=>{
                 
             }
             })
+            let items = document.querySelectorAll('.choice-spot>li')
+            let arr = [...items]
+
+            left_scroll.forEach((sc,index)=>{
+                
+                if(index%2==0){
+                    sc.addEventListener('click',e=>{
+                        arr.forEach(a=>a.classList.remove('z-index'))
+                        // console.log(e.target)
+                        rotateRight(arr)
+                    })
+                }
+                else{
+                    let items = document.querySelectorAll('.choice-spot>li')
+                    sc.addEventListener('click',e=>{
+                        arr.forEach(a=>a.classList.remove('z-index'))
+                        // console.log(e.target)
+                        rotateLeft(arr)
+                    })
+                }
+            })
+
+            right_scroll.forEach((sc,index)=>{
+                
+                if(index%2==0){
+                    sc.addEventListener('click',e=>{
+                        arr.forEach(a=>a.classList.remove('z-index'))
+                        // console.log(e.target)
+                        rotateRight(arr)
+                    })
+                }
+                else{
+                    let items = document.querySelectorAll('.choice-spot>li')
+                    sc.addEventListener('click',e=>{
+                        arr.forEach(a=>a.classList.remove('z-index'))
+                        // console.log(e.target)
+                        rotateLeft(arr)
+                    })
+                }
+            })
+
+
         })
 }
 
-            
+        
