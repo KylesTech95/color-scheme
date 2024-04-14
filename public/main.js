@@ -40,7 +40,7 @@ const failSafe = {
         scroll.classList.add('no-pointer')
         setTimeout(()=>{
             scroll.classList.remove('no-pointer')
-        },1750)
+        },50)
     }
 }
 const postfetch = async(api,d) => {
