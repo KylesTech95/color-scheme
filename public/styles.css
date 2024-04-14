@@ -32,6 +32,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background:rgb(255,255,136)
 }
 #wrapper{
     height:100vh;
@@ -79,6 +80,18 @@ position:relative;
 }
 .choice-spot>li{
     border-radius: 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+}
+.color-input{
+    width:100%;
+    background:transparent;
+    text-align:center;
+    width:100%;
+    border-radius:20px;
+    bordeR:none;
 }
 .hidden{
     display:none;
@@ -108,6 +121,7 @@ position:relative;
 .active-click{
     border:.5rem solid ghostwhite;
 }
+
 
 .swoosh-left{
     opacity:0;

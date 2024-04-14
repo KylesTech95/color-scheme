@@ -59,6 +59,14 @@ window.onload=()=>{
             let arg = [...data.colors]
             for(let i = 0; i < arg.length; i++){
                 const li = document.createElement('li')
+                const input = document.createElement('input')
+                      input.classList.add('color-input')
+                      input.setAttribute('type','text')
+                      input.setAttribute('value',arg[i].color);
+                      if(/[0-34],[0-34]|[0-34],/g.test(arg[i].color)){
+                        input.style.color = `ghostwhite`;
+                      }
+                      li.append(input)
                 li.style = `background:${arg[i].color};
                             position:absolute;
                             height:100%;
@@ -69,6 +77,8 @@ window.onload=()=>{
                             justify-content:center;
                             `
                     spot.appendChild(li)
+                    
+
                 
             }
             let items = document.querySelectorAll('.choice-spot>li')
