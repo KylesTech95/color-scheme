@@ -105,6 +105,10 @@ position:relative;
     transform:translate(150px,0);
     transition:1s;
 }
+.active-click{
+    border:.5rem solid ghostwhite;
+}
+
 .swoosh-left{
     opacity:0;
     transform:translate(-150px,0);

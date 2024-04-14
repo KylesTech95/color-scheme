@@ -1,4 +1,4 @@
-const spots = document.querySelectorAll('.choice-spot')
+const spot = document.querySelector('.choice-spot')
 let r,g,b,colour;
 const insert_btn = document.getElementById('insert-color')
 const insert_color = '/colors-insert'
@@ -18,21 +18,17 @@ const postfetch = async(api,d) => {
     return response.json()
 }
 const rotateRight = (arr) => {
-    arr[arr.length-1].classList.remove('swoosh-left')
+    // arr[arr.length-1].classList.remove('swoosh-left')
     let take = arr.pop();
     arr.unshift(take)
-    arr[arr.length-1].classList.add('swoosh-left')
+    // arr[arr.length-1].classList.add('swoosh-left')
     arr[0].classList.add('z-index')
-    console.log(arr[0])
     
 }
 const rotateLeft = (arr) => {
-    arr[arr.length-1].classList.remove('swoosh-right')
     let take = arr.shift();
     arr.push(take)
-    arr[arr.length-1].classList.add('swoosh-right')
     arr[0].classList.add('z-index')
-    console.log(arr[0])
 }
 const left_scroll = document.querySelectorAll('#scroll-container>.scroll')
 
@@ -60,12 +56,10 @@ for(let i=0; i < 1<<12; i++) {
 
 window.onload=()=>{    
     fetch(api_colors).then(res=>res.json()).then(data=>{
-        spots.forEach(spot=>{
-            // console.log(data.colors)
-            let arr = [...data.colors]
-            for(let i = 0; i < arr.length; i++){
+            let arg = [...data.colors]
+            for(let i = 0; i < arg.length; i++){
                 const li = document.createElement('li')
-                li.style = `background:${arr[i].color};
+                li.style = `background:${arg[i].color};
                             position:absolute;
                             height:100%;
                             width:100%;
@@ -75,13 +69,8 @@ window.onload=()=>{
                             justify-content:center;
                             `
                     spot.appendChild(li)
-                // setTimeout(()=>{
-                //     spot.appendChild(li)
-                //     console.log(li)
-                // },25*(i+1))
                 
             }
-            })
             let items = document.querySelectorAll('.choice-spot>li')
             let arr = [...items]
 
