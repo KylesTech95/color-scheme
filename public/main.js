@@ -4,6 +4,11 @@ const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 let idCount = 0;
 
+const appear = (input) => {
+    input.classList.remove('hidden')
+}
+const disappear = (input) => {
+}
 const copyColor = async(inp) => {
         try {
           await navigator.clipboard.writeText(inp.value);
@@ -66,14 +71,15 @@ const rotateRight = (scroll) => {
         // create input
         const input = document.createElement('input')
               input.classList.add('color-input')
-        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+              fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
             input.style.background = data.current_color;
             input.classList.add('color-input')
             input.setAttribute('type','text')
             input.setAttribute('value',data.current_color)
             sp.append(input)
+            // disappear(input)
+            appear(input)
             clickInput(input)
-            
             makeWhiteColor(data.current_color,input)
         })
     })
@@ -85,12 +91,12 @@ const rotateRight = (scroll) => {
                 console.log(idCount)
                 const input = document.createElement('input')
                       input.classList.add('color-input')
-                fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+                      fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
                 input.style.background = data.current_color;
                 input.classList.add('color-input')
                 input.setAttribute('type','text')
                 input.setAttribute('value',data.current_color)
-                    sp.append(input)
+                sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
             })
@@ -114,6 +120,8 @@ const rotateLeft = (scroll) => {
             input.setAttribute('value',data.current_color)
             sp.append(input)
             clickInput(input)
+            // disappear(input)
+            appear(input)
             makeWhiteColor(data.current_color,input)
         })
     })
@@ -130,7 +138,7 @@ const rotateLeft = (scroll) => {
                 input.classList.add('color-input')
                 input.setAttribute('type','text')
                 input.setAttribute('value',data.current_color)
-                    sp.append(input)
+                sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
             })
