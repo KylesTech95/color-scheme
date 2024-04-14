@@ -11,7 +11,6 @@
     position:absolute;
     width:100px;
     top:5%;
-    border:4px solid red;
     background:#333;
     height: 100px;
     border-radius:50%;
@@ -33,25 +32,20 @@ body{
     display:flex;
     flex-direction: column;
     align-items: center;
+    background:#333;
     justify-content: center;
-    background:rgb(255,255,136)
 }
 #wrapper{
     height:100vh;
     width:100%;
-    bordeR:5px solid red;
 }
 #nav-container{
     width:100%;
     height:100px;
-    border:3px solid indigo;
-    background:violet;
     opacity:.9;
 }
 
 #choice-container{
-    border:3px solid indigo;
-    background:silver;
     height: 75vh;
     width:100%;
     display:flex;
@@ -102,10 +96,10 @@ position:relative;
 }
 
 
-#scroll-container,
-#scroll-container2{
+#scroll-container{
+    gap:10rem;
     position:relative;
-    top:-5rem;
+    top:-8rem;
     width:50%;
     z-index:998;
     height:50px;
@@ -132,6 +126,7 @@ position:relative;
     transition:1s;
 }
 .scroll{
+    color:ghostWhite;
     z-index:999;
     height:50px;
     width:50px;
@@ -148,9 +143,20 @@ position:relative;
     transition:.25s;
 
 }
+.hover-effect{
+    cursor:pointer;
+    transform:scale(.9);
+    transition:.25s;
+}
 .play-icon{
-    transform:scale(2.25);
+    transform:scale(5);
     animation: colorview 20s infinite alternate forwards ease;
     position:absolute;
-}
 
+}
+.scroll>h4{
+    position:absolute;
+    top:-4rem;
+    text-align:center;
+    font-family: Arial, Helvetica, sans-serif;
+}

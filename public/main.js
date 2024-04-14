@@ -3,7 +3,20 @@ let r,g,b,colour;
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 let idCount = 0;
-
+const rgb2Hex = (n) => {
+const hex = n.toString(16)
+return hex.length < 1 ?  `0${hex}`:hex
+}
+const rgbToHex = (r, g, b) => {
+    console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
+    return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
+  }
+const hoverEffect = (scroll) => {
+    scroll.classList.add('hover-effect')
+    setTimeout(()=>{
+        scroll.classList.remove('hover-effect')
+    },250)
+}
 const appear = (input) => {
     input.classList.remove('hidden')
 }
@@ -81,11 +94,15 @@ const rotateRight = (scroll) => {
             appear(input)
             clickInput(input)
             makeWhiteColor(data.current_color,input)
+            let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+            rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
         })
     })
     window.addEventListener('keydown',e=>{
         if(/ArrowRight/.test(e.key)){
-                failSafe.scroll(scroll);
+        hoverEffect(scroll)
+
+            failSafe.scroll(scroll);
                 idCount+=1;
                 if(idCount>4096)idCount=1;
                 console.log(idCount)
@@ -99,6 +116,8 @@ const rotateRight = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
+                let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+                rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
             })
         }
     })
@@ -123,10 +142,15 @@ const rotateLeft = (scroll) => {
             // disappear(input)
             appear(input)
             makeWhiteColor(data.current_color,input)
+            let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+            rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+
         })
     })
     window.addEventListener('keydown',e=>{
         if(/ArrowLeft/.test(e.key)){
+        hoverEffect(scroll)
+
             failSafe.scroll(scroll);
             idCount-=1;
             if(idCount<1)idCount=4096;
@@ -141,6 +165,8 @@ const rotateLeft = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
+                let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+                rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
             })
         }
     })
