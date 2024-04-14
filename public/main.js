@@ -16,6 +16,8 @@ const copyColor = async(inp) => {
 const clickInput = (input) => {
     input.onclick=e=>{
         console.log(e.target)
+        input.setAttribute('onclick',"return false;")
+        input.setAttribute('onkeydown',"return false;")
         copyColor(input)
     }
 }     
