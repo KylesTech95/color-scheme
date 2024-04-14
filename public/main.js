@@ -9,7 +9,7 @@ const failSafe = {
         scroll.classList.add('no-pointer')
         setTimeout(()=>{
             scroll.classList.remove('no-pointer')
-        },2500)
+        },1750)
     }
 }
 const postfetch = async(api,d) => {
@@ -27,27 +27,77 @@ const postfetch = async(api,d) => {
     // testing postFetch
     return response.json()
 }
+
+
 const rotateRight = (scroll) => {
+    let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
         failSafe.scroll(scroll);
         idCount+=1;
         if(idCount>4096)idCount=1;
-        console.log(idCount)
+            console.log(idCount)
+        // create input
+        const input = document.createElement('input')
+              input.classList.add('color-input')
         fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-            console.log(data.current_color)
+            input.style.background = data.current_color;
+            input.classList.add('color-input')
+            input.setAttribute('type','text')
+            input.setAttribute('value',data.current_color)
+            sp.append(input)
         })
+    })
+    window.addEventListener('keydown',e=>{
+        if(/ArrowRight/.test(e.key)){
+                failSafe.scroll(scroll);
+                idCount+=1;
+                if(idCount>4096)idCount=1;
+                console.log(idCount)
+                const input = document.createElement('input')
+                      input.classList.add('color-input')
+                fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+                input.style.background = data.current_color;
+                input.classList.add('color-input')
+                input.setAttribute('type','text')
+                input.setAttribute('value',data.current_color)
+                sp.append(input)
+            })
+        }
     })
 }
 const rotateLeft = (scroll) => {
+    let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
         failSafe.scroll(scroll);
         idCount-=1;
         if(idCount<1)idCount=4096;
         console.log(idCount)
-        
+        const input = document.createElement('input')
+        input.classList.add('color-input')
         fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-            console.log(data.current_color)
+            input.style.background = data.current_color;
+            input.classList.add('color-input')
+            input.setAttribute('type','text')
+            input.setAttribute('value',data.current_color)
+            sp.append(input)
         })
+    })
+    window.addEventListener('keydown',e=>{
+        if(/ArrowLeft/.test(e.key)){
+            failSafe.scroll(scroll);
+            idCount-=1;
+            if(idCount<1)idCount=4096;
+            console.log(idCount)
+            const input = document.createElement('input')
+            input.classList.add('color-input')
+            fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+                input.style.background = data.current_color;
+                input.classList.add('color-input')
+                input.setAttribute('type','text')
+                input.setAttribute('value',data.current_color)
+                sp.append(input)
+            })
+        }
     })
 }
 
@@ -65,8 +115,8 @@ const clickScrolls = () => {
                 console.log(undefined);
             break;
         }
-        
     })
+
 }
 clickScrolls()
         
