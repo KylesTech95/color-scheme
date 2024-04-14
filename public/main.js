@@ -18,19 +18,20 @@ const postfetch = async(api,d) => {
     return response.json()
 }
 const rotateRight = (arr) => {
-    let take = arr.shift();
-    arr.push(take)
-    console.log(arr[0])
-    arr[0].classList.add('z-index')
-}
-const rotateLeft = (arr) => {
     let take = arr.pop();
     arr.unshift(take)
-    console.log(arr[0])
     arr[0].classList.add('z-index')
+    console.log(arr[0])
+    
+}
+const rotateLeft = (arr) => {
+    // arr[arr.length-1].remove('z-index')
+    let take = arr.shift();
+    arr.push(take)
+    arr[0].classList.add('z-index')
+    console.log(arr[0])
 }
 const left_scroll = document.querySelectorAll('#scroll-container>.scroll')
-const right_scroll = document.querySelectorAll('#scroll-container2>.scroll')
 
 const api_colors = `/colors`
 
@@ -83,43 +84,16 @@ window.onload=()=>{
 
             left_scroll.forEach((sc,index)=>{
                 
-                if(index%2==0){
                     sc.addEventListener('click',e=>{
                         arr.forEach(a=>a.classList.remove('z-index'))
                         // console.log(e.target)
-                        rotateRight(arr)
-                    })
-                }
-                else{
-                    let items = document.querySelectorAll('.choice-spot>li')
-                    sc.addEventListener('click',e=>{
-                        arr.forEach(a=>a.classList.remove('z-index'))
-                        // console.log(e.target)
-                        rotateLeft(arr)
-                    })
-                }
-            })
+                        if(index%2!==0)rotateRight(arr)
+                        if(index%2===0)rotateLeft(arr)
 
-            right_scroll.forEach((sc,index)=>{
+                    })
                 
-                if(index%2==0){
-                    sc.addEventListener('click',e=>{
-                        arr.forEach(a=>a.classList.remove('z-index'))
-                        // console.log(e.target)
-                        rotateRight(arr)
-                    })
-                }
-                else{
-                    let items = document.querySelectorAll('.choice-spot>li')
-                    sc.addEventListener('click',e=>{
-                        arr.forEach(a=>a.classList.remove('z-index'))
-                        // console.log(e.target)
-                        rotateLeft(arr)
-                    })
-                }
+                
             })
-
-
         })
 }
 
