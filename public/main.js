@@ -18,16 +18,19 @@ const postfetch = async(api,d) => {
     return response.json()
 }
 const rotateRight = (arr) => {
+    arr[arr.length-1].classList.remove('swoosh-left')
     let take = arr.pop();
     arr.unshift(take)
+    arr[arr.length-1].classList.add('swoosh-left')
     arr[0].classList.add('z-index')
     console.log(arr[0])
     
 }
 const rotateLeft = (arr) => {
-    // arr[arr.length-1].remove('z-index')
+    arr[arr.length-1].classList.remove('swoosh-right')
     let take = arr.shift();
     arr.push(take)
+    arr[arr.length-1].classList.add('swoosh-right')
     arr[0].classList.add('z-index')
     console.log(arr[0])
 }
