@@ -96,6 +96,9 @@ position:relative;
 .z-index{
     z-index:999;
 }
+.light-color{
+    color:ghostWhite;
+}
 
 
 #scroll-container,
@@ -114,9 +117,6 @@ position:relative;
     opacity:0;
     transform:translate(150px,0);
     transition:1s;
-}
-.active-click{
-    border:.5rem solid ghostwhite;
 }
 
 

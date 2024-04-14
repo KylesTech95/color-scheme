@@ -4,6 +4,30 @@ const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 let idCount = 0;
 
+const copyColor = async(inp) => {
+        try {
+          await navigator.clipboard.writeText(inp.value);
+          console.log('Content copied to clipboard');
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+      
+} 
+const clickInput = (input) => {
+    input.onclick=e=>{
+        console.log(e.target)
+        copyColor(input)
+    }
+}     
+const makeWhiteColor = (data,input) => {
+    // if r & g are less-than or equal to 100
+    if(/[0-100],[0-100]|[0-100],/.test(data)){
+        input.classList.add('light-color')
+    }
+    else{
+        input.classList.remove('light-color')
+    }
+}
 const failSafe = {
     scroll: (scroll) => {
         scroll.classList.add('no-pointer')
@@ -28,7 +52,8 @@ const postfetch = async(api,d) => {
     return response.json()
 }
 
-
+// rotate colors process:
+// 1) Rotate Right
 const rotateRight = (scroll) => {
     let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
@@ -45,6 +70,9 @@ const rotateRight = (scroll) => {
             input.setAttribute('type','text')
             input.setAttribute('value',data.current_color)
             sp.append(input)
+            clickInput(input)
+            
+            makeWhiteColor(data.current_color,input)
         })
     })
     window.addEventListener('keydown',e=>{
@@ -60,11 +88,14 @@ const rotateRight = (scroll) => {
                 input.classList.add('color-input')
                 input.setAttribute('type','text')
                 input.setAttribute('value',data.current_color)
-                sp.append(input)
+                    sp.append(input)
+                clickInput(input)
+                makeWhiteColor(data.current_color,input)
             })
         }
     })
 }
+// 2) Rotate Left
 const rotateLeft = (scroll) => {
     let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
@@ -80,6 +111,8 @@ const rotateLeft = (scroll) => {
             input.setAttribute('type','text')
             input.setAttribute('value',data.current_color)
             sp.append(input)
+            clickInput(input)
+            makeWhiteColor(data.current_color,input)
         })
     })
     window.addEventListener('keydown',e=>{
@@ -95,13 +128,13 @@ const rotateLeft = (scroll) => {
                 input.classList.add('color-input')
                 input.setAttribute('type','text')
                 input.setAttribute('value',data.current_color)
-                sp.append(input)
+                    sp.append(input)
+                clickInput(input)
+                makeWhiteColor(data.current_color,input)
             })
         }
     })
 }
-
-
 const clickScrolls = () => {
     scrolls.forEach((scroll,index)=>{
         switch(true){
@@ -119,4 +152,3 @@ const clickScrolls = () => {
 
 }
 clickScrolls()
-        
