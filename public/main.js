@@ -12,10 +12,9 @@ submit_btn.addEventListener('click',e=>{
     // e.preventDefault();
     // console.log('yasss')
     // let api = '/post-sum-fn'
-    // async function postMe(api){
-    //     let response = await api
-
-    // }
+    fetch('/get-sum-fn').then(res=>res.json()).then(data=>{
+        console.log(data.result)
+    })
 })
 
 
