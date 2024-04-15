@@ -7,6 +7,16 @@ const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
+const submit_btn = document.getElementById('submit-btn')
+submit_btn.addEventListener('click',e=>{
+    // e.preventDefault();
+    // console.log('yasss')
+    // let api = '/post-sum-fn'
+    // async function postMe(api){
+    //     let response = await api
+
+    // }
+})
 
 
 const rgb2Hex = (n) => {
