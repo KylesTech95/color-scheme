@@ -49,6 +49,18 @@
             </div>
         </div>
     </section>
+    <section id="test-container">
+        <form action="/post-sum-fn" id="form" method="POST" enctype="multipart/form-data" class="test-form">
+            <div class="number-container">
+                <input type="number" name="a"/>
+                <input type="number" name="b"/>
+            </div>
+            <div class="result-container">
+                <h4 class="result-actual"></h4>
+            </div>
+            <input type="submit" form="form"/>
+        </form>
+    </section>
     </div>
 </body>
 <script src="main.js"></script>
