@@ -3,6 +3,11 @@ let r,g,b,colour;
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 let idCount = 0;
+const res = {
+    color: document.querySelector(".result-color>h4"),
+    hex: document.querySelector(".result-hex>h4")
+}
+
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
@@ -94,8 +99,13 @@ const rotateRight = (scroll) => {
             appear(input)
             clickInput(input)
             makeWhiteColor(data.current_color,input)
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
             let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
-            rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                res.color.textContent = data.current_color
+                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+                res.color.style.color = data.current_color
+                res.hex.style.color = data.current_color
         })
     })
     window.addEventListener('keydown',e=>{
@@ -117,7 +127,11 @@ const rotateRight = (scroll) => {
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
                 let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
-                rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                res.color.textContent = data.current_color
+                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+                res.color.style.color = data.current_color
+                res.hex.style.color = data.current_color
             })
         }
     })
@@ -143,8 +157,12 @@ const rotateLeft = (scroll) => {
             appear(input)
             makeWhiteColor(data.current_color,input)
             let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
-            rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                res.color.textContent = data.current_color
+                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+                res.color.style.color = data.current_color
+                res.hex.style.color = data.current_color
         })
     })
     window.addEventListener('keydown',e=>{
@@ -166,7 +184,11 @@ const rotateLeft = (scroll) => {
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
                 let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
-                rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                res.color.textContent = data.current_color
+                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+                res.color.style.color = data.current_color
+                res.hex.style.color = data.current_color
             })
         }
     })
