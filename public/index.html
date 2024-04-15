@@ -53,15 +53,18 @@
         <!-- enctype="multipart/form-data" may not allow names to show up in body
         when sending post requests from client to the server
         -->
-        <form action="/post-sum-fn" id="form" method="POST" class="test-form" onsubmit="return true"> 
+        <form action="/cleared" id="claerme" method="GET" class="test-form"> 
+        </form>
+        <form action="/post-sum-fn" id="form" method="POST" class="test-form" onsubmit="return false"> 
             <div class="number-container">
-                <input type="number" name="a"/>
-                <input type="number" name="b"/>
+                <input type="number" name="a" class="num-input"/>
+                <input type="number" name="b" class="num-input"/>
             </div>
             <div class="result-container">
                 <h4 class="result-actual"></h4>
             </div>
             <input type="submit" id="submit-btn"/>
+            <input type="reset" id="form" onclick="clearFn()">
         </form>
     </section>
     </div>

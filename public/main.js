@@ -2,20 +2,52 @@ const spot = document.querySelector('.choice-spot')
 let r,g,b,colour;
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
+const inputs = document.querySelectorAll(".num-input")
 let idCount = 0;
+let click = 0;
+const post = '/post-sum-fn'
+const get = '/get-sum-fn'
 const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
+const postFn = async (post,d) => {
+        let response = await fetch(post,{
+            method:'POST',
+            mode:"cors",
+            cache:"no-cache",
+            credentials: "same-origin",
+            headers:{"Content-Type":"application/json"},
+            redirect:"follow",
+            referrerPolicy:"no-referrer",
+            body:JSON.stringify(d)
+        })
+        return response.json();
+    }
 const submit_btn = document.getElementById('submit-btn')
 submit_btn.addEventListener('click',e=>{
-    // e.preventDefault();
-    // console.log('yasss')
-    // let api = '/post-sum-fn'
-    fetch('/get-sum-fn').then(res=>res.json()).then(data=>{
+    e.preventDefault();
+    // post request
+    postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
         console.log(data.result)
     })
+    // settimeout for get request
+   setTimeout(()=>{
+     //get request
+     fetch(get).then(res=>res.json()).then(data=>{
+        console.log(data)
+    })
+   },500)
+
+    return [...inputs].forEach(inp=>{
+        inp.value = ''
+    })
 })
+
+async function clearFn(){
+   let ft = await fetch('/cleared')
+   console.log('db cleared!')
+}
 
 
 const rgb2Hex = (n) => {
