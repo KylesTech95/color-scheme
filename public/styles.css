@@ -53,7 +53,7 @@ position:relative;
 }
 .res-item>h4{
     color:#fff;
-    text-align:center;
+    /* text-align:center; */
     font-size:24px;
     letter-spacing: 1.25px;
 }

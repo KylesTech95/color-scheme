@@ -8,6 +8,7 @@ const res = {
     hex: document.querySelector(".result-hex>h4")
 }
 
+
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
