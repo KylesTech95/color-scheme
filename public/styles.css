@@ -23,7 +23,6 @@
 #result-container{
     width:33%;
     height:50%;
-    border:4px solid red;
     border-radius:20px;
     display:flex;
     flex-direction:column;
@@ -36,7 +35,7 @@
 height:50px;
 width:80%;
 border-radius:20px;
-bordeR:3px solid green;
+bordeR:3px solid lime;
 padding:.25rem;
 display:flex;
 flex-direction:row;
