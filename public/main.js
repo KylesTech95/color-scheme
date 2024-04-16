@@ -56,6 +56,20 @@ submit_btn.addEventListener('click',e=>{
         inp.value = ''
     })
 })
+const shaveUl = (spot) => {
+     let arr = [...spot.children].filter(child=>child.type==='text')
+     let cp = document.querySelector('.choice-spot')
+     let cparr = [...cp.children].filter(child=>child.type==='text')
+     for(let i = 0; i < cparr.length; i++){
+        // console.log(cparr[i])
+        if(cparr[i]==arr[i]){
+            if(i!==cparr.length-1){
+                console.log(cparr[i])
+                spot.removeChild(arr[i])
+            }
+        }
+     }
+}
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
@@ -164,6 +178,7 @@ const rotateRight = (scroll) => {
             appear(input)
             clickInput(input)
             makeWhiteColor(data.current_color,input)
+            shaveUl(sp)
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
@@ -194,6 +209,7 @@ const rotateRight = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
+                shaveUl(sp)
                 // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
                     let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
                 // // console.log(rgbColor)
@@ -214,6 +230,7 @@ const rotateLeft = (scroll) => {
         idCount-=1;
         if(idCount<1)idCount=4096;
         // // console.log(idCount)
+
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
@@ -226,6 +243,8 @@ const rotateLeft = (scroll) => {
             // disappear(input)
             appear(input)
             makeWhiteColor(data.current_color,input)
+            shaveUl(sp)
+
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
         let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
             // // console.log(rgbColor)
@@ -255,6 +274,7 @@ const rotateLeft = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
+                shaveUl(sp)
                 // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
                 // // console.log(rgbColor)
@@ -348,6 +368,7 @@ data.colors.forEach((col,index) => {
                 makeWhiteColor(col.color,input)
                 spot.append(input)
                 clickInput(input)
+                shaveUl(spot)
               
         })
 })
