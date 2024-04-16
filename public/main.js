@@ -19,25 +19,7 @@ const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
-submit_btn.addEventListener('click',e=>{
-    e.preventDefault();
-    // post request
-    postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
-        // // console.log(data.result)
-        resActual.textContent = data.result;
-    })
-    // settimeout for get request
-   setTimeout(()=>{
-     //get request
-     fetch(get).then(res=>res.json()).then(data=>{
-        // console.log(data)
-    })
-   },500)
-
-    return [...inputs].forEach(inp=>{
-        inp.value = ''
-    })
-})
+// create input function
 const createInput = (input,data,bool) => {
     if(!bool){
         console.log(data)
@@ -55,6 +37,7 @@ const createInput = (input,data,bool) => {
         }
     
 }
+// post request helper
 const postFn = async (post,d) => {
         let response = await fetch(post,{
             method:'POST',
@@ -68,39 +51,44 @@ const postFn = async (post,d) => {
         })
         return response.json();
 }
-async function clearFn(){
-    let ft = await fetch('/cleared')
-    // console.log('db cleared!')
-    resActual.textContent = 0;
-}
+// Isolate all children within spot-container, and remove the child(input)
 const shaveUl = (spot) => {
-     let arr = [...spot.children].filter(child=>child.type==='text')
-     let cp = document.querySelector('.choice-spot')
-     let cparr = [...cp.children].filter(child=>child.type==='text')
+     let arr = [...spot.children].filter(child=>child.type==='text')    // filter all inputs for type = text
+     let cp = document.querySelector('.choice-spot')     // select choice spot div
+     let cparr = [...cp.children].filter(child=>child.type==='text')  // filter all inputs for type = text
      for(let i = 0; i < cparr.length; i++){
-        // console.log(cparr[i])
-        if(cparr[i]==arr[i]){
-            if(i!==cparr.length-1){
-                // console.log(cparr[i])
-                spot.removeChild(arr[i])
+        if(cparr[i]==arr[i]){   // if items in cparr == arr   
+            if(i!==cparr.length-1){//if i is -ne (not equal) to last item in cparr
+                spot.removeChild(arr[i])// remove the child
             }
         }
      }
 }
+// helper function formats number to hex
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
 }
+// function that converts number to hex with 3 arguments (r,g,b)
 const rgbToHex = (r, g, b) => {
     // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
     return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
 }
-const getHexCode = (res,data,rgbColor) => {
-// rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-res.color.textContent = data.current_color
-res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
-res.color.style.color = data.current_color
-res.hex.style.color = data.current_color
+// executive function to set html elements style attributes
+const setRGBAndHex = (res,data,rgbColor,bool) => {
+    if(!bool){
+    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    res.color.textContent = data.current_color
+    res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+    res.color.style.color = data.current_color
+    res.hex.style.color = data.current_color
+    }
+    else{
+        res.color.textContent = data.style.background
+        res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+        res.color.style.color = data.style.background
+        res.hex.style.color = data.style.background
+    }
 }
 const hoverEffect = (scroll) => {
     scroll.classList.add('hover-effect')
@@ -111,8 +99,7 @@ const hoverEffect = (scroll) => {
 const appear = (input) => {
     input.classList.remove('hidden')
 }
-const disappear = (input) => {
-}
+// copy color with navigatior's clipboard.writeText() function
 const copyColor = async(inp) => {
         try {
           await navigator.clipboard.writeText(inp.value);
@@ -122,6 +109,7 @@ const copyColor = async(inp) => {
         }
       
 } 
+// copy message appears when new color is clicked(in spot-container)
 const copyMessagePop = () => {
     copy_message.classList.remove('coppied-message-hidden')
     copy_message.classList.add('coppied-message')
@@ -130,16 +118,21 @@ const copyMessagePop = () => {
     copy_message.classList.remove('coppied-message')
     },750)
 }
+// input click event
 const clickInput = (input) => {
     input.onclick=e=>{
         // // console.log(e.target)
         input.setAttribute('onclick',"return false;")
         input.setAttribute('onkeydown',"return false;")
         copyColor(input)
-        copyMessagePop()
     }
 }   
-clickInput(spot)
+// spot-container: add event listener (click) to show "coppied!" consistently
+spot.addEventListener('click',e=>{
+    copyMessagePop()
+})
+// turn input's color white 
+// turn copy-icon white
 const makeWhiteColor = (data,input) => {
     // if r & g are less-than or equal to 100
     if(/[0-100],[0-100]|[0-100],/.test(data)){
@@ -156,14 +149,7 @@ const makeWhiteColor = (data,input) => {
         copy.classList.remove('hidden')
     }
 }
-const failSafe = {
-    scroll: (scroll) => {
-        scroll.classList.add('no-pointer')
-        setTimeout(()=>{
-            scroll.classList.remove('no-pointer')
-        },50)
-    }
-}
+// post fetch Fn
 const postfetch = async(api,d) => {
     const response = await fetch(api,
     {
@@ -180,91 +166,88 @@ const postfetch = async(api,d) => {
     return response.json()
 }
 
+
 // rotate colors process:
 // 1) Rotate Right
 const rotateRight = (scroll) => {
     let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
-        failSafe.scroll(scroll);
-        idCount+=1;
-        if(idCount>4096)idCount=1;
-            // // console.log(idCount)
-        // create input
-        const input = document.createElement('input')
-              input.classList.add('color-input')
-              fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-            createInput(input,data)
-            sp.append(input)
+    idCount+=1;
+    if(idCount>4096)idCount=1;
+    // // console.log(idCount)
+    // create input
+    const input = document.createElement('input')
+    input.classList.add('color-input')
+    fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+    createInput(input,data)
+    sp.append(input)
             // disappear(input)
-            appear(input)
-            clickInput(input)
-            makeWhiteColor(data.current_color,input)
-            shaveUl(sp)
-            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-            // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
-            let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-            // // console.log(rgbColor)
+    appear(input)
+    clickInput(input)
+    makeWhiteColor(data.current_color,input)
+    shaveUl(sp)
+    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+    let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+    // // console.log(rgbColor)
 
-            getHexCode(res,data,rgbColor)
+    setRGBAndHex(res,data,rgbColor)
         })
     })
     window.addEventListener('keydown',e=>{
         if(/ArrowRight/.test(e.key)){
         hoverEffect(scroll)
+        idCount+=1;
 
-            failSafe.scroll(scroll);
-                idCount+=1;
-                if(idCount>4096)idCount=1;
-                // // console.log(idCount)
-                const input = document.createElement('input')
-                      input.classList.add('color-input')
-                      fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-                createInput(input,data)
-                sp.append(input)
-                clickInput(input)
-                makeWhiteColor(data.current_color,input)
-                shaveUl(sp)
-                // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
-                    let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-                // // console.log(rgbColor)
-                getHexCode(res,data,rgbColor)
-            })
-        }
+        if(idCount>4096)idCount=1;
+        // // console.log(idCount)
+        const input = document.createElement('input')
+        input.classList.add('color-input')
+        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+        createInput(input,data)
+        sp.append(input)
+        clickInput(input)
+        makeWhiteColor(data.current_color,input)
+        shaveUl(sp)
+        // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+            let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+        // // console.log(rgbColor)
+        setRGBAndHex(res,data,rgbColor)
+        })
+      }
     })
 }
 // 2) Rotate Left
 const rotateLeft = (scroll) => {
     let sp = scroll.parentElement.parentElement;
     scroll.addEventListener('click', e => {
-        failSafe.scroll(scroll);
-        idCount-=1;
-        if(idCount<1)idCount=4096;
-        // // console.log(idCount)
+    idCount-=1;
+    if(idCount<1)idCount=4096;
+    // // console.log(idCount)
 
-        const input = document.createElement('input')
-        input.classList.add('color-input')
-        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-            createInput(input,data)
-            sp.append(input)
-            clickInput(input)
-            // disappear(input)
-            appear(input)
-            makeWhiteColor(data.current_color,input)
-            shaveUl(sp)
+    const input = document.createElement('input')
+    input.classList.add('color-input')
+    fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+    createInput(input,data)
+    sp.append(input)
+    clickInput(input)
+    // disappear(input)
+    appear(input)
+    makeWhiteColor(data.current_color,input)
+    shaveUl(sp)
 
-            // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
-        let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-            // // console.log(rgbColor)
-            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                getHexCode(res,data,rgbColor)
+    // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+    let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+    // // console.log(rgbColor)
+    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    setRGBAndHex(res,data,rgbColor)
         })
     })
     window.addEventListener('keydown',e=>{
         if(/ArrowLeft/.test(e.key)){
         hoverEffect(scroll)
 
-            failSafe.scroll(scroll);
-            idCount-=1;
+                idCount-=1;
             if(idCount<1)idCount=4096;
             // // console.log(idCount)
             const input = document.createElement('input')
@@ -278,11 +261,12 @@ const rotateLeft = (scroll) => {
                 // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
                 // // console.log(rgbColor)
-                getHexCode(res,data,rgbColor)
+                setRGBAndHex(res,data,rgbColor)
             })
         }
     })
 }
+// switch statement when clicking left and right arrows
 const clickScrolls = () => {
     scrolls.forEach((scroll,index)=>{
         switch(true){
@@ -294,6 +278,7 @@ const clickScrolls = () => {
             break;
             default:
                 // console.log(undefined);
+                return undefined;
             break;
         }
     })
@@ -301,7 +286,7 @@ const clickScrolls = () => {
 }
 clickScrolls()
 
-// test sumFn
+
 //________________________________________
 
 // let arr = []
@@ -349,11 +334,7 @@ data.colors.forEach((col,index) => {
             idCount=index+1
 
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                res.color.textContent = e.target.style.background
-                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
-                res.color.style.color = e.target.style.background
-                res.hex.style.color = e.target.style.background
-
+                setRGBAndHex(res,e.target,rgbColor,true)
             // identify rgb input
             const input = document.createElement('input')
               input.style.background = col.color;
@@ -361,6 +342,7 @@ data.colors.forEach((col,index) => {
                 spot.append(input)
                 clickInput(input)
                 shaveUl(spot)
+                makeWhiteColor(col.color,input)
               
         })
 })
@@ -369,8 +351,8 @@ for(let i in arr){
     pal_container.append(arr[i])
 }
 })
-
 //___________________________
+// spot-container event listeners 
 spot.addEventListener('mouseover',e=>{
     // console.log(copy)
     copy.classList.remove('copy-current')
@@ -382,4 +364,31 @@ spot.addEventListener('mouseout',e=>{
     copy.classList.remove('copy-hover')
 })
 
-//scroll events
+//___________________________________________
+//API - combine numbers (sum)
+// send/receive requests from server
+submit_btn.addEventListener('click',e=>{
+    e.preventDefault();
+    // post request
+    postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
+        // // console.log(data.result)
+        resActual.textContent = data.result;
+    })
+    // settimeout for get request
+   setTimeout(()=>{
+     //get request
+     fetch(get).then(res=>res.json()).then(data=>{
+        // console.log(data)
+    })
+   },500)
+
+    return [...inputs].forEach(inp=>{
+        inp.value = ''
+    })
+})
+// clear database function
+async function clearFn(){
+    let ft = await fetch('/cleared')
+    // console.log('db cleared!')
+    resActual.textContent = 0;
+}

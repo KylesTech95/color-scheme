@@ -36,7 +36,7 @@
 height:50px;
 width:80%;
 border-radius:20px;
-bordeR:3px solid lime;
+bordeR:1px solid lime;
 padding:.25rem;
 display:flex;
 flex-direction:row;
@@ -156,6 +156,8 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 position:relative;
+/* border:2px dotted violet; */
+
 }
 
 .color-input{
