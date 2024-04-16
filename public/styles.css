@@ -9,16 +9,17 @@
     pointer-events:none;
 }
 #insert-color{
+    z-index:999;
     position:absolute;
     width:100px;
     top:5%;
-    background:#333;
+    background:#f00;
     height: 100px;
     border-radius:50%;
     transition:.25s;
     /* Uncomment below to display the button to INSERT COLORS */
-    display:none;
-
+    /* display:none; */
+/*  */
 }
 #result-container{
     width:33%;
