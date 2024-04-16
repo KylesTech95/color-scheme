@@ -1,8 +1,11 @@
-const spot = document.querySelector('.choice-spot')
 let r,g,b,colour;
+const spot = document.querySelector('.choice-spot')
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const inputs = document.querySelectorAll(".num-input")
+const resActual = document.querySelector('.result-actual')
+const submit_btn = document.getElementById('submit-btn')
+
 let idCount = 0;
 let click = 0;
 const post = '/post-sum-fn'
@@ -23,13 +26,18 @@ const postFn = async (post,d) => {
             body:JSON.stringify(d)
         })
         return response.json();
-    }
-const submit_btn = document.getElementById('submit-btn')
+}
+async function clearFn(){
+    let ft = await fetch('/cleared')
+    console.log('db cleared!')
+    resActual.textContent = 0;
+ }
 submit_btn.addEventListener('click',e=>{
     e.preventDefault();
     // post request
     postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
         console.log(data.result)
+        resActual.textContent = data.result;
     })
     // settimeout for get request
    setTimeout(()=>{
@@ -43,12 +51,6 @@ submit_btn.addEventListener('click',e=>{
         inp.value = ''
     })
 })
-
-async function clearFn(){
-   let ft = await fetch('/cleared')
-   console.log('db cleared!')
-}
-
 
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
