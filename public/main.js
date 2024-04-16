@@ -7,6 +7,8 @@ const resActual = document.querySelector('.result-actual')
 const submit_btn = document.getElementById('submit-btn')
 const pal_container = document.querySelector('.color-pal-list-container')
 const pal_spot = document.querySelector('.color-pal-spot-container');
+let copy = document.querySelector('.copy-icon')
+
 
 let idCount = 0;
 let click = 0;
@@ -92,10 +94,17 @@ const clickInput = (input) => {
 const makeWhiteColor = (data,input) => {
     // if r & g are less-than or equal to 100
     if(/[0-100],[0-100]|[0-100],/.test(data)){
-        input.classList.add('light-color')
+        input.classList.add('light-color');
+        copy.classList.remove('copy-dark')
+        copy.classList.add('copy-white')
+        copy.classList.remove('hidden')
+
     }
     else{
-        input.classList.remove('light-color')
+        input.classList.remove('light-color');
+        copy.classList.add('copy-dark')
+        copy.classList.remove('copy-white')
+        copy.classList.remove('hidden')
     }
 }
 const failSafe = {
@@ -327,6 +336,7 @@ data.colors.forEach((col,index) => {
                 input.setAttribute('value',col.color)
                 makeWhiteColor(col.color,input)
                 spot.append(input)
+                clickInput(input)
               
         })
 })
@@ -334,9 +344,16 @@ data.colors.forEach((col,index) => {
 for(let i in arr){
     pal_container.append(arr[i])
 }
+})
 
-
-
-
-
+//___________________________
+spot.addEventListener('mouseover',e=>{
+    console.log(copy)
+    copy.classList.remove('copy-current')
+    copy.classList.add('copy-hover')
+})
+spot.addEventListener('mouseout',e=>{
+    console.log(copy)
+    copy.classList.add('copy-current')
+    copy.classList.remove('copy-hover')
 })

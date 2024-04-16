@@ -100,7 +100,13 @@ body{
     height:100px;
     opacity:.9;
 }
-
+.copy-icon{
+    position:absolute;
+    right:20px;
+    z-index:999;
+    transform:scale(1.5);
+    top:20px;
+}
 #choice-container{
     height: 75vh;
     width:100%;
@@ -115,6 +121,8 @@ body{
 
 
 .choice-spot{
+/* border:3px solid blue; */
+margin-bottom:-2rem;
 width:33%;
 border-radius: 20px;
 height:100px;
@@ -143,8 +151,23 @@ position:relative;
     transition:.3s;
 }
 .color-input:hover{
-    transform:scale(1.10);
+    transform:scale(1.025);
     transition:.25s;
+}
+.copy-current{
+    transform:scale(1.25);
+    transition:.25s;
+}
+.copy-white{
+    color:#fff;
+}
+.copy-dark{
+    color:#000;
+}
+.copy-hover{
+    transform:scale(.98);
+    transition:.25s;
+    cursor:pointer;
 }
 .hidden{
     opacity:0;
@@ -321,5 +344,5 @@ form#form{
     align-items:center;
     justify-content: center;
     position:relative;
-    
+
 }
