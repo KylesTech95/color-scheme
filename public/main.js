@@ -6,6 +6,7 @@ const inputs = document.querySelectorAll(".num-input")
 const resActual = document.querySelector('.result-actual')
 const submit_btn = document.getElementById('submit-btn')
 const pal_container = document.querySelector('.color-pal-list-container')
+const pal_spot = document.querySelector('.color-pal-spot-container');
 
 let idCount = 0;
 let click = 0;
@@ -316,6 +317,17 @@ data.colors.forEach((col,index) => {
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
                 res.color.style.color = e.target.style.background
                 res.hex.style.color = e.target.style.background
+
+            // identify rgb input
+            const input = document.createElement('input')
+              input.classList.add('color-input')
+              input.style.background = col.color;
+                input.classList.add('color-input')
+                input.setAttribute('type','text')
+                input.setAttribute('value',col.color)
+                makeWhiteColor(col.color,input)
+                spot.append(input)
+              
         })
 })
 // append items in pallette container
