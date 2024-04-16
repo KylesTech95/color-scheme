@@ -5,6 +5,7 @@ const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const inputs = document.querySelectorAll(".num-input")
 const resActual = document.querySelector('.result-actual')
 const submit_btn = document.getElementById('submit-btn')
+const pal_container = document.querySelector('.color-pal-list-container')
 
 let idCount = 0;
 let click = 0;
@@ -51,7 +52,6 @@ submit_btn.addEventListener('click',e=>{
         inp.value = ''
     })
 })
-
 const rgb2Hex = (n) => {
 const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
@@ -285,3 +285,33 @@ clickScrolls()
 //         return data.color
 //     })
 // })
+
+
+
+// fill color palette
+fetch('/colors').then(res=>res.json()).then(data=>{
+// console.log(data.colors)
+let arr = []
+data.colors.forEach(col => {
+    const li = document.createElement('li')
+    li.classList.add('.color-pal-list-item')
+    li.setAttribute('style',`
+            background:${col.color};
+            opacity:.9;
+            height:25px;
+            width:25px;
+            border:.5px solid #fff;
+            transition:.25s;
+            z-index:999;
+            `)
+    li.classList.add('hover-li')
+        arr.push(li)
+})
+console.log(arr)
+for(let i in arr){
+    pal_container.append(arr[i])
+}
+
+
+
+})
