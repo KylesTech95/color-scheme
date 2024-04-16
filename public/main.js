@@ -8,6 +8,7 @@ const submit_btn = document.getElementById('submit-btn')
 const pal_container = document.querySelector('.color-pal-list-container')
 const pal_spot = document.querySelector('.color-pal-spot-container');
 let copy = document.querySelector('.copy-icon')
+const copy_message = document.querySelector('#copy-message')
 
 
 let idCount = 0;
@@ -33,21 +34,21 @@ const postFn = async (post,d) => {
 }
 async function clearFn(){
     let ft = await fetch('/cleared')
-    console.log('db cleared!')
+    // console.log('db cleared!')
     resActual.textContent = 0;
  }
 submit_btn.addEventListener('click',e=>{
     e.preventDefault();
     // post request
     postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
-        console.log(data.result)
+        // // console.log(data.result)
         resActual.textContent = data.result;
     })
     // settimeout for get request
    setTimeout(()=>{
      //get request
      fetch(get).then(res=>res.json()).then(data=>{
-        console.log(data)
+        // console.log(data)
     })
    },500)
 
@@ -60,7 +61,7 @@ const hex = n.toString(16)
 return hex.length < 1 ?  `0${hex}`:hex
 }
 const rgbToHex = (r, g, b) => {
-    console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
+    // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
     return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
   }
 const hoverEffect = (scroll) => {
@@ -77,20 +78,30 @@ const disappear = (input) => {
 const copyColor = async(inp) => {
         try {
           await navigator.clipboard.writeText(inp.value);
-          console.log('Content copied to clipboard');
+        //   console.log('Content copied to clipboard');
         } catch (err) {
-          console.error('Failed to copy: ', err);
+        //   console.error('Failed to copy: ', err);
         }
       
 } 
+const copyMessagePop = () => {
+    copy_message.classList.remove('coppied-message-hidden')
+    copy_message.classList.add('coppied-message')
+    setTimeout(()=>{
+    copy_message.classList.add('coppied-message-hidden')
+    copy_message.classList.remove('coppied-message')
+    },750)
+}
 const clickInput = (input) => {
     input.onclick=e=>{
-        console.log(e.target)
+        // // console.log(e.target)
         input.setAttribute('onclick',"return false;")
         input.setAttribute('onkeydown',"return false;")
         copyColor(input)
+        copyMessagePop()
     }
-}     
+}   
+clickInput(spot)
 const makeWhiteColor = (data,input) => {
     // if r & g are less-than or equal to 100
     if(/[0-100],[0-100]|[0-100],/.test(data)){
@@ -139,7 +150,7 @@ const rotateRight = (scroll) => {
         failSafe.scroll(scroll);
         idCount+=1;
         if(idCount>4096)idCount=1;
-            console.log(idCount)
+            // // console.log(idCount)
         // create input
         const input = document.createElement('input')
               input.classList.add('color-input')
@@ -156,7 +167,7 @@ const rotateRight = (scroll) => {
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-            console.log(rgbColor)
+            // // console.log(rgbColor)
 
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
@@ -172,7 +183,7 @@ const rotateRight = (scroll) => {
             failSafe.scroll(scroll);
                 idCount+=1;
                 if(idCount>4096)idCount=1;
-                console.log(idCount)
+                // // console.log(idCount)
                 const input = document.createElement('input')
                       input.classList.add('color-input')
                       fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
@@ -185,7 +196,7 @@ const rotateRight = (scroll) => {
                 makeWhiteColor(data.current_color,input)
                 // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
                     let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-                console.log(rgbColor)
+                // // console.log(rgbColor)
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
@@ -202,7 +213,7 @@ const rotateLeft = (scroll) => {
         failSafe.scroll(scroll);
         idCount-=1;
         if(idCount<1)idCount=4096;
-        console.log(idCount)
+        // // console.log(idCount)
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
@@ -217,7 +228,7 @@ const rotateLeft = (scroll) => {
             makeWhiteColor(data.current_color,input)
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
         let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-            console.log(rgbColor)
+            // // console.log(rgbColor)
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
@@ -233,7 +244,7 @@ const rotateLeft = (scroll) => {
             failSafe.scroll(scroll);
             idCount-=1;
             if(idCount<1)idCount=4096;
-            console.log(idCount)
+            // // console.log(idCount)
             const input = document.createElement('input')
             input.classList.add('color-input')
             fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
@@ -246,7 +257,7 @@ const rotateLeft = (scroll) => {
                 makeWhiteColor(data.current_color,input)
                 // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-                console.log(rgbColor)
+                // // console.log(rgbColor)
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
@@ -266,7 +277,7 @@ const clickScrolls = () => {
                 return rotateRight(scroll);
             break;
             default:
-                console.log(undefined);
+                // console.log(undefined);
             break;
         }
     })
@@ -283,11 +294,11 @@ clickScrolls()
 //     g = ((i>>4) & 0xf) * 0x11;
 //     b = (i & 0xf) * 0x11;
 //     colour = "rgb("+r+","+g+","+b+")";
-//     // console.log(colour)
+// //     // console.log(colour)
 //     arr.push(colour)
     
 // }
-// console.log(arr)
+// // console.log(arr)
 
 // insert_btn.style.left = `${document.body.clientWidth/2}px`
 // insert_btn.addEventListener('click', e => {
@@ -299,7 +310,7 @@ clickScrolls()
 
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{
-// console.log(data.colors)
+// // console.log(data.colors)
 let arr = []
 data.colors.forEach((col,index) => {
     const li = document.createElement('li')
@@ -318,7 +329,7 @@ data.colors.forEach((col,index) => {
         arr.push(li)
         li.addEventListener('mouseover',e=>{
             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-            console.log(rgbColor)
+            // console.log(rgbColor)
             idCount=index+1
 
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
@@ -348,12 +359,12 @@ for(let i in arr){
 
 //___________________________
 spot.addEventListener('mouseover',e=>{
-    console.log(copy)
+    // console.log(copy)
     copy.classList.remove('copy-current')
     copy.classList.add('copy-hover')
 })
 spot.addEventListener('mouseout',e=>{
-    console.log(copy)
+    // console.log(copy)
     copy.classList.add('copy-current')
     copy.classList.remove('copy-hover')
 })

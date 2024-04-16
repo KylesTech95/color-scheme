@@ -107,6 +107,25 @@ body{
     transform:scale(1.5);
     top:20px;
 }
+
+#copy-message{
+    position:absolute;
+    z-index:990;
+    color:ghostwhite;
+    letter-spacing: .5px;
+    text-rendering: optimizeSpeed;
+}
+.coppied-message{
+    top:-2.25rem;
+    transition:.5s;
+    opacity:1;
+}
+.coppied-message-hidden{
+    top:0;
+    transition:.5s;
+    opacity:0;
+}
+
 #choice-container{
     height: 75vh;
     width:100%;
