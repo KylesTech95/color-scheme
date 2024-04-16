@@ -202,11 +202,15 @@ position:relative;
     color:#333;
 }
 
+.scroll>h4{
+    min-width:100px;
+    max-width:100px;
+}
 
 #scroll-container{
     gap:10rem;
     position:relative;
-    top:-8rem;
+    top:-12rem;
     width:50%;
     z-index:998;
     height:50px;
@@ -287,6 +291,10 @@ position:relative;
     justify-content:center;
     align-items: center;
     gap:.5rem;
+}
+#color-pal-container{
+margin-top:-6rem;
+/* border:3px solid green; */
 }
 .number-container>input{
     text-align:center;
