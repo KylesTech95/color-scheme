@@ -18,7 +18,7 @@
     border-radius:50%;
     transition:.25s;
     /* Uncomment below to display the button to INSERT COLORS */
-    /* display:none; */
+    display:none;
 /*  */
 }
 #result-container{

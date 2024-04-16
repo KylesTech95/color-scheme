@@ -144,8 +144,11 @@ const rotateRight = (scroll) => {
             clickInput(input)
             makeWhiteColor(data.current_color,input)
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-            let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
-                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+            // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+            let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+            console.log(rgbColor)
+
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
                 res.color.style.color = data.current_color
@@ -170,7 +173,9 @@ const rotateRight = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
-                let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+                // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+                    let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+                console.log(rgbColor)
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
@@ -200,7 +205,9 @@ const rotateLeft = (scroll) => {
             // disappear(input)
             appear(input)
             makeWhiteColor(data.current_color,input)
-            let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+            // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+        let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+            console.log(rgbColor)
             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
@@ -227,7 +234,9 @@ const rotateLeft = (scroll) => {
                 sp.append(input)
                 clickInput(input)
                 makeWhiteColor(data.current_color,input)
-                let rgbColor = data.current_color.match(/[0-9]+/gi,'').join`,`.split`,`;
+                // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+            let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+                console.log(rgbColor)
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                 res.color.textContent = data.current_color
                 res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
@@ -258,21 +267,21 @@ clickScrolls()
 // test sumFn
 //________________________________________
 
-let arr = []
-for(let i=0; i < 1<<12; i++) {
-    r = ((i>>8) & 0xf) * 0x11;
-    g = ((i>>4) & 0xf) * 0x11;
-    b = (i & 0xf) * 0x11;
-    colour = "rgb("+r+","+g+","+b+")";
-    // console.log(colour)
-    arr.push(colour)
+// let arr = []
+// for(let i=0; i < 1<<12; i++) {
+//     r = ((i>>8) & 0xf) * 0x11;
+//     g = ((i>>4) & 0xf) * 0x11;
+//     b = (i & 0xf) * 0x11;
+//     colour = "rgb("+r+","+g+","+b+")";
+//     // console.log(colour)
+//     arr.push(colour)
     
-}
-console.log(arr)
+// }
+// console.log(arr)
 
-insert_btn.style.left = `${document.body.clientWidth/2}px`
-insert_btn.addEventListener('click', e => {
-    postfetch('/colors-insert',{rgb:[...arr]}).then((data)=>{
-        return data.color
-    })
-})
+// insert_btn.style.left = `${document.body.clientWidth/2}px`
+// insert_btn.addEventListener('click', e => {
+//     postfetch('/colors-insert',{rgb:[...arr]}).then((data)=>{
+//         return data.color
+//     })
+// })
