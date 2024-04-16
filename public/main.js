@@ -64,7 +64,7 @@ const shaveUl = (spot) => {
         // console.log(cparr[i])
         if(cparr[i]==arr[i]){
             if(i!==cparr.length-1){
-                console.log(cparr[i])
+                // console.log(cparr[i])
                 spot.removeChild(arr[i])
             }
         }

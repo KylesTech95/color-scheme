@@ -337,7 +337,7 @@ form#form{
     border-radius:12px;
 }
 .color-pal-list-container{
-    overflow-x:scroll;
+    overflow-x:hidden;
     overflow-y:scroll;
     height:100%;
     width:100%;
