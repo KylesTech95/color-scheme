@@ -287,12 +287,11 @@ clickScrolls()
 // })
 
 
-
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{
 // console.log(data.colors)
 let arr = []
-data.colors.forEach(col => {
+data.colors.forEach((col,index) => {
     const li = document.createElement('li')
     li.classList.add('.color-pal-list-item')
     li.setAttribute('style',`
@@ -305,12 +304,26 @@ data.colors.forEach(col => {
             z-index:999;
             `)
     li.classList.add('hover-li')
+    // push li into arrow
         arr.push(li)
+        li.addEventListener('mouseover',e=>{
+            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+            console.log(rgbColor)
+            idCount=index+1
+
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                res.color.textContent = e.target.style.background
+                res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
+                res.color.style.color = e.target.style.background
+                res.hex.style.color = e.target.style.background
+        })
 })
-console.log(arr)
+// append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
 }
+
+
 
 
 
