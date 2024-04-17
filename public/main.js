@@ -26,6 +26,9 @@ const createInput = (input,data,bool) => {
         input.style.background = data.current_color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
+        // input.setAttribute('disabled','true')
+            input.setAttribute('autocomplete','off')
+            input.setAttribute('spellcheck','false')
         input.setAttribute('value',data.current_color)
     }
     else{
@@ -33,6 +36,9 @@ const createInput = (input,data,bool) => {
         input.style.background = data.color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
+        // input.setAttribute('disabled','true')
+        input.setAttribute('autocomplete','off')
+        input.setAttribute('spellcheck','false')
         input.setAttribute('value',data.color)
         }
     
@@ -128,8 +134,8 @@ const clickInput = (input) => {
     }
 }   
 // spot-container: add event listener (click) to show "coppied!" consistently
-spot.addEventListener('click',e=>{
-    copyMessagePop()
+window.addEventListener('click',e=>{
+    if(e.target.classList.contains('color-input')) copyMessagePop()
 })
 // turn input's color white 
 // turn copy-icon white
@@ -170,7 +176,7 @@ const postfetch = async(api,d) => {
 // rotate colors process:
 // 1) Rotate Right
 const rotateRight = (scroll) => {
-    let sp = scroll.parentElement.parentElement;
+    let sp = spot;
     scroll.addEventListener('click', e => {
     idCount+=1;
     if(idCount>4096)idCount=1;
@@ -219,7 +225,7 @@ const rotateRight = (scroll) => {
 }
 // 2) Rotate Left
 const rotateLeft = (scroll) => {
-    let sp = scroll.parentElement.parentElement;
+    let sp = spot;
     scroll.addEventListener('click', e => {
     idCount-=1;
     if(idCount<1)idCount=4096;
@@ -247,24 +253,24 @@ const rotateLeft = (scroll) => {
         if(/ArrowLeft/.test(e.key)){
         hoverEffect(scroll)
 
-                idCount-=1;
-            if(idCount<1)idCount=4096;
-            // // console.log(idCount)
-            const input = document.createElement('input')
-            input.classList.add('color-input')
-            fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
-                createInput(input,data)
-                sp.append(input)
-                clickInput(input)
-                makeWhiteColor(data.current_color,input)
-                shaveUl(sp)
-                // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+        idCount-=1;
+        if(idCount<1)idCount=4096;
+        // // console.log(idCount)
+        const input = document.createElement('input')
+        input.classList.add('color-input')
+        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+            createInput(input,data)
+            sp.append(input)
+            clickInput(input)
+            makeWhiteColor(data.current_color,input)
+            shaveUl(sp)
+            // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-                // // console.log(rgbColor)
-                setRGBAndHex(res,data,rgbColor)
-            })
-        }
-    })
+            // // console.log(rgbColor)
+            setRGBAndHex(res,data,rgbColor)
+        })
+      }
+  })
 }
 // switch statement when clicking left and right arrows
 const clickScrolls = () => {
@@ -328,23 +334,22 @@ data.colors.forEach((col,index) => {
     li.classList.add('hover-li')
     // push li into arrow
         arr.push(li)
-        li.addEventListener('mouseover',e=>{
-            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-            // console.log(rgbColor)
-            idCount=index+1
-
-            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                setRGBAndHex(res,e.target,rgbColor,true)
-            // identify rgb input
-            const input = document.createElement('input')
-              input.style.background = col.color;
-                createInput(input,col,true)
-                spot.append(input)
-                clickInput(input)
-                shaveUl(spot)
-                makeWhiteColor(col.color,input)
-              
-        })
+    li.addEventListener('mouseover',e=>{
+        let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+        // console.log(rgbColor)
+        idCount=index+1
+        // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+            setRGBAndHex(res,e.target,rgbColor,true)
+        // identify rgb input
+        const input = document.createElement('input')
+        input.style.background = col.color;
+        createInput(input,col,true)
+        spot.append(input)
+        clickInput(input)
+        shaveUl(spot)
+        makeWhiteColor(col.color,input)
+            
+    })
 })
 // append items in pallette container
 for(let i in arr){
