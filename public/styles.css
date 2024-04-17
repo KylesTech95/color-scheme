@@ -12,7 +12,12 @@ html{
 .no-pointer{
     pointer-events:none;
 }
+/* #mid-line{
+    position:absolute;
+    width:100%;
+    bordeR:3px solid #f00;
 
+} */
 .section-scroll-btn{
     position:fixed;
     left:10%;
