@@ -171,8 +171,6 @@ const postfetch = async(api,d) => {
     // testing postFetch
     return response.json()
 }
-
-
 // rotate colors process:
 // 1) Rotate Right
 const rotateRight = (scroll) => {
