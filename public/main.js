@@ -11,59 +11,39 @@ const palID = document.getElementById('color-pal-container')
 let copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
-const mid_obj = {
-    width:`100%`,
-    border: `3px solid red`,
-    top:`top: ${screen.height/2}px`,
-    position:`fixed`
-}
 let idCount = 0;
 let click = 0;
 const post = '/post-sum-fn'
-const get = '/get-sum-fn'
+const get = '/get-sum-fn';
+let destination = palID.clientHeight-105
+let scroll_arr=[]
+let scroll_dir;
+
+// objects
+const mid_obj = {
+    width:`100%`,
+    border: `3px solid transparent`,
+    top:`top: ${screen.height/2}px`,
+    position:`fixed`,
+    z_index:1
+}
 const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
+
+
+//functions
+
+// give HR element some attributes (midline)
 const configureMidLine = (mid) => {
-console.log(mid)
-mid.style = `width:${mid_obj.width};position:${mid_obj.position};border:${mid_obj.border};top:${mid_obj.top};`
+    mid.style = `width:${mid_obj.width};position:${mid_obj.position};border:${mid_obj.border};top:${mid_obj.top};z-index:${mid_obj.z_index};`
 }
-configureMidLine(midline)
-
-    let destination = palID.clientHeight-105
-    let scroll_arr=[]
-    let scroll_dir;
-    window.addEventListener('scroll',e=>{
-    // compare current scroll and previous scroll
-
-        let current = window.scrollY;
-            scroll_arr.push(current)
-            // if current scroll is less than array's 2nd-to-last index, GO UP
-            if(current < scroll_arr[scroll_arr.length-2]){
-                console.log('going up')
-                scroll_dir = true
-            }
-            // if current scroll is less than array's 2nd-to-last index, GO DOWN
-            if(current > scroll_arr[scroll_arr.length-2]){
-                console.log('going down')
-                scroll_dir = false
-            }
-            
-            // force scroll
-            if(!scroll_dir && midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-spot.clientHeight){
-                window.scrollTo(palID.offsetLeft,destination)
-                
-            }
-            if(scroll_dir && midline.getBoundingClientRect().y > spot.clientHeight + spot.getBoundingClientRect().y){
-                window.scrollTo(0,0)      
-            }
-    })
-
+    configureMidLine(midline)
 // create input function
 const createInput = (input,data,bool) => {
     if(!bool){
-        console.log(data)
+        // console.log(data)
         input.style.background = data.current_color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
@@ -73,7 +53,7 @@ const createInput = (input,data,bool) => {
         input.setAttribute('value',data.current_color)
     }
     else{
-        console.log(data)
+        // console.log(data)
         input.style.background = data.color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
@@ -389,6 +369,18 @@ data.colors.forEach((col,index) => {
         makeWhiteColor(col.color,input)
             
     })
+    li.addEventListener('click',async e=>{
+        // identify rgb input
+        const input = document.createElement('input')
+        input.style.background = col.color;
+        createInput(input,col,true)
+        spot.append(input)
+        clickInput(input)
+        shaveUl(spot)
+        makeWhiteColor(col.color,input)
+        copyColor(input)
+        copyMessagePop()
+    })
 })
 // append items in pallette container
 for(let i in arr){
@@ -436,3 +428,30 @@ async function clearFn(){
     // console.log('db cleared!')
     resActual.textContent = 0;
 }
+
+// scroll event listener
+window.addEventListener('scroll',e=>{
+// compare current scroll and previous scroll
+
+    let current = window.scrollY;
+        scroll_arr.push(current)
+        // if current scroll is less than array's 2nd-to-last index, GO UP
+        if(current < scroll_arr[scroll_arr.length-2]){
+            // console.log('going up')
+            scroll_dir = true
+        }
+        // if current scroll is less than array's 2nd-to-last index, GO DOWN
+        if(current > scroll_arr[scroll_arr.length-2]){
+            // console.log('going down')
+            scroll_dir = false
+        }
+        
+        // force scroll
+        if(!scroll_dir && midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-spot.clientHeight){
+            window.scrollTo(palID.offsetLeft,destination)
+            
+        }
+        if(scroll_dir && midline.getBoundingClientRect().y > spot.clientHeight + spot.getBoundingClientRect().y){
+            window.scrollTo(0,0)      
+        }
+})
