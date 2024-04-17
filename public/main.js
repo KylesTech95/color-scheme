@@ -184,7 +184,7 @@ const rotateRight = (scroll) => {
     // create input
     const input = document.createElement('input')
     input.classList.add('color-input')
-    fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+    fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
     createInput(input,data)
     sp.append(input)
             // disappear(input)
@@ -209,7 +209,7 @@ const rotateRight = (scroll) => {
         // // console.log(idCount)
         const input = document.createElement('input')
         input.classList.add('color-input')
-        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+        fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
         createInput(input,data)
         sp.append(input)
         clickInput(input)
@@ -233,7 +233,7 @@ const rotateLeft = (scroll) => {
 
     const input = document.createElement('input')
     input.classList.add('color-input')
-    fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+    fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
     createInput(input,data)
     sp.append(input)
     clickInput(input)
@@ -258,7 +258,7 @@ const rotateLeft = (scroll) => {
         // // console.log(idCount)
         const input = document.createElement('input')
         input.classList.add('color-input')
-        fetch(`/colors-insert/${idCount}`).then(res=>res.json()).then(data=>{
+        fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
             createInput(input,data)
             sp.append(input)
             clickInput(input)

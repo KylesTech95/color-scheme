@@ -99,6 +99,8 @@ body{
     width:100%;
     height:100px;
     opacity:.9;
+    /* background:red; */
+    
 }
 .copy-icon{
     position:absolute;
