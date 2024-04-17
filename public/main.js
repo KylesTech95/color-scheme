@@ -18,6 +18,7 @@ const get = '/get-sum-fn';
 let destination = palID.clientHeight-105
 let scroll_arr=[]
 let scroll_dir;
+let noClick = false;
 
 // objects
 const mid_obj = {
@@ -432,7 +433,7 @@ async function clearFn(){
 // scroll event listener
 window.addEventListener('scroll',e=>{
 // compare current scroll and previous scroll
-
+    noClick = true;
     let current = window.scrollY;
         scroll_arr.push(current)
         // if current scroll is less than array's 2nd-to-last index, GO UP
@@ -447,11 +448,11 @@ window.addEventListener('scroll',e=>{
         }
         
         // force scroll
-        if(!scroll_dir && midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-spot.clientHeight){
+        if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-spot.clientHeight)){
             window.scrollTo(palID.offsetLeft,destination)
             
         }
-        if(scroll_dir && midline.getBoundingClientRect().y > spot.clientHeight + spot.getBoundingClientRect().y){
+        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+50) ){
             window.scrollTo(0,0)      
         }
 })
