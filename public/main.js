@@ -19,6 +19,16 @@ const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
+window.addEventListener('scroll',e=>{
+    let yPos = window.scrollY;
+    // console.log(yPos)
+    // console.log(palID.clientHeight)
+    // console.log(' ')
+    let des = palID.clientHeight - 85
+    if(yPos >  (res.hex.getBoundingClientRect().y)+225){
+        window.scrollTo(0,des)
+    }
+})
 // create input function
 const createInput = (input,data,bool) => {
     if(!bool){
