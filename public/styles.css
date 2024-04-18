@@ -179,7 +179,7 @@ body{
     background:#000;
     margin-top:2rem;
     transition:.25s;
-    position:absolute;
+    position:fixed;
     right:12px;
     top:25px;
 }
