@@ -534,7 +534,6 @@ form#form{
 }
 #color-pal::-webkit-resizer{
     outline: 2px dashed red;
-
 }
 .color-pal-list-container{
     overflow-x:hidden;
