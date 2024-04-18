@@ -399,7 +399,7 @@ form#form{
 }
 #color-pal{
     overflow:hidden;
-    width:600px;
+    width:90%;
     height:400px;
     /* bordeR:4px solid yellow; */
     display:flex;
@@ -407,12 +407,22 @@ form#form{
     justify-content: end;
     align-items: center;
     box-shadow: 0 0 1rem .5px ghostWhite;
-    border-radius:12px;
     margin-bottom:2rem;
+    min-height:250px;
+    min-width:50%;
+    max-width:95%;
+    max-height:550px;
+    resize:both;
+}
+#color-pal::-webkit-resizer{
+    outline: 2px dashed red;
+
 }
 .color-pal-list-container{
     overflow-x:hidden;
     overflow-y:scroll;
+    -ms-overflow-style: none;
+    scrollbar-width:none;
     height:100%;
     width:100%;
     /* border:3px solid violet; */
