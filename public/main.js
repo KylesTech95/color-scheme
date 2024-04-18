@@ -497,3 +497,18 @@ function closeNav(){
     navActual.classList.add('hidden-item');
     btn_top.classList.add('hidden-item')
 }
+
+const navArr = document.querySelectorAll('.nav-item>a')
+
+navArr.forEach((item,i)=>{
+    if(i==0){
+        item.addEventListener('click',e=>{
+            blink(fingers[0])
+        })
+    }
+    if(i==1){
+        item.addEventListener('click',e=>{
+            blink(fingers[1])
+        })
+    }
+})
