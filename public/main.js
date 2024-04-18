@@ -15,7 +15,7 @@ let idCount = 0;
 let click = 0;
 const post = '/post-sum-fn'
 const get = '/get-sum-fn';
-let destination = palID.clientHeight-105
+let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 let noClick = false;
@@ -32,7 +32,6 @@ const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
-
 
 //functions
 
@@ -139,12 +138,27 @@ const copyColor = async(inp) => {
 } 
 // copy message appears when new color is clicked(in spot-container)
 const copyMessagePop = () => {
-    copy_message.classList.remove('coppied-message-hidden')
-    copy_message.classList.add('coppied-message')
-    setTimeout(()=>{
-    copy_message.classList.add('coppied-message-hidden')
-    copy_message.classList.remove('coppied-message')
+    if(midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+(spot.clientHeight/2)){
+        copy_message.classList.remove('coppied-message-hidden')
+        copy_message.classList.remove('coppied-message-hidden-down')
+
+        copy_message.classList.add('coppied-message')
+        setTimeout(()=>{
+        copy_message.classList.add('coppied-message-hidden')
+        copy_message.classList.remove('coppied-message')
     },750)
+    console.log('you are over')
+    }
+    else{
+        copy_message.classList.remove('coppied-message-hidden')
+        copy_message.classList.remove('coppied-message-hidden-down')
+
+        copy_message.classList.add('coppied-message-down')
+        setTimeout(()=>{
+        copy_message.classList.add('coppied-message-hidden-down')
+        copy_message.classList.remove('coppied-message-down')
+    },750)
+    }
 }
 // input click event
 const clickInput = (input) => {
@@ -404,31 +418,31 @@ spot.addEventListener('mouseout',e=>{
 //___________________________________________
 //API - combine numbers (sum)
 // send/receive requests from server
-submit_btn.addEventListener('click',e=>{
-    e.preventDefault();
-    // post request
-    postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
-        // // console.log(data.result)
-        resActual.textContent = data.result;
-    })
-    // settimeout for get request
-   setTimeout(()=>{
-     //get request
-     fetch(get).then(res=>res.json()).then(data=>{
-        // console.log(data)
-    })
-   },500)
+// submit_btn.addEventListener('click',e=>{
+//     e.preventDefault();
+//     // post request
+//     postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
+//         // // console.log(data.result)
+//         resActual.textContent = data.result;
+//     })
+//     // settimeout for get request
+//    setTimeout(()=>{
+//      //get request
+//      fetch(get).then(res=>res.json()).then(data=>{
+//         // console.log(data)
+//     })
+//    },500)
 
-    return [...inputs].forEach(inp=>{
-        inp.value = ''
-    })
-})
+//     return [...inputs].forEach(inp=>{
+//         inp.value = ''
+//     })
+// })
 // clear database function
-async function clearFn(){
-    let ft = await fetch('/cleared')
-    // console.log('db cleared!')
-    resActual.textContent = 0;
-}
+// async function clearFn(){
+//     let ft = await fetch('/cleared')
+//     // console.log('db cleared!')
+//     resActual.textContent = 0;
+// }
 
 // scroll event listener
 window.addEventListener('scroll',e=>{
@@ -446,13 +460,12 @@ window.addEventListener('scroll',e=>{
             // console.log('going down')
             scroll_dir = false
         }
-        
         // force scroll
-        if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-spot.clientHeight)){
+        if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-5)){
             window.scrollTo(palID.offsetLeft,destination)
             
         }
-        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+50) ){
+        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+20) ){
             window.scrollTo(0,0)      
         }
 })

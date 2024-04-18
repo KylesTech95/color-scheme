@@ -173,6 +173,16 @@ body{
     transition:.5s;
     opacity:1;
 }
+.coppied-message-hidden-down{
+    bottom:0;
+    transition:.5s;
+    opacity:0;
+}
+.coppied-message-down{
+    bottom:-2.25rem;
+    transition:.5s;
+    opacity:1;
+}
 .coppied-message-hidden{
     top:0;
     transition:.5s;
