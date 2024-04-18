@@ -11,6 +11,7 @@ const palID = document.getElementById('color-pal-container')
 let copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
+
 let idCount = 0;
 let click = 0;
 const post = '/post-sum-fn'
@@ -416,6 +417,12 @@ data.colors.forEach((col,index) => {
         //send a post request to colors_inventory table
         postfetch('/color-inventory-insert',{color:col.color})
         // inject chosen color into color-inventory-list-container
+        const lis = [...pal_container.children]
+
+        lis.forEach(it =>it.classList.add('no-pointer'))
+        setTimeout(()=>{
+            lis.forEach(it =>it.classList.remove('no-pointer'))
+        },250)
     })
 
 })
