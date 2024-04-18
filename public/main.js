@@ -19,7 +19,7 @@ let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 let noClick = false;
-
+//____________________________
 // objects
 const mid_obj = {
     width:`100%`,
@@ -32,14 +32,13 @@ const res = {
     color: document.querySelector(".result-color>h4"),
     hex: document.querySelector(".result-hex>h4")
 }
-
+//____________________________
 //functions
-
 // give HR element some attributes (midline)
 const configureMidLine = (mid) => {
     mid.style = `width:${mid_obj.width};position:${mid_obj.position};border:${mid_obj.border};top:${mid_obj.top};z-index:${mid_obj.z_index};`
 }
-    configureMidLine(midline)
+configureMidLine(midline)
 // create input function
 const createInput = (input,data,bool) => {
     if(!bool){
@@ -50,6 +49,7 @@ const createInput = (input,data,bool) => {
         // input.setAttribute('disabled','true')
             input.setAttribute('autocomplete','off')
             input.setAttribute('spellcheck','false')
+            input.setAttribute('id','choice-spot-input')
         input.setAttribute('value',data.current_color)
     }
     else{
@@ -338,7 +338,12 @@ const spotHover = (copy,spot) => {
         spot.classList.add('color-input-current')
     },250)
 }
-//________________________________________
+
+
+
+
+
+//____________________________
 
 // let arr = []
 // for(let i=0; i < 1<<12; i++) {
@@ -361,10 +366,11 @@ const spotHover = (copy,spot) => {
 
 
 // fill color palette
-fetch('/colors').then(res=>res.json()).then(data=>{
+fetch('/colors').then(res=>res.json()).then(data=>{ // data
 // // console.log(data.colors)
 let arr = []
 data.colors.forEach((col,index) => {
+
     const li = document.createElement('li')
     li.classList.add('.color-pal-list-item')
     li.setAttribute('style',`
@@ -407,8 +413,15 @@ data.colors.forEach((col,index) => {
         copyColor(input)
         copyMessagePop()
         spotHover(copy,spot)
+
+        //send a post request to colors_inventory table
+        postfetch('/color-inventory-insert',{color:col.color})
     })
+
 })
+
+
+
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])

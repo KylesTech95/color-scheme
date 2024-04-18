@@ -101,7 +101,7 @@ justify-content:space-evenly;
 /* gap:1rem; */
 position:relative;
 }
-.res-item>label{
+.res-item>div{
     color:#fff;
     background:black;
     padding:.25rem;
