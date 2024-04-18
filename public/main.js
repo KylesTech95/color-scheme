@@ -325,8 +325,19 @@ const clickScrolls = () => {
 
 }
 clickScrolls()
-
-
+// function that takes copy element & hovers
+const spotHover = (copy,spot) => {
+    copy.classList.remove('copy-current')
+    copy.classList.add('copy-hover')
+    spot.classList.add('color-input-hover')
+    spot.classList.remove('color-input-current')
+    setTimeout(()=>{
+        copy.classList.add('copy-current')
+        copy.classList.remove('copy-hover')
+        spot.classList.remove('color-input-hover')
+        spot.classList.add('color-input-current')
+    },250)
+}
 //________________________________________
 
 // let arr = []
@@ -395,6 +406,7 @@ data.colors.forEach((col,index) => {
         makeWhiteColor(col.color,input)
         copyColor(input)
         copyMessagePop()
+        spotHover(copy,spot)
     })
 })
 // append items in pallette container

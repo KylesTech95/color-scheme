@@ -269,6 +269,9 @@ cursor:pointer;
     letter-spacing: .5px;
     text-rendering: optimizeSpeed;
 }
+.copy-message-actual{
+    cursor:none;
+}
 .coppied-message{
     top:-2.25rem;
     transition:.5s;
@@ -342,6 +345,14 @@ position:relative;
     transform:scale(1.025);
     transition:.25s;
 }
+.color-input-hover{
+    transform:scale(1.025);
+    transition:.25s;
+}
+.color-input-current{
+    transform:scale(1);
+    transition:.25s;
+}
 .copy-current{
     transform:scale(1.25);
     transition:.25s;
@@ -371,10 +382,6 @@ position:relative;
     color:#333;
 }
 
-.scroll>h4{
-    min-width:100px;
-    max-width:100px;
-}
 
 #scroll-container{
     gap:10rem;
@@ -437,6 +444,15 @@ position:relative;
     position:absolute;
     top:-4rem;
     text-align:center;
+    min-width:100px;
+    max-width:100px;
+    letter-spacing: 1px;
+    font-size:16px;
+}
+.scroll>h4.keyboard{
+    color:#f00 !important;
+    position:absolute;
+    top:-5.5rem;
 }
 
 /* Testing container*/
