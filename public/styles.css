@@ -538,7 +538,7 @@ form#form{
 .hover-li:hover{
     transform:scale(1.5);
     transition:.5s;
-    cursor:pointer;
+    cursor:copy;
 }
 .color-pal-spot-container{
     height:50px;
