@@ -480,11 +480,20 @@ window.addEventListener('scroll',e=>{
             blink(fingers[1])   
         }
 })
+let btn_top = document.querySelector('.nav-btn-top')
 const nav = document.querySelector('#nav-container')
+const navActual = nav.children[0]
 function toggleFn(){
     if(nav.classList.contains('base')){
         nav.classList.remove('base')
         nav.classList.add('full')
+        navActual.classList.remove('hidden-item')
+        btn_top.classList.remove('hidden-item')
     }
 }
-
+function closeNav(){
+    nav.classList.add('base')
+    nav.classList.remove('full')
+    navActual.classList.add('hidden-item');
+    btn_top.classList.add('hidden-item')
+}
