@@ -413,9 +413,9 @@ data.colors.forEach((col,index) => {
         copyColor(input)
         copyMessagePop()
         spotHover(copy,spot)
-
         //send a post request to colors_inventory table
         postfetch('/color-inventory-insert',{color:col.color})
+        // inject chosen color into color-inventory-list-container
     })
 
 })
