@@ -445,6 +445,15 @@ spot.addEventListener('mouseout',e=>{
 // }
 
 // scroll event listener
+const fingers = document.querySelectorAll('.hover-span')
+const blink = (finger) => {
+    finger.classList.add('finger-glow')
+    finger.parentElement.classList.add('finger-border-active')
+    setTimeout(()=>{
+        finger.classList.remove('finger-glow')
+        finger.parentElement.classList.remove('finger-border-active')
+    },250)
+}
 window.addEventListener('scroll',e=>{
 // compare current scroll and previous scroll
     noClick = true;
@@ -461,12 +470,21 @@ window.addEventListener('scroll',e=>{
             scroll_dir = false
         }
         // force scroll
-        if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-5)){
+        if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-10)){
             window.scrollTo(palID.offsetLeft,destination)
+            blink(fingers[0])
             
         }
-        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+20) ){
-            window.scrollTo(0,0)      
+        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+10) ){
+            window.scrollTo(0,0)   
+            blink(fingers[1])   
         }
 })
+const nav = document.querySelector('#nav-container')
+function toggleFn(){
+    if(nav.classList.contains('base')){
+        nav.classList.remove('base')
+        nav.classList.add('full')
+    }
+}
 
