@@ -38,7 +38,7 @@ const res = {
 // get inventory of colors
 const inventory_container = document.querySelector('.color-inventory-list-container')
 const getColorInventory = () => {
-    fetch('/color-inventory-insert').then(res=>res.json()).then(data=>{
+    fetch('/color-inventory').then(res=>res.json()).then(data=>{
         console.log(data.inventory)
         // // send color to inventory
         let arr = [...data.inventory];
@@ -391,7 +391,7 @@ const spotHover = (copy,spot) => {
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{ // data
 // // console.log(data.colors)
-let arr = []
+let arr = [], arr_inv = [];
 data.colors.forEach((col,index) => {
 
     const li = document.createElement('li')
@@ -449,11 +449,11 @@ data.colors.forEach((col,index) => {
             },850)
         })
 
-        fetch('/color-inventory-insert').then(res=>res.json()).then(data=>{
+        fetch('/color-inventory').then(res=>res.json()).then(data=>{
             // // send color to inventory
-            let arr = [...data.inventory];
+            let dInv = [...data.inventory];
     
-            arr.forEach((inv,index)=>{
+            dInv.forEach((inv,index)=>{
                 if(inv.color===col.color){
                     const iLi = document.createElement('li')
                     iLi.classList.add('color-inventory-list-item')
@@ -463,7 +463,7 @@ data.colors.forEach((col,index) => {
                       width:45px;
                       border:2px solid green
                       `)
-                    inventory_container.append(iLi)
+                      arr_inv.push(iLi)
                 }
             })
         })
@@ -472,6 +472,9 @@ data.colors.forEach((col,index) => {
     })
 
 })
+for(let i in arr_inv){
+    inventory_container.append(li)
+}
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
