@@ -35,6 +35,28 @@ const res = {
 }
 //____________________________
 //functions
+// get inventory of colors
+const inventory_container = document.querySelector('.color-inventory-list-container')
+const getColorInventory = () => {
+    fetch('/color-inventory-insert').then(res=>res.json()).then(data=>{
+        console.log(data.inventory)
+        // // send color to inventory
+        let arr = [...data.inventory];
+
+        arr.forEach((inv,index)=>{
+            const iLi = document.createElement('li')
+                  iLi.classList.add('color-inventory-list-item')
+                  iLi.setAttribute('style', `
+                    background:${inv.color};
+                    height:45px;
+                    width:45px;
+                    border:2px solid green
+                    `)
+                  inventory_container.append(iLi)
+        })
+    })
+}
+getColorInventory()
 // give HR element some attributes (midline)
 const configureMidLine = (mid) => {
     mid.style = `width:${mid_obj.width};position:${mid_obj.position};border:${mid_obj.border};top:${mid_obj.top};z-index:${mid_obj.z_index};`
@@ -418,17 +440,38 @@ data.colors.forEach((col,index) => {
         postfetch('/color-inventory-insert',{color:col.color})
         // inject chosen color into color-inventory-list-container
         const lis = [...pal_container.children]
+        lis.forEach(it =>{
+            it.classList.add('no-pointer')
+            it.setAttribute('disabled',true)
+            setTimeout(()=>{
+                lis.forEach(it =>it.classList.remove('no-pointer'))
+                it.setAttribute('disabled',false)
+            },850)
+        })
 
-        lis.forEach(it =>it.classList.add('no-pointer'))
-        setTimeout(()=>{
-            lis.forEach(it =>it.classList.remove('no-pointer'))
-        },250)
+        fetch('/color-inventory-insert').then(res=>res.json()).then(data=>{
+            // // send color to inventory
+            let arr = [...data.inventory];
+    
+            arr.forEach((inv,index)=>{
+                if(inv.color===col.color){
+                    const iLi = document.createElement('li')
+                    iLi.classList.add('color-inventory-list-item')
+                    iLi.setAttribute('style', `
+                      background:${inv.color};
+                      height:45px;
+                      width:45px;
+                      border:2px solid green
+                      `)
+                    inventory_container.append(iLi)
+                }
+            })
+        })
+
+        
     })
 
 })
-
-
-
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
@@ -446,7 +489,6 @@ spot.addEventListener('mouseout',e=>{
     copy.classList.add('copy-current')
     copy.classList.remove('copy-hover')
 })
-
 //___________________________________________
 //API - combine numbers (sum)
 // send/receive requests from server
@@ -529,9 +571,7 @@ function closeNav(){
     navActual.classList.add('hidden-item');
     btn_top.classList.add('hidden-item')
 }
-
 const navArr = document.querySelectorAll('.nav-item>a')
-
 navArr.forEach((item,i)=>{
     if(i==0){
         item.addEventListener('click',e=>{

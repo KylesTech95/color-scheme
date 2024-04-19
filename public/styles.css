@@ -515,7 +515,7 @@ form#form{
     align-items:center;
     justify-content: center;
     position:absolute;
-    top:12rem;
+    top:7.5rem;
     
 }
 .color-inventory-title{
@@ -534,11 +534,11 @@ form#form{
     align-items: start;
     flex-wrap: wrap;
 }
-.color-inventory-list-container>li{
+/* .color-inventory-list-container>li{
     height:45px;
     width:45px;
     border:2px solid green;
-}
+} */
 #color-pal-container{
     width:100%;
     height:100vh;
