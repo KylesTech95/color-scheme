@@ -21,40 +21,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: color_inventory; Type: TABLE; Schema: public; Owner: kylestech95
---
-
-CREATE TABLE public.color_inventory (
-    id integer NOT NULL,
-    color character varying(50) NOT NULL
-);
-
-
-ALTER TABLE public.color_inventory OWNER TO kylestech95;
-
---
--- Name: color_inventory_id_seq; Type: SEQUENCE; Schema: public; Owner: kylestech95
---
-
-CREATE SEQUENCE public.color_inventory_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.color_inventory_id_seq OWNER TO kylestech95;
-
---
--- Name: color_inventory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kylestech95
---
-
-ALTER SEQUENCE public.color_inventory_id_seq OWNED BY public.color_inventory.id;
-
-
---
 -- Name: colors; Type: TABLE; Schema: public; Owner: kylestech95
 --
 
@@ -123,13 +89,6 @@ ALTER SEQUENCE public.numbers_id_seq OWNED BY public.numbers.id;
 
 
 --
--- Name: color_inventory id; Type: DEFAULT; Schema: public; Owner: kylestech95
---
-
-ALTER TABLE ONLY public.color_inventory ALTER COLUMN id SET DEFAULT nextval('public.color_inventory_id_seq'::regclass);
-
-
---
 -- Name: colors id; Type: DEFAULT; Schema: public; Owner: kylestech95
 --
 
@@ -141,14 +100,6 @@ ALTER TABLE ONLY public.colors ALTER COLUMN id SET DEFAULT nextval('public.color
 --
 
 ALTER TABLE ONLY public.numbers ALTER COLUMN id SET DEFAULT nextval('public.numbers_id_seq'::regclass);
-
-
---
--- Data for Name: color_inventory; Type: TABLE DATA; Schema: public; Owner: kylestech95
---
-
-COPY public.color_inventory (id, color) FROM stdin;
-\.
 
 
 --
@@ -4264,13 +4215,6 @@ COPY public.numbers (id, result) FROM stdin;
 
 
 --
--- Name: color_inventory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kylestech95
---
-
-SELECT pg_catalog.setval('public.color_inventory_id_seq', 1, false);
-
-
---
 -- Name: colors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kylestech95
 --
 
@@ -4282,14 +4226,6 @@ SELECT pg_catalog.setval('public.colors_id_seq', 4096, true);
 --
 
 SELECT pg_catalog.setval('public.numbers_id_seq', 1, false);
-
-
---
--- Name: color_inventory color_inventory_pkey; Type: CONSTRAINT; Schema: public; Owner: kylestech95
---
-
-ALTER TABLE ONLY public.color_inventory
-    ADD CONSTRAINT color_inventory_pkey PRIMARY KEY (id);
 
 
 --
