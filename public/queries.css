@@ -1,0 +1,12 @@
+@media screen and (max-width:400px){
+    .choice-spot{
+    width:75%;
+    transition:.5s;
+    }
+ .play-icon{
+    transform:scale(4)
+ }   
+ .section-scroll-btn{
+    left:2.5%;
+ }
+}

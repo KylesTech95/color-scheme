@@ -311,7 +311,7 @@ cursor:pointer;
 
 
 .choice-spot{
-/* border:3px solid blue; */
+border:3px solid blue;
 width:33%;
 border-radius: 20px;
 height:100px;
@@ -320,7 +320,6 @@ transform: .25s;
 opacity:.9;
 background:transparent;
 z-index:997;
-
 display:flex;
 flex-direction: column;
 align-items: center;
