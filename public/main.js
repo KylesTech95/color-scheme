@@ -334,12 +334,12 @@ window.addEventListener('scroll',e=>{
         // force scroll
         if(!scroll_dir && (midline.getBoundingClientRect().y < spot.getBoundingClientRect().y && midline.getBoundingClientRect().y > spot.getBoundingClientRect().y-10)){
             window.scrollTo(palID.offsetLeft,destination)
-            blink(fingers[0])
+            blink(fingers[1])
             
         }
         if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+2) ){
             window.scrollTo(0,0)   
-            blink(fingers[1])   
+            blink(fingers[0])   
         }
 })
 let btn_top = document.querySelector('.nav-btn-top')
