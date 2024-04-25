@@ -311,7 +311,7 @@ cursor:pointer;
 
 
 .choice-spot{
-border:3px solid blue;
+/* border:3px solid blue; */
 width:33%;
 border-radius: 20px;
 height:100px;
@@ -551,6 +551,7 @@ form#form{
     flex-direction: column;
     justify-content:end;
     position:relative;
+    z-index:997;
 
 }
 #color-pal{
