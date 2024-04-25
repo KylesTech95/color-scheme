@@ -337,7 +337,7 @@ window.addEventListener('scroll',e=>{
             blink(fingers[0])
             
         }
-        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+10) ){
+        if(scroll_dir && (midline.getBoundingClientRect().y > spot.getBoundingClientRect().y&&midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+2) ){
             window.scrollTo(0,0)   
             blink(fingers[1])   
         }
@@ -353,12 +353,14 @@ function toggleFn(){
         btn_top.classList.remove('hidden-item')
     }
 }
+nav.addEventListener('click',toggleFn)
 function closeNav(){
     nav.classList.add('base')
     nav.classList.remove('full')
     navActual.classList.add('hidden-item');
     btn_top.classList.add('hidden-item')
 }
+btn_top.addEventListener('click',closeNav)
 const navArr = document.querySelectorAll('.nav-item>a')
 navArr.forEach((item,i)=>{
     if(i==0){
