@@ -1,25 +1,27 @@
-let r,g,b,colour;
+import configureMidLine from './components/midline.js'
+import createInput from './components/createinput.js'
+import shaveUl from './components/shaveul.js';
+import blink from './components/blink.js';
+import { rgbToHex, setRGBAndHex } from './components/rgbconversions.js';
+import { copyColor,copyMessagePop } from './components/copymachine.js';
+import { clickInput } from './components/clickinput.js';
+import { makeWhiteColor } from './components/makewhite.js';
+// import {postFn,postfetch} from './components/post.js'
+
 const spot = document.querySelector('.choice-spot')
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
-const inputs = document.querySelectorAll(".num-input")
-const resActual = document.querySelector('.result-actual')
-const submit_btn = document.getElementById('submit-btn')
 const pal_container = document.querySelector('.color-pal-list-container')
-const pal_spot = document.querySelector('.color-pal-spot-container');
 const palID = document.getElementById('color-pal-container')
 let copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
-
+const fingers = document.querySelectorAll('.hover-span')
 let idCount = 0;
-let click = 0;
-const post = '/post-sum-fn'
-const get = '/get-sum-fn';
 let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
-let noClick = false;
+
 //____________________________
 // objects
 const mid_obj = {
@@ -35,90 +37,6 @@ const res = {
 }
 //____________________________
 //functions
-
-// give HR element some attributes (midline)
-const configureMidLine = (mid) => {
-    mid.style = `width:${mid_obj.width};position:${mid_obj.position};border:${mid_obj.border};top:${mid_obj.top};z-index:${mid_obj.z_index};`
-}
-configureMidLine(midline)
-// create input function
-const createInput = (input,data,bool) => {
-    if(!bool){
-        // console.log(data)
-        input.style.background = data.current_color;
-        input.classList.add('color-input')
-        input.setAttribute('type','text')
-        // input.setAttribute('disabled','true')
-            input.setAttribute('autocomplete','off')
-            input.setAttribute('spellcheck','false')
-            input.setAttribute('id','choice-spot-input')
-        input.setAttribute('value',data.current_color)
-    }
-    else{
-        // console.log(data)
-        input.style.background = data.color;
-        input.classList.add('color-input')
-        input.setAttribute('type','text')
-        // input.setAttribute('disabled','true')
-        input.setAttribute('autocomplete','off')
-        input.setAttribute('spellcheck','false')
-        input.setAttribute('value',data.color)
-        }
-    
-}
-// post request helper
-const postFn = async (post,d) => {
-        let response = await fetch(post,{
-            method:'POST',
-            mode:"cors",
-            cache:"no-cache",
-            credentials: "same-origin",
-            headers:{"Content-Type":"application/json"},
-            redirect:"follow",
-            referrerPolicy:"no-referrer",
-            body:JSON.stringify(d)
-        })
-        return response.json();
-}
-// Isolate all children within spot-container, and remove the child(input)
-const shaveUl = (spot) => {
-     let arr = [...spot.children].filter(child=>child.type==='text')    // filter all inputs for type = text
-     let cp = document.querySelector('.choice-spot')     // select choice spot div
-     let cparr = [...cp.children].filter(child=>child.type==='text')  // filter all inputs for type = text
-     for(let i = 0; i < cparr.length; i++){
-        if(cparr[i]==arr[i]){   // if items in cparr == arr   
-            if(i!==cparr.length-1){//if i is -ne (not equal) to last item in cparr
-                spot.removeChild(arr[i])// remove the child
-            }
-        }
-     }
-}
-// helper function formats number to hex
-const rgb2Hex = (n) => {
-const hex = n.toString(16)
-return hex.length < 1 ?  `0${hex}`:hex
-}
-// function that converts number to hex with 3 arguments (r,g,b)
-const rgbToHex = (r, g, b) => {
-    // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
-    return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
-}
-// executive function to set html elements style attributes
-const setRGBAndHex = (res,data,rgbColor,bool) => {
-    if(!bool){
-    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-    res.color.textContent = data.current_color
-    res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
-    res.color.style.color = data.current_color
-    res.hex.style.color = data.current_color
-    }
-    else{
-        res.color.textContent = data.style.background
-        res.hex.textContent = rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2]);
-        res.color.style.color = data.style.background
-        res.hex.style.color = data.style.background
-    }
-}
 const hoverEffect = (scroll) => {
     scroll.classList.add('hover-effect')
     setTimeout(()=>{
@@ -127,88 +45,14 @@ const hoverEffect = (scroll) => {
 }
 const appear = (input) => {
     input.classList.remove('hidden')
-}
-// copy color with navigatior's clipboard.writeText() function
-const copyColor = async(inp) => {
-        try {
-          await navigator.clipboard.writeText(inp.value);
-        //   console.log('Content copied to clipboard');
-        } catch (err) {
-        //   console.error('Failed to copy: ', err);
-        }
-      
 } 
-// copy message appears when new color is clicked(in spot-container)
-const copyMessagePop = () => {
-    if(midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+(spot.clientHeight/2)){
-        copy_message.classList.remove('coppied-message-hidden')
-        copy_message.classList.remove('coppied-message-hidden-down')
-
-        copy_message.classList.add('coppied-message')
-        setTimeout(()=>{
-        copy_message.classList.add('coppied-message-hidden')
-        copy_message.classList.remove('coppied-message')
-    },750)
-    console.log('you are over')
-    }
-    else{
-        copy_message.classList.remove('coppied-message-hidden')
-        copy_message.classList.remove('coppied-message-hidden-down')
-
-        copy_message.classList.add('coppied-message-down')
-        setTimeout(()=>{
-        copy_message.classList.add('coppied-message-hidden-down')
-        copy_message.classList.remove('coppied-message-down')
-    },750)
-    }
-}
-// input click event
-const clickInput = (input) => {
-    input.onclick=e=>{
-        // // console.log(e.target)
-        input.setAttribute('onclick',"return false;")
-        input.setAttribute('onkeydown',"return false;")
-        copyColor(input)
-    }
-}   
 // spot-container: add event listener (click) to show "coppied!" consistently
 window.addEventListener('click',e=>{
-    if(e.target.classList.contains('color-input')) copyMessagePop()
+    if(e.target.classList.contains('color-input')) copyMessagePop(midline,spot,copy_message)
 })
-// turn input's color white 
-// turn copy-icon white
-const makeWhiteColor = (data,input) => {
-    // if r & g are less-than or equal to 100
-    if(/[0-100],[0-100]|[0-100],/.test(data)){
-        input.classList.add('light-color');
-        copy.classList.remove('copy-dark')
-        copy.classList.add('copy-white')
-        copy.classList.remove('hidden')
+// give HR element some attributes (midline)
+configureMidLine(mid_obj,midline)
 
-    }
-    else{
-        input.classList.remove('light-color');
-        copy.classList.add('copy-dark')
-        copy.classList.remove('copy-white')
-        copy.classList.remove('hidden')
-    }
-}
-// post fetch Fn
-const postfetch = async(api,d) => {
-    const response = await fetch(api,
-    {
-      method:'POST',
-      mode:"cors",
-      cache:"no-cache",
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: { "Content-Type": "application/json"},
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer",
-      body:JSON.stringify(d),
-    })
-    // testing postFetch
-    return response.json()
-}
 // rotate colors process:
 // 1) Rotate Right
 const rotateRight = (scroll) => {
@@ -221,16 +65,17 @@ const rotateRight = (scroll) => {
     const input = document.createElement('input')
     input.classList.add('color-input')
     fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-    createInput(input,data)
+    createInput(input,data,false)
     sp.append(input)
             // disappear(input)
     appear(input)
     clickInput(input)
-    makeWhiteColor(data.current_color,input)
+    makeWhiteColor(data.current_color,input,copy)
     shaveUl(sp)
-    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-    // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
     let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
+    rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
+    
     // // console.log(rgbColor)
 
     setRGBAndHex(res,data,rgbColor)
@@ -246,10 +91,10 @@ const rotateRight = (scroll) => {
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-        createInput(input,data)
+        createInput(input,data,false)
         sp.append(input)
         clickInput(input)
-        makeWhiteColor(data.current_color,input)
+        makeWhiteColor(data.current_color,input,copy)
         shaveUl(sp)
         // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
@@ -270,18 +115,18 @@ const rotateLeft = (scroll) => {
     const input = document.createElement('input')
     input.classList.add('color-input')
     fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-    createInput(input,data)
+    createInput(input,data,false)
     sp.append(input)
     clickInput(input)
     // disappear(input)
     appear(input)
-    makeWhiteColor(data.current_color,input)
+    makeWhiteColor(data.current_color,input,copy)
     shaveUl(sp)
 
     // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
     let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
     // // console.log(rgbColor)
-    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
     setRGBAndHex(res,data,rgbColor)
         })
     })
@@ -295,10 +140,10 @@ const rotateLeft = (scroll) => {
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-            createInput(input,data)
+            createInput(input,data,false)
             sp.append(input)
             clickInput(input)
-            makeWhiteColor(data.current_color,input)
+            makeWhiteColor(data.current_color,input,copy)
             shaveUl(sp)
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
@@ -327,26 +172,25 @@ const clickScrolls = () => {
 
 }
 clickScrolls()
-// function that takes copy element & hovers
-const spotHover = (copy,spot) => {
-    copy.classList.remove('copy-current')
-    copy.classList.add('copy-hover')
-    spot.classList.add('color-input-hover')
-    spot.classList.remove('color-input-current')
-    setTimeout(()=>{
-        copy.classList.add('copy-current')
-        copy.classList.remove('copy-hover')
-        spot.classList.remove('color-input-hover')
-        spot.classList.add('color-input-current')
-    },250)
-}
-
-
-
-
 
 //____________________________
-
+// post fetch Fn
+// const postfetch = async(api,d) => {
+//     const response = await fetch(api,
+//     {
+//       method:'POST',
+//       mode:"cors",
+//       cache:"no-cache",
+//       credentials: "same-origin", // include, *same-origin, omit
+//       headers: { "Content-Type": "application/json"},
+//       redirect: "follow", // manual, *follow, error
+//       referrerPolicy: "no-referrer",
+//       body:JSON.stringify(d),
+//     })
+//     // testing postFetch
+//     return response.json()
+// }
+// let r,g,b,colour;
 // let arr = []
 // for(let i=0; i < 1<<12; i++) {
 //     r = ((i>>8) & 0xf) * 0x11;
@@ -400,7 +244,7 @@ data.colors.forEach((col,index) => {
         spot.append(input)
         clickInput(input)
         shaveUl(spot)
-        makeWhiteColor(col.color,input)
+        makeWhiteColor(col.color,input,copy)
             
     })
     li.addEventListener('click',async e=>{
@@ -411,10 +255,9 @@ data.colors.forEach((col,index) => {
         spot.append(input)
         clickInput(input)
         shaveUl(spot)
-        makeWhiteColor(col.color,input)
+        makeWhiteColor(col.color,input,copy)
         copyColor(input)
-        copyMessagePop()
-        spotHover(copy,spot)
+        copyMessagePop(midline,spot,copy_message)
     })
 
 })
@@ -437,6 +280,13 @@ spot.addEventListener('mouseout',e=>{
 })
 //___________________________________________
 //API - combine numbers (sum)
+//sum api
+// const inputs = document.querySelectorAll(".num-input")
+// const resActual = document.querySelector('.result-actual')
+// const submit_btn = document.getElementById('submit-btn')
+// const post = '/post-sum-fn'
+// const get = '/get-sum-fn';
+
 // send/receive requests from server
 // submit_btn.addEventListener('click',e=>{
 //     e.preventDefault();
@@ -465,15 +315,7 @@ spot.addEventListener('mouseout',e=>{
 // }
 
 // scroll event listener
-const fingers = document.querySelectorAll('.hover-span')
-const blink = (finger) => {
-    finger.classList.add('finger-glow')
-    finger.parentElement.classList.add('finger-border-active')
-    setTimeout(()=>{
-        finger.classList.remove('finger-glow')
-        finger.parentElement.classList.remove('finger-border-active')
-    },250)
-}
+let noClick = false;
 window.addEventListener('scroll',e=>{
 // compare current scroll and previous scroll
     noClick = true;
