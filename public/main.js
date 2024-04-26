@@ -224,11 +224,12 @@ const palScrollLimit = (data,container) => {
     const limits = [1025,2049,3072,4097]
     console.log(data.length)
     container.addEventListener('scroll',e=>{
-        let mid = e.target.clientHeight / 2;
+        let mid = e.target.clientHeight * .9;
         console.log(mid)
         let current = e.target.scrollTop;
         if(current > mid){
             console.log('you should grow your data now!')
+            
         }
     })
     
