@@ -22,6 +22,9 @@ let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 
+function detectMob() {
+    return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+  }
 //____________________________
 // objects
 const mid_obj = {
@@ -238,23 +241,26 @@ data.colors.forEach((col,index) => {
     li.classList.add('hover-li')
     // push li into arrow
         arr.push(li)
-    li.addEventListener('mouseover',e=>{
-        let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-        // console.log(rgbColor)
-        idCount=index+1
-        // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-            setRGBAndHex(res,e.target,rgbColor,true)
-        // identify rgb input
-        const input = document.createElement('input')
-        input.style.background = col.color;
-        createInput(input,col,idCount,true)
-        // listenValue(input)
-        spot.append(input)
-        clickInput(input)
-        shaveUl(spot)
-        makeWhiteColor(col.color,input,copy)
-            
-    })
+    if(detectMob()){
+        li.addEventListener('mouseover',e=>{
+            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+            // console.log(rgbColor)
+            idCount=index+1
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                setRGBAndHex(res,e.target,rgbColor,true)
+            // identify rgb input
+            const input = document.createElement('input')
+            input.style.background = col.color;
+            createInput(input,col,idCount,true)
+            // listenValue(input)
+            spot.append(input)
+            clickInput(input)
+            shaveUl(spot)
+            makeWhiteColor(col.color,input,copy)
+                
+        })
+    }
+    
     li.addEventListener('click',async e=>{
         // identify rgb input
         const input = document.createElement('input')
@@ -277,11 +283,13 @@ for(let i in arr){
 })
 //___________________________
 // spot-container event listeners 
-spot.addEventListener('mouseover',e=>{
-    // console.log(copy)
-    copy.classList.remove('copy-current')
-    copy.classList.add('copy-hover')
-})
+if(detectMob()){
+    spot.addEventListener('mouseover',e=>{
+        // console.log(copy)
+        copy.classList.remove('copy-current')
+        copy.classList.add('copy-hover')
+    })
+}
 spot.addEventListener('mouseout',e=>{
     // console.log(copy)
     copy.classList.add('copy-current')
