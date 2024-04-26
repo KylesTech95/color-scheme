@@ -260,6 +260,25 @@ data.colors.forEach((col,index) => {
                 
         })
     }
+    else{
+        li.addEventListener('touchstart',e=>{
+            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+            // console.log(rgbColor)
+            idCount=index+1
+            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                setRGBAndHex(res,e.target,rgbColor,true)
+            // identify rgb input
+            const input = document.createElement('input')
+            input.style.background = col.color;
+            createInput(input,col,idCount,true)
+            // listenValue(input)
+            spot.append(input)
+            clickInput(input)
+            shaveUl(spot)
+            makeWhiteColor(col.color,input,copy)
+                
+        })
+    }
     
     li.addEventListener('click',async e=>{
         // identify rgb input
