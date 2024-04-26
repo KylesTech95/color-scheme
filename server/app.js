@@ -1,5 +1,6 @@
 require('dotenv').config()
 const pool = require('./db.js').pool
+const sequelize = require('./seq.js').sequelize
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -9,7 +10,7 @@ const routes = require('./../lib/routes.js')
 const middleware = require('./../lib/middleware.js')
 
 middleware(app,express,cors,bodyParser)
-routes(app,pool)
+routes(app,pool,sequelize)
 
 
 
