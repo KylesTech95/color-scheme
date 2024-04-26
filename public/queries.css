@@ -9,4 +9,7 @@
  .section-scroll-btn{
     left:2.5%;
  }
+ #color-pal{
+   resize:none;
+ }
 }

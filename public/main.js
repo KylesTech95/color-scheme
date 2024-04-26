@@ -220,13 +220,26 @@ clickScrolls()
 //     })
 // })
 
-
+const palScrollLimit = (data,container) => { 
+    const limits = [1025,2049,3072,4097]
+    console.log(data.length)
+    container.addEventListener('scroll',e=>{
+        let mid = e.target.clientHeight / 2;
+        console.log(mid)
+        let current = e.target.scrollTop;
+        if(current > mid){
+            console.log('you should grow your data now!')
+        }
+    })
+    
+}
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{ // data
 // // console.log(data.colors)
+palScrollLimit(data.colors,pal_container)
+
 let arr = [], arr_inv = [];
 data.colors.forEach((col,index) => {
-
     const li = document.createElement('li')
     li.classList.add('.color-pal-list-item')
     li.setAttribute('style',`
@@ -295,6 +308,7 @@ data.colors.forEach((col,index) => {
     })
 
 })
+
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
