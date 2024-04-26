@@ -317,7 +317,7 @@ border-radius: 20px;
 height:100px;
 transform: .25s;
 /* box-shadow: 0 0 8px .25px ghostWhite; */
-opacity:.9;
+opacity:1;
 background:transparent;
 z-index:998;
 display:flex;
