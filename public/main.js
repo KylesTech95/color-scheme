@@ -48,7 +48,10 @@ const appear = (input) => {
 } 
 // spot-container: add event listener (click) to show "coppied!" consistently
 window.addEventListener('click',e=>{
-    if(e.target.classList.contains('color-input')) copyMessagePop(midline,spot,copy_message)
+    if(e.target.classList.contains('color-input')){
+        console.log('you clicked input')
+        copyMessagePop(midline,spot,copy_message)
+    } 
 })
 // give HR element some attributes (midline)
 configureMidLine(mid_obj,midline)
