@@ -22,6 +22,11 @@ let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 
+const listenValue = (inp) => {
+    inp.addEventListener('input',e=>{
+        console.log(e.target)
+    })
+}
 //____________________________
 // objects
 const mid_obj = {
@@ -68,7 +73,8 @@ const rotateRight = (scroll) => {
     const input = document.createElement('input')
     input.classList.add('color-input')
     fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-    createInput(input,data,false)
+    createInput(input,data,idCount,false)
+    listenValue(input)
     sp.append(input)
             // disappear(input)
     appear(input)
@@ -94,7 +100,8 @@ const rotateRight = (scroll) => {
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-        createInput(input,data,false)
+        createInput(input,data,idCount,false)
+        listenValue(input)
         sp.append(input)
         clickInput(input)
         makeWhiteColor(data.current_color,input,copy)
@@ -118,7 +125,8 @@ const rotateLeft = (scroll) => {
     const input = document.createElement('input')
     input.classList.add('color-input')
     fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-    createInput(input,data,false)
+    createInput(input,data,idCount,false)
+    listenValue(input)
     sp.append(input)
     clickInput(input)
     // disappear(input)
@@ -143,7 +151,8 @@ const rotateLeft = (scroll) => {
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
-            createInput(input,data,false)
+            createInput(input,data,idCount,false)
+            listenValue(input)
             sp.append(input)
             clickInput(input)
             makeWhiteColor(data.current_color,input,copy)
@@ -243,7 +252,8 @@ data.colors.forEach((col,index) => {
         // identify rgb input
         const input = document.createElement('input')
         input.style.background = col.color;
-        createInput(input,col,true)
+        createInput(input,col,idCount,true)
+        listenValue(input)
         spot.append(input)
         clickInput(input)
         shaveUl(spot)
@@ -254,7 +264,8 @@ data.colors.forEach((col,index) => {
         // identify rgb input
         const input = document.createElement('input')
         input.style.background = col.color;
-        createInput(input,col,true)
+        createInput(input,col,idCount,true)
+        listenValue(input)
         spot.append(input)
         clickInput(input)
         shaveUl(spot)
