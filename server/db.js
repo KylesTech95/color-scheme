@@ -2,7 +2,7 @@ require('dotenv').config()
 const { Pool } = require('pg')
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize(process.env.URI,{
+const sequelize = new Sequelize(process.env.EXT,{
     dialect:'pool'
 
 })
