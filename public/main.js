@@ -241,7 +241,7 @@ data.colors.forEach((col,index) => {
     li.classList.add('hover-li')
     // push li into arrow
         arr.push(li)
-    if(detectMob()){
+    if(!detectMob()){
         li.addEventListener('mouseover',e=>{
             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
             // console.log(rgbColor)
@@ -283,7 +283,7 @@ for(let i in arr){
 })
 //___________________________
 // spot-container event listeners 
-if(detectMob()){
+if(!detectMob()){
     spot.addEventListener('mouseover',e=>{
         // console.log(copy)
         copy.classList.remove('copy-current')
