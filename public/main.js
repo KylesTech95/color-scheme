@@ -6,7 +6,7 @@ import { rgbToHex, setRGBAndHex } from './components/rgbconversions.js';
 import { copyColor,copyMessagePop } from './components/copymachine.js';
 import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
-// import {postFn,postfetch} from './components/post.js'
+import {postFn,postfetch} from './components/post.js'
 
 const spot = document.querySelector('.choice-spot')
 const insert_btn = document.getElementById('insert-color')
@@ -222,9 +222,23 @@ clickScrolls()
 let posq = '/post-quarter'
 const palScrollLimit = (data,container) => { 
     const quarters = [1025,2049,3072,4097]
-    console.log(data.length)
     container.addEventListener('scroll',e=>{
-        let current = e.target.scrollTop;
+        let currentTop = (e.target.scrollTop);
+        for(let i = 0; i < quarters.length; i++){
+            if(currentTop < pal_container.clientHeight*.25){
+                console.log(1)
+            }
+            if(currentTop >= pal_container.clientHeight*.25 && currentTop <= pal_container.clientHeight*.50){
+                console.log(2)
+            }
+            if(currentTop >= pal_container.clientHeight*.50 && currentTop <= pal_container.clientHeight*.75){
+                console.log(3)
+            }
+            if(currentTop >= pal_container.clientHeight*.75 && currentTop <= pal_container.clientHeight*1){
+                console.log(4)
+            }
+            
+        }
     })
     
 }
