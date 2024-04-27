@@ -220,37 +220,38 @@ clickScrolls()
 //     })
 // })
 let tracker;
-const palScrollLimit = (container,arr,qua,scrollH) => { 
+const palScrollLimit = (container,arr,qua,quarter,scrollH) => { 
     container.addEventListener('scroll',e=>{
         let currentTop = (e.target.scrollTop);
-
         for(let i = 0; i < qua.length; i++){
             if(currentTop < scrollH*.25){
                 // console.log(1)
-                tracker=0
+                quarter=0
             }
             if(currentTop >= scrollH*.25 && currentTop <= scrollH*.50){
                 // console.log(2)
-                tracker=1
+                quarter=1
             }
             if(currentTop >= scrollH*.50 && currentTop <= scrollH*.75){
                 // console.log(3)
-                tracker=2
+                quarter=2
             }
             if(currentTop >= scrollH*.75 && currentTop <= scrollH*1){
                 // console.log(4)
-                tracker=3
+                quarter=3
             }
             
-        }
-        
-        console.log(tracker)
-        console.log(qua[tracker])
+        }        
     })
     
 }
+    let scrollH = pal_container.scrollHeight;
+    let qua = [1025,2049,3073,4097]
+    let quarter = 0;
 // fill color palette
-fetch('/colors').then(res=>res.json()).then(data=>{ // data
+fetch(`/colors/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
+    palScrollLimit(pal_container,data.colors,qua,quarter,scrollH)
+
 let arr = [], arr_inv = [];
 data.colors.forEach((col,index) => {
     const li = document.createElement('li')
@@ -326,9 +327,7 @@ data.colors.forEach((col,index) => {
 for(let i in arr){
     pal_container.append(arr[i])
 }
-let scrollH = pal_container.scrollHeight;
-let qua = [1025,2049,3073,4097]
-palScrollLimit(pal_container,arr,qua,scrollH)
+
 console.log(pal_container.children.length)
 })
 //___________________________
