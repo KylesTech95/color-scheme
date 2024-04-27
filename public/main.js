@@ -246,6 +246,8 @@ const palScrollLimit = (container,arr,qua,quarter,scrollH) => {
        fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{
             console.log(data.colors.length)
             console.log(data.colors)
+           // manipulate the pal container - match the length
+           return [...container.children].filter((el,x)=> x<qua[quarter])
         })
     })
     
