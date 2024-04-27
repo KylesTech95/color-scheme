@@ -219,33 +219,38 @@ clickScrolls()
 //         return data.color
 //     })
 // })
-let posq = '/post-quarter'
-const palScrollLimit = (data,container) => { 
-    const quarters = [1025,2049,3072,4097]
+let tracker = 0;
+const palScrollLimit = (container,qua) => { 
     container.addEventListener('scroll',e=>{
         let currentTop = (e.target.scrollTop);
-        for(let i = 0; i < quarters.length; i++){
+        let children = [...container.children]
+
+        for(let i = 0; i < qua.length; i++){
             if(currentTop < pal_container.clientHeight*.25){
-                console.log(1)
+                // console.log(1)
+                tracker=0
             }
             if(currentTop >= pal_container.clientHeight*.25 && currentTop <= pal_container.clientHeight*.50){
-                console.log(2)
+                // console.log(2)
+                tracker=1
             }
             if(currentTop >= pal_container.clientHeight*.50 && currentTop <= pal_container.clientHeight*.75){
-                console.log(3)
+                // console.log(3)
+                tracker=2
             }
             if(currentTop >= pal_container.clientHeight*.75 && currentTop <= pal_container.clientHeight*1){
-                console.log(4)
+                // console.log(4)
+                tracker=3
             }
             
         }
+        // console.log(tracker)
+        console.log(qua[tracker])
     })
     
 }
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{ // data
-// // console.log(data.colors)
-palScrollLimit(data.colors,pal_container)
 
 let arr = [], arr_inv = [];
 data.colors.forEach((col,index) => {
@@ -317,11 +322,14 @@ data.colors.forEach((col,index) => {
     })
 
 })
-
+let qua = [1025,2049,3073,4097]
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
 }
+palScrollLimit(pal_container,qua)
+
+console.log(pal_container.children.length)
 })
 //___________________________
 // spot-container event listeners 
