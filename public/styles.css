@@ -566,11 +566,11 @@ form#form{
     /* border:8px solid rgb(0,51,238); */
     box-shadow: 0 0 1rem .5px ghostWhite;
     margin-bottom:2rem;
-    min-height:250px;
-    min-width:50%;
-    max-width:88%;
-    max-height:490px;
-    resize:both;
+    min-width:75%;
+    max-width:75%;
+    min-height:400px;
+    max-height:400px;
+    /* resize:both; */
 }
 #color-pal::-webkit-resizer{
     outline: 2px dashed red;

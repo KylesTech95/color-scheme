@@ -241,7 +241,12 @@ const palScrollLimit = (container,arr,qua,quarter,scrollH) => {
                 quarter=3
             }
             
-        }        
+        }
+        console.log(qua[quarter])   
+       fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{
+            console.log(data.colors.length)
+            console.log(data.colors)
+        })
     })
     
 }
@@ -249,7 +254,7 @@ const palScrollLimit = (container,arr,qua,quarter,scrollH) => {
     let qua = [1025,2049,3073,4097]
     let quarter = 0;
 // fill color palette
-fetch(`/colors/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
+fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
     palScrollLimit(pal_container,data.colors,qua,quarter,scrollH)
 
 let arr = [], arr_inv = [];
@@ -328,7 +333,6 @@ for(let i in arr){
     pal_container.append(arr[i])
 }
 
-console.log(pal_container.children.length)
 })
 //___________________________
 // spot-container event listeners 
