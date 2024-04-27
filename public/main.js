@@ -219,7 +219,7 @@ clickScrolls()
 //         return data.color
 //     })
 // })
-let tracker = 0;
+let tracker;
 const palScrollLimit = (container,arr,qua,scrollH) => { 
     container.addEventListener('scroll',e=>{
         let currentTop = (e.target.scrollTop);
@@ -243,9 +243,9 @@ const palScrollLimit = (container,arr,qua,scrollH) => {
             }
             
         }
-        // console.log(tracker)
+        
+        console.log(tracker)
         console.log(qua[tracker])
-        // arr = [...arr].slice(0,qua[tracker])
     })
     
 }
