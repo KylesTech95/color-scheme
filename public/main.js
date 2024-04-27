@@ -220,25 +220,24 @@ clickScrolls()
 //     })
 // })
 let tracker = 0;
-const palScrollLimit = (container,qua) => { 
+const palScrollLimit = (container,arr,qua,scrollH) => { 
     container.addEventListener('scroll',e=>{
         let currentTop = (e.target.scrollTop);
-        let children = [...container.children]
 
         for(let i = 0; i < qua.length; i++){
-            if(currentTop < pal_container.clientHeight*.25){
+            if(currentTop < scrollH*.25){
                 // console.log(1)
                 tracker=0
             }
-            if(currentTop >= pal_container.clientHeight*.25 && currentTop <= pal_container.clientHeight*.50){
+            if(currentTop >= scrollH*.25 && currentTop <= scrollH*.50){
                 // console.log(2)
                 tracker=1
             }
-            if(currentTop >= pal_container.clientHeight*.50 && currentTop <= pal_container.clientHeight*.75){
+            if(currentTop >= scrollH*.50 && currentTop <= scrollH*.75){
                 // console.log(3)
                 tracker=2
             }
-            if(currentTop >= pal_container.clientHeight*.75 && currentTop <= pal_container.clientHeight*1){
+            if(currentTop >= scrollH*.75 && currentTop <= scrollH*1){
                 // console.log(4)
                 tracker=3
             }
@@ -246,12 +245,12 @@ const palScrollLimit = (container,qua) => {
         }
         // console.log(tracker)
         console.log(qua[tracker])
+        // arr = [...arr].slice(0,qua[tracker])
     })
     
 }
 // fill color palette
 fetch('/colors').then(res=>res.json()).then(data=>{ // data
-
 let arr = [], arr_inv = [];
 data.colors.forEach((col,index) => {
     const li = document.createElement('li')
@@ -322,13 +321,14 @@ data.colors.forEach((col,index) => {
     })
 
 })
-let qua = [1025,2049,3073,4097]
+
 // append items in pallette container
 for(let i in arr){
     pal_container.append(arr[i])
 }
-palScrollLimit(pal_container,qua)
-
+let scrollH = pal_container.scrollHeight;
+let qua = [1025,2049,3073,4097]
+palScrollLimit(pal_container,arr,qua,scrollH)
 console.log(pal_container.children.length)
 })
 //___________________________
