@@ -226,20 +226,18 @@ clickScrolls()
 let scrollHeight = pal_container.scrollHeight;
 let fixedHeight = pal_container.clientHeight;
 let quotient = Math.floor(scrollHeight/fixedHeight)
-let start = 0;
 let captureTrace = []
 let goingUp = (top,capture) => (top < capture[capture.length-2]&&(captureTrace[1].length === 3 && captureTrace[0].length === 1))
 let goingDown = (top,capture) => (top > capture[capture.length-2]&&(captureTrace[0].length === 3 && captureTrace[1].length === 1))
 
-const adjustArrSize = (container,arr,quo,start) => {
+const adjustArrSize = (container) => {
         container.onscroll=e=>{
             let scTop = e.target.scrollTop;
             let heightMod40 = scTop % 400;
             captureTrace.push(heightMod40)
             if(captureTrace.length > 2)captureTrace.shift()
             captureTrace = captureTrace.map(x=>x+"")         
-            console.log(captureTrace)
-            
+            // console.log(captureTrace)
             
             if(captureTrace.length > 1){
                 if(goingUp(scTop,captureTrace) || captureTrace[1].length === 3 && captureTrace[0].length === 1){
@@ -249,10 +247,6 @@ const adjustArrSize = (container,arr,quo,start) => {
                 console.log('going Down')
                   }
             }
-            else{
-                console.log('test pass')
-            }
-            
         }
 }
 
@@ -330,7 +324,7 @@ fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
     })
     
     // append items in pallette container
-    adjustArrSize(pal_container, arr,quotient,start)
+    adjustArrSize(pal_container)
     for(let i in arr){
         pal_container.append(arr[i])
     }
