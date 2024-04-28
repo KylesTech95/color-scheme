@@ -236,11 +236,17 @@ const adjustArrSize = (container,arr,quo,start) => {
             if(captureTrace.length > 2)captureTrace.shift()
             captureTrace = captureTrace.map(x=>x+"")         
             console.log(captureTrace)
-            if(captureTrace[0].length === 3 && captureTrace[1].length === 1 || captureTrace[1].length === 3 && captureTrace[0].length === 1){
+            
+            if(captureTrace.length > 1){
+                if(captureTrace[0].length === 3 && captureTrace[1].length === 1 || captureTrace[1].length === 3 && captureTrace[0].length === 1){
+                    console.log('test pass')
+                   }
+                if(captureTrace[0] <= 3 && captureTrace[1] < 1)console.log('test pass')      
+            }
+            else{
                 console.log('test pass')
-               }      
-
-        
+            }
+            
         }
 }
 
