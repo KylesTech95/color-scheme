@@ -8,7 +8,9 @@ import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
 import {postFn,postfetch} from './components/post.js'
 
+const wrapper = document.getElementById('wrapper')
 const spot = document.querySelector('.choice-spot')
+const ch_container = document.getElementById('choice-container')
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const pal_container = document.querySelector('.color-pal-list-container')
@@ -446,3 +448,10 @@ navArr.forEach((item,i)=>{
         })
     }
 })
+
+const result_container = document.getElementById('result-container')
+if(window.innerWidth < 400){
+    wrapper.removeChild(palID)
+     ch_container.appendChild(palID)
+    
+}

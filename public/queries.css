@@ -2,14 +2,24 @@
     .choice-spot{
     width:75%;
     transition:.5s;
+    top:-3.25rem;
     }
  .play-icon{
     transform:scale(4)
  }   
  .section-scroll-btn{
-    left:2.5%;
+    /* left:2.5%; */
+    display:none;
  }
  #color-pal{
    resize:none;
  }
+ #scroll-container{
+   display:none;
+ }
+ #choice-container{
+   gap:0;
+ }
+
+
 }
