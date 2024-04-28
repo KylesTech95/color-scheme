@@ -221,69 +221,67 @@ clickScrolls()
 //         return data.color
 //     })
 // })
-let tracker;
-const palScrollLimit = (container,arr,qua,quarter,scrollH) => { 
-    container.addEventListener('scroll',e=>{
-        let currentTop = (e.target.scrollTop);
-        for(let i = 0; i < qua.length; i++){
-            if(currentTop < scrollH*.25){
-                // console.log(1)
-                quarter=0
-            }
-            if(currentTop >= scrollH*.25 && currentTop <= scrollH*.50){
-                // console.log(2)
-                quarter=1
-            }
-            if(currentTop >= scrollH*.50 && currentTop <= scrollH*.75){
-                // console.log(3)
-                quarter=2
-            }
-            if(currentTop >= scrollH*.75 && currentTop <= scrollH*1){
-                // console.log(4)
-                quarter=3
-            }
-            
-        }
-        console.log(qua[quarter])   
-       fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{
-            console.log(data.colors.length)
-            console.log(data.colors)
-           // manipulate the pal container - match the length
-           return [...container.children].filter((el,x)=> x<qua[quarter])
-        })
-    })
-    
-}
-    let scrollH = pal_container.scrollHeight;
+let scrollH = pal_container.scrollHeight;
     let qua = [1025,2049,3073,4097]
     let quarter = 0;
-// fill color palette
-fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
-    palScrollLimit(pal_container,data.colors,qua,quarter,scrollH)
-
-let arr = [], arr_inv = [];
-data.colors.forEach((col,index) => {
-    const li = document.createElement('li')
-    li.classList.add('.color-pal-list-item')
-    li.setAttribute('style',`
-            background:${col.color};
-            opacity:.9;
-            height:25px;
-            width:25px;
-            border:.5px solid #fff;
-            transition:.25s;
-            z-index:999;
-            `)
-    li.classList.add('hover-li')
-    // push li into arrow
-        arr.push(li)
-    if(!detectMob()){
-        li.addEventListener('mouseover',e=>{
-            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-            // console.log(rgbColor)
-            idCount=index+1
-            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                setRGBAndHex(res,e.target,rgbColor,true)
+fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
+        console.log(data.colors.length)
+    let arr = [], arr_inv = [];
+    data.colors.forEach((col,index) => {
+        const li = document.createElement('li')
+        li.classList.add('.color-pal-list-item')
+        li.setAttribute('style',`
+                background:${col.color};
+                opacity:.9;
+                height:25px;
+                width:25px;
+                border:.5px solid #fff;
+                transition:.25s;
+                z-index:999;
+                `)
+        li.classList.add('hover-li')
+        // push li into arrow
+            arr.push(li)
+        if(!detectMob()){
+            li.addEventListener('mouseover',e=>{
+                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                // console.log(rgbColor)
+                idCount=index+1
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                    setRGBAndHex(res,e.target,rgbColor,true)
+                // identify rgb input
+                const input = document.createElement('input')
+                input.style.background = col.color;
+                createInput(input,col,idCount,true)
+                // listenValue(input)
+                spot.append(input)
+                clickInput(input)
+                shaveUl(spot)
+                makeWhiteColor(col.color,input,copy)
+                    
+            })
+        }
+        else{
+            li.addEventListener('touchstart',e=>{
+                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                // console.log(rgbColor)
+                idCount=index+1
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                    setRGBAndHex(res,e.target,rgbColor,true)
+                // identify rgb input
+                const input = document.createElement('input')
+                input.style.background = col.color;
+                createInput(input,col,idCount,true)
+                // listenValue(input)
+                spot.append(input)
+                clickInput(input)
+                shaveUl(spot)
+                makeWhiteColor(col.color,input,copy)
+                    
+            })
+        }
+        
+        li.addEventListener('click',async e=>{
             // identify rgb input
             const input = document.createElement('input')
             input.style.background = col.color;
@@ -293,51 +291,212 @@ data.colors.forEach((col,index) => {
             clickInput(input)
             shaveUl(spot)
             makeWhiteColor(col.color,input,copy)
-                
+            copyColor(input)
+            copyMessagePop(midline,spot,copy_message)
         })
-    }
-    else{
-        li.addEventListener('touchstart',e=>{
-            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-            // console.log(rgbColor)
-            idCount=index+1
-            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                setRGBAndHex(res,e.target,rgbColor,true)
-            // identify rgb input
-            const input = document.createElement('input')
-            input.style.background = col.color;
-            createInput(input,col,idCount,true)
-            // listenValue(input)
-            spot.append(input)
-            clickInput(input)
-            shaveUl(spot)
-            makeWhiteColor(col.color,input,copy)
-                
-        })
+    
+    })
+    
+    // append items in pallette container
+    for(let i in arr){
+        pal_container.append(arr[i])
     }
     
-    li.addEventListener('click',async e=>{
-        // identify rgb input
-        const input = document.createElement('input')
-        input.style.background = col.color;
-        createInput(input,col,idCount,true)
-        // listenValue(input)
-        spot.append(input)
-        clickInput(input)
-        shaveUl(spot)
-        makeWhiteColor(col.color,input,copy)
-        copyColor(input)
-        copyMessagePop(midline,spot,copy_message)
     })
+// const palScrollLimit = (container,qua,quarter,scrollH) => { 
+//     container.addEventListener('scroll',e=>{
+//         let pCh = [...container.children]
+//         console.log(pCh.length)
+//         let currentTop = (e.target.scrollTop);
+//         for(let i = 0; i < qua.length; i++){
+//             if(currentTop < scrollH*.25){
+//                 // console.log(1)
+//                 quarter=0
+//             }
+//             if(currentTop >= scrollH*.25 && currentTop <= scrollH*.50){
+//                 // console.log(2)
+//                 quarter=1
+//             }
+//             if(currentTop >= scrollH*.50 && currentTop <= scrollH*.75){
+//                 // console.log(3)
+//                 quarter=2
+//             }
+//             if(currentTop >= scrollH*.75 && currentTop <= scrollH*1){
+//                 // console.log(4)
+//                 quarter=3
+//             }
+            
+//         }
+//         console.log(qua[quarter])   
+        
+//         fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
+        
+//         let arr = [], arr_inv = [];
+//         if(container.children.length > 0){
+//             // for(let i in container.children){
+//             //     container.removeChild(container.children[i])
+//             // }
+//         }
+//         data.colors.forEach((col,index) => {
+//             const li = document.createElement('li')
+//             li.classList.add('.color-pal-list-item')
+//             li.setAttribute('style',`
+//                     background:${col.color};
+//                     opacity:.9;
+//                     height:25px;
+//                     width:25px;
+//                     border:.5px solid #fff;
+//                     transition:.25s;
+//                     z-index:999;
+//                     `)
+//             li.classList.add('hover-li')
+//             // push li into arrow
+//                 arr.push(li)
+//             if(!detectMob()){
+//                 li.addEventListener('mouseover',e=>{
+//                     let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//                     // console.log(rgbColor)
+//                     idCount=index+1
+//                     // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                         setRGBAndHex(res,e.target,rgbColor,true)
+//                     // identify rgb input
+//                     const input = document.createElement('input')
+//                     input.style.background = col.color;
+//                     createInput(input,col,idCount,true)
+//                     // listenValue(input)
+//                     spot.append(input)
+//                     clickInput(input)
+//                     shaveUl(spot)
+//                     makeWhiteColor(col.color,input,copy)
+                        
+//                 })
+//             }
+//             else{
+//                 li.addEventListener('touchstart',e=>{
+//                     let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//                     // console.log(rgbColor)
+//                     idCount=index+1
+//                     // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                         setRGBAndHex(res,e.target,rgbColor,true)
+//                     // identify rgb input
+//                     const input = document.createElement('input')
+//                     input.style.background = col.color;
+//                     createInput(input,col,idCount,true)
+//                     // listenValue(input)
+//                     spot.append(input)
+//                     clickInput(input)
+//                     shaveUl(spot)
+//                     makeWhiteColor(col.color,input,copy)
+                        
+//                 })
+//             }
+            
+//             li.addEventListener('click',async e=>{
+//                 // identify rgb input
+//                 const input = document.createElement('input')
+//                 input.style.background = col.color;
+//                 createInput(input,col,idCount,true)
+//                 // listenValue(input)
+//                 spot.append(input)
+//                 clickInput(input)
+//                 shaveUl(spot)
+//                 makeWhiteColor(col.color,input,copy)
+//                 copyColor(input)
+//                 copyMessagePop(midline,spot,copy_message)
+//             })
+        
+//         })
+//         // append items in pallette container
+//         for(let i in arr){
+//             pal_container.append(arr[i])
+//         }
+        
+//         })
+//     })
+    
+// }
+//     palScrollLimit(pal_container,qua,quarter,scrollH)
+// fill color palette
+// fetch(`/colors/pal/${qua[quarter]}`).then(res=>res.json()).then(data=>{ // data
+//     palScrollLimit(pal_container,data.colors,qua,quarter,scrollH)
 
-})
+// let arr = [], arr_inv = [];
+// data.colors.forEach((col,index) => {
+//     const li = document.createElement('li')
+//     li.classList.add('.color-pal-list-item')
+//     li.setAttribute('style',`
+//             background:${col.color};
+//             opacity:.9;
+//             height:25px;
+//             width:25px;
+//             border:.5px solid #fff;
+//             transition:.25s;
+//             z-index:999;
+//             `)
+//     li.classList.add('hover-li')
+//     // push li into arrow
+//         arr.push(li)
+//     if(!detectMob()){
+//         li.addEventListener('mouseover',e=>{
+//             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//             // console.log(rgbColor)
+//             idCount=index+1
+//             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                 setRGBAndHex(res,e.target,rgbColor,true)
+//             // identify rgb input
+//             const input = document.createElement('input')
+//             input.style.background = col.color;
+//             createInput(input,col,idCount,true)
+//             // listenValue(input)
+//             spot.append(input)
+//             clickInput(input)
+//             shaveUl(spot)
+//             makeWhiteColor(col.color,input,copy)
+                
+//         })
+//     }
+//     else{
+//         li.addEventListener('touchstart',e=>{
+//             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//             // console.log(rgbColor)
+//             idCount=index+1
+//             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                 setRGBAndHex(res,e.target,rgbColor,true)
+//             // identify rgb input
+//             const input = document.createElement('input')
+//             input.style.background = col.color;
+//             createInput(input,col,idCount,true)
+//             // listenValue(input)
+//             spot.append(input)
+//             clickInput(input)
+//             shaveUl(spot)
+//             makeWhiteColor(col.color,input,copy)
+                
+//         })
+//     }
+    
+//     li.addEventListener('click',async e=>{
+//         // identify rgb input
+//         const input = document.createElement('input')
+//         input.style.background = col.color;
+//         createInput(input,col,idCount,true)
+//         // listenValue(input)
+//         spot.append(input)
+//         clickInput(input)
+//         shaveUl(spot)
+//         makeWhiteColor(col.color,input,copy)
+//         copyColor(input)
+//         copyMessagePop(midline,spot,copy_message)
+//     })
 
-// append items in pallette container
-for(let i in arr){
-    pal_container.append(arr[i])
-}
+// })
 
-})
+// // append items in pallette container
+// for(let i in arr){
+//     pal_container.append(arr[i])
+// }
+
+// })
 //___________________________
 // spot-container event listeners 
 if(!detectMob()){
@@ -450,7 +609,7 @@ navArr.forEach((item,i)=>{
 })
 
 const result_container = document.getElementById('result-container')
-if(window.innerWidth < 400){
+if(window.innerWidth < 1000){
     wrapper.removeChild(palID)
      ch_container.appendChild(palID)
     
