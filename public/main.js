@@ -228,6 +228,9 @@ let fixedHeight = pal_container.clientHeight;
 let quotient = Math.floor(scrollHeight/fixedHeight)
 let start = 0;
 let captureTrace = []
+let goingUp = (top,capture) => (top < capture[capture.length-2] || (captureTrace[1].length === 3 && captureTrace[0].length === 1))
+let goingDown = (top,capture) => (top > capture[capture.length-2]||(captureTrace[0].length === 3 && captureTrace[1].length === 1))
+
 const adjustArrSize = (container,arr,quo,start) => {
         container.onscroll=e=>{
             let scTop = e.target.scrollTop;
@@ -237,10 +240,14 @@ const adjustArrSize = (container,arr,quo,start) => {
             captureTrace = captureTrace.map(x=>x+"")         
             console.log(captureTrace)
             
+            
             if(captureTrace.length > 1){
-                if(captureTrace[0].length === 3 && captureTrace[1].length === 1 || captureTrace[1].length === 3 && captureTrace[0].length === 1){
-                    console.log('test pass')
+                if(goingUp(scTop,captureTrace) && captureTrace[0].length === 3 && captureTrace[1].length === 1 || captureTrace[1].length === 3 && captureTrace[0].length === 1){
+                    console.log('going Up')
                    }
+                if(goingDown(scTop,captureTrace) && captureTrace[0].length === 3 && captureTrace[1].length === 1 || captureTrace[1].length === 3 && captureTrace[0].length === 1){
+                console.log('going Down')
+                  }
                 if(captureTrace[0] <= 3 && captureTrace[1] < 1)console.log('test pass')      
             }
             else{
