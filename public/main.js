@@ -344,6 +344,13 @@ let pal_image = {
 const xml = new XMLHttpRequest;
 const meth = 'GET'
 const url = '/colors'
+let myData = "d="; // the raw data you will send
+for(let i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 1024b = 1kb). change it the way you want
+{
+    myData += "k"; // add one byte of data;
+}
+let download_size = 5*1024*1024;
+let startTime, endTime;
 xml.open(meth,url,true)
 xml.onload = (d) => {
     let data = JSON.parse(d.target.response)
@@ -417,20 +424,26 @@ xml.onload = (d) => {
             copyMessagePop(midline,spot,copy_message)
         })
     
-    })
-    
-    // append items in pallette container
-    // adjustArrSize(pal_container,pal_image)
-    
+    }) 
     for(let i in arr){
         pal_container.append(arr[i])
     }
 }
-xml.send()
-
-
-
-
+xml.onreadystatechange = function(event) {
+    if(event.target.readyState == 4 && event.target.status == 200) {
+        endTime = (new Date()).getTime();
+        ShowData();
+    }
+}
+function ShowData()
+{
+    let duration = (endTime - startTime) / 1000;
+    let bitsLoaded = download_size * 8;
+    let speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
+    alert("Speed: " + speedMbps + " Mbps");
+}
+startTime = (new Date()).getTime();
+xml.send(myData);
 
 //___________________________
 // spot-container event listeners 
