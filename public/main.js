@@ -225,31 +225,43 @@ clickScrolls()
 
 let scrollHeight = pal_container.scrollHeight;
 let fixedHeight = pal_container.clientHeight;
-let quotient = Math.floor(scrollHeight/fixedHeight)
 let captureTrace = []
-let goingUp = (top,capture) => (top < capture[capture.length-2]&&(captureTrace[1].length === 3 && captureTrace[0].length === 1))
-let goingDown = (top,capture) => (top > capture[capture.length-2]&&(captureTrace[0].length === 3 && captureTrace[1].length === 1))
+let goingUp = (top,capture) => (top < capture[capture.length-2])
+let goingDown = (top,capture) => (top > capture[capture.length-2])
 
-const adjustArrSize = (container) => {
+const adjustArrSize = (container,pal_image) => {
         container.onscroll=e=>{
             let scTop = e.target.scrollTop;
-            let heightMod40 = scTop % 400;
-            captureTrace.push(heightMod40)
+            let capture = Math.floor(scTop);
+            captureTrace.push(capture)
             if(captureTrace.length > 2)captureTrace.shift()
-            captureTrace = captureTrace.map(x=>x+"")         
-            // console.log(captureTrace)
-            
+
             if(captureTrace.length > 1){
-                if(goingUp(scTop,captureTrace) || captureTrace[1].length === 3 && captureTrace[0].length === 1){
-                    console.log('going Up')
-                   }
-                if(goingDown(scTop,captureTrace) || captureTrace[0].length === 3 && captureTrace[1].length === 1){
-                console.log('going Down')
-                  }
+                // if(goingUp(scTop,captureTrace)){
+                //     console.log('going Up')
+                //    }
+                // if(goingDown(scTop,captureTrace)){
+                //     console.log('going Down')
+                //   }
             }
+            return [...container.children].forEach((a,b) => {
+                if(a.getBoundingClientRect().y > pal_image.top && a.getBoundingClientRect().y < pal_image.bottom){
+                    a.style.background ='red';
+                      
+                }
+                else{
+                    // a.style.background = 'black';
+                    a.style.background = 'transparent';
+                }
+            })
+            
         }
 }
-
+const hashPal = document.getElementById('color-pal')
+let pal_image = {
+    top:hashPal.getBoundingClientRect().y-hashPal.getBoundingClientRect().y,
+    bottom:hashPal.clientHeight+250,
+}
 fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
         console.log(data.colors.length)
     let arr = [], arr_inv = [];
@@ -324,10 +336,12 @@ fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
     })
     
     // append items in pallette container
-    adjustArrSize(pal_container)
+    adjustArrSize(pal_container,pal_image)
+    
     for(let i in arr){
         pal_container.append(arr[i])
     }
+    
     
     })
 
