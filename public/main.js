@@ -259,8 +259,95 @@ let pal_image = {
     top:hashPal.getBoundingClientRect().y-hashPal.getBoundingClientRect().y,
     bottom:hashPal.clientHeight+250,
 }
-fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
-        // console.log(data.colors.length)
+// fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
+//     // console.log(data.colors.length)
+//     let arr = [], arr_inv = [];
+//     data.colors.forEach((col,index) => {
+//         const li = document.createElement('li')
+//         li.classList.add('.color-pal-list-item')
+//         li.setAttribute('style',`
+//                 background:${col.color};
+//                 opacity:.9;
+//                 height:25px;
+//                 width:25px;
+//                 border:.5px solid #fff;
+//                 transition:.25s;
+//                 z-index:999;
+//                 `)
+//         li.classList.add('hover-li')
+//         // push li into arrow
+//             arr.push(li)
+//         if(!detectMob()){
+//             li.addEventListener('mouseover',e=>{
+//                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//                 // console.log(rgbColor)
+//                 idCount=index+1
+//                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                     setRGBAndHex(res,e.target,rgbColor,true)
+//                 // identify rgb input
+//                 const input = document.createElement('input')
+//                 input.style.background = col.color;
+//                 createInput(input,col,idCount,true)
+//                 // listenValue(input)
+//                 spot.append(input)
+//                 clickInput(input)
+//                 shaveUl(spot)
+//                 makeWhiteColor(col.color,input,copy)
+                    
+//             })
+//         }
+//         else{
+//             li.addEventListener('touchstart',e=>{
+//                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+//                 // console.log(rgbColor)
+//                 idCount=index+1
+//                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+//                     setRGBAndHex(res,e.target,rgbColor,true)
+//                 // identify rgb input
+//                 const input = document.createElement('input')
+//                 input.style.background = col.color;
+//                 createInput(input,col,idCount,true)
+//                 // listenValue(input)
+//                 spot.append(input)
+//                 clickInput(input)
+//                 shaveUl(spot)
+//                 makeWhiteColor(col.color,input,copy)
+                    
+//             })
+//         }
+        
+//         li.addEventListener('click',async e=>{
+//             // identify rgb input
+//             const input = document.createElement('input')
+//             input.style.background = col.color;
+//             createInput(input,col,idCount,true)
+//             // listenValue(input)
+//             spot.append(input)
+//             clickInput(input)
+//             shaveUl(spot)
+//             makeWhiteColor(col.color,input,copy)
+//             copyColor(input)
+//             copyMessagePop(midline,spot,copy_message)
+//         })
+    
+//     })
+    
+//     // append items in pallette container
+//     // adjustArrSize(pal_container,pal_image)
+    
+//     for(let i in arr){
+//         pal_container.append(arr[i])
+//     }
+    
+    
+//     })
+const xml = new XMLHttpRequest;
+const meth = 'GET'
+const url = '/colors'
+xml.open(meth,url,true)
+xml.onload = (d) => {
+    let data = JSON.parse(d.target.response)
+    // console.log(data.colors.length)
     let arr = [], arr_inv = [];
     data.colors.forEach((col,index) => {
         const li = document.createElement('li')
@@ -338,21 +425,8 @@ fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
     for(let i in arr){
         pal_container.append(arr[i])
     }
-    
-    
-    })
-
-
-
-
-
-
-
-
-
-
-
-
+}
+xml.send()
 
 
 
@@ -468,16 +542,12 @@ navArr.forEach((item,i)=>{
         })
     }
 })
-
 const result_container = document.getElementById('result-container')
 if(window.innerWidth < 1000){
     wrapper.removeChild(palID)
      ch_container.appendChild(palID)
     
 }
-
-console.log('hello')
-
 // spot-container: add event listener (click) to show "coppied!" consistently
 spot.addEventListener('mouseover',e=>{
     const input = document.querySelector('.color-input')
