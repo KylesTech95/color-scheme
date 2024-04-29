@@ -19,7 +19,6 @@ if(midline.getBoundingClientRect().y < spot.getBoundingClientRect().y+(spot.clie
     copy_message.classList.add('coppied-message-hidden')
     copy_message.classList.remove('coppied-message')
 },750)
-console.log('you are over')
 }
 else{
     copy_message.classList.remove('coppied-message-hidden')

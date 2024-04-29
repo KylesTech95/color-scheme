@@ -12,9 +12,6 @@ const middleware = require('./../lib/middleware.js')
 middleware(app,express,cors,bodyParser)
 routes(app,pool,sequelize)
 
-
-
-
 app.listen(PORT,()=>{
     console.log('Buddy, you are listening on port ' + PORT)
 })

@@ -8,6 +8,7 @@ import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
 import {postFn,postfetch} from './components/post.js'
 
+
 const wrapper = document.getElementById('wrapper')
 const spot = document.querySelector('.choice-spot')
 const ch_container = document.getElementById('choice-container')
@@ -51,13 +52,7 @@ const hoverEffect = (scroll) => {
 const appear = (input) => {
     input.classList.remove('hidden')
 } 
-// spot-container: add event listener (click) to show "coppied!" consistently
-window.addEventListener('click',e=>{
-    if(e.target.classList.contains('color-input')){
-        console.log('you clicked input')
-        copyMessagePop(midline,spot,copy_message)
-    } 
-})
+
 // give HR element some attributes (midline)
 configureMidLine(mid_obj,midline)
 
@@ -246,12 +241,15 @@ const adjustArrSize = (container,pal_image) => {
             }
             return [...container.children].forEach((a,b) => {
                 if(a.getBoundingClientRect().y > pal_image.top && a.getBoundingClientRect().y < pal_image.bottom){
-                    a.style.background ='red';
+                    // a.style.background ='red';
+                    a.style.visibility='visible'
                       
                 }
                 else{
                     // a.style.background = 'black';
-                    a.style.background = 'transparent';
+                    // a.style.background = 'transparent';
+                    a.style.visibility='hidden'
+
                 }
             })
             
@@ -263,7 +261,7 @@ let pal_image = {
     bottom:hashPal.clientHeight+250,
 }
 fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
-        console.log(data.colors.length)
+        // console.log(data.colors.length)
     let arr = [], arr_inv = [];
     data.colors.forEach((col,index) => {
         const li = document.createElement('li')
@@ -344,7 +342,6 @@ fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
     
     
     })
-
 
 
 
@@ -479,3 +476,4 @@ if(window.innerWidth < 1000){
      ch_container.appendChild(palID)
     
 }
+

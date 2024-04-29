@@ -11,6 +11,7 @@ export default function createInput(input,data,id,bool){
             input.setAttribute('id','choice-spot-input')
         input.setAttribute('value',data.current_color)
         input.setAttribute('disabled',true)
+        
     }
     else{
         // console.log(data)

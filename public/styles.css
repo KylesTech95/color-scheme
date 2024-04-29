@@ -264,6 +264,7 @@ cursor:pointer;
     z-index:999;
     transform:scale(1.5);
     top:20px;
+    border:2px solid red;
 }
 
 #copy-message{
@@ -319,14 +320,12 @@ transform: .25s;
 /* box-shadow: 0 0 8px .25px ghostWhite; */
 opacity:1;
 background:transparent;
-z-index:998;
 display:flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 position:relative;
-/* border:2px dotted violet; */
-
+border:3px solid red;
 }
 
 .color-input{
@@ -343,12 +342,10 @@ position:relative;
     position:absolute;
     cursor:pointer;
     transition:.3s;
+    z-index:998;
+    border:3px solid violet;
 }
 .color-input:hover{
-    transform:scale(1.025);
-    transition:.25s;
-}
-.color-input-hover{
     transform:scale(1.025);
     transition:.25s;
 }
@@ -544,8 +541,8 @@ form#form{
 #color-pal-container{
     width:100%;
     height:100vh;
-    margin-top:-6.85rem;
-    /* bordeR:2px solid yellow; */
+    /* margin-top:-6.85rem; */
+    bordeR:2px solid yellow;
     display:flex;
     align-items: center;
     flex-direction: column;
@@ -553,6 +550,14 @@ form#form{
     position:relative;
     z-index:997;
 
+}
+@keyframes shifting {
+    from{
+        transform:translate(0,0)
+    }
+    to{
+        transform:translate(0,200px) 
+    }
 }
 #color-pal{
     overflow:hidden;
