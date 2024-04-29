@@ -52,7 +52,6 @@ const hoverEffect = (scroll) => {
 const appear = (input) => {
     input.classList.remove('hidden')
 } 
-
 // give HR element some attributes (midline)
 configureMidLine(mid_obj,midline)
 
@@ -477,3 +476,20 @@ if(window.innerWidth < 1000){
     
 }
 
+console.log('hello')
+
+// spot-container: add event listener (click) to show "coppied!" consistently
+spot.addEventListener('mouseover',e=>{
+    const input = document.querySelector('.color-input')
+    try{
+        if(e.target.classList.contains('color-input')){
+            console.log('you clicked input')
+            copyMessagePop(midline,spot,copy_message)
+            copyColor(input)
+        }
+    }
+    catch(err){
+        err = 'this is not the input you are looking for'
+        console.log(err)
+    }
+})
