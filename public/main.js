@@ -333,7 +333,7 @@ fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
     })
     
     // append items in pallette container
-    adjustArrSize(pal_container,pal_image)
+    // adjustArrSize(pal_container,pal_image)
     
     for(let i in arr){
         pal_container.append(arr[i])
