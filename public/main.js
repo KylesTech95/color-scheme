@@ -344,25 +344,32 @@ let pal_image = {
 const xml = new XMLHttpRequest;
 const meth = 'GET'
 const url = '/colors'
-let myData = "d="; // the raw data you will send
-for(let i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 1024b = 1kb). change it the way you want
-{
-    myData += "k"; // add one byte of data;
-}
+const txtAreaTest=document.getElementById('random')
+// let myData = "d="; // the raw data you will send
+// for(let i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 1024b = 1kb). change it the way you want
+// {
+//     myData += "k"; // add one byte of data;
+// }
 // let download_size = 5*1024*1024;
 // let startTime, endTime;
 // let lastIndex = 0;
 
 
 
-xml.open(meth,url,true)
-// xml.responseText='blob'
+const xmlFn = (xml,meth,url) => {
+    xml.open(meth,url,true)
+let ran = []
 xml.onload = (d) => {
-    if(d.target.status==200){
-        // do method
-    }
-    // let data = JSON.parse(d.target.response)
-    // // console.log(data.colors.length)
+    
+    let data = JSON.parse(d.target.response)
+    console.log(data)
+
+    // for(let i = 0; i < data.colors.length; i++){
+    //     ran.push(data.colors[i])
+        
+    // }
+//    txtAreaTest.value = [...ran].map((c,x)=>x<ran.length-1 ? c.color+"\n" : c.color)
+    // console.log(data.colors.length)
     // let arr = [], arr_inv = [];
     // data.colors.forEach((col,index) => {
     //     const li = document.createElement('li')
@@ -437,9 +444,6 @@ xml.onload = (d) => {
     //     pal_container.append(arr[i])
     // }
 }
-
-
-
 // xml.onreadystatechange = function(event) {
 //     if(event.target.readyState == 4 && event.target.status == 200) {
 //         endTime = (new Date()).getTime();
@@ -465,8 +469,9 @@ xml.onload = (d) => {
 
 // }
 // startTime = (new Date()).getTime();
-xml.send();
-
+xml.send()
+}
+xmlFn(xml,meth,url)
 
 
 //___________________________
