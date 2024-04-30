@@ -345,133 +345,132 @@ const xml = new XMLHttpRequest;
 const meth = 'GET'
 const url = '/colors'
 const txtAreaTest=document.getElementById('random')
-// let myData = "d="; // the raw data you will send
-// for(let i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 1024b = 1kb). change it the way you want
-// {
-//     myData += "k"; // add one byte of data;
-// }
-// let download_size = 5*1024*1024;
-// let startTime, endTime;
-// let lastIndex = 0;
-
-
-
-const xmlFn = (xml,meth,url) => {
-    xml.open(meth,url,true)
-let ran = []
-xml.onload = (d) => {
-    
-    let data = JSON.parse(d.target.response)
-    console.log(data)
-
-    // for(let i = 0; i < data.colors.length; i++){
-    //     ran.push(data.colors[i])
-        
-    // }
-//    txtAreaTest.value = [...ran].map((c,x)=>x<ran.length-1 ? c.color+"\n" : c.color)
-    // console.log(data.colors.length)
-    // let arr = [], arr_inv = [];
-    // data.colors.forEach((col,index) => {
-    //     const li = document.createElement('li')
-    //     li.classList.add('.color-pal-list-item')
-    //     li.setAttribute('style',`
-    //             background:${col.color};
-    //             opacity:.9;
-    //             height:25px;
-    //             width:25px;
-    //             border:.5px solid #fff;
-    //             transition:.25s;
-    //             z-index:999;
-    //             `)
-    //     li.classList.add('hover-li')
-    //     // push li into arrow
-    //         arr.push(li)
-    //     if(!detectMob()){
-    //         li.addEventListener('mouseover',e=>{
-    //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-    //             // console.log(rgbColor)
-    //             idCount=index+1
-    //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-    //                 setRGBAndHex(res,e.target,rgbColor,true)
-    //             // identify rgb input
-    //             const input = document.createElement('input')
-    //             input.style.background = col.color;
-    //             createInput(input,col,idCount,true)
-    //             // listenValue(input)
-    //             spot.append(input)
-    //             clickInput(input)
-    //             shaveUl(spot)
-    //             makeWhiteColor(col.color,input,copy)
-                    
-    //         })
-    //     }
-    //     else{
-    //         li.addEventListener('touchstart',e=>{
-    //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-    //             // console.log(rgbColor)
-    //             idCount=index+1
-    //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-    //                 setRGBAndHex(res,e.target,rgbColor,true)
-    //             // identify rgb input
-    //             const input = document.createElement('input')
-    //             input.style.background = col.color;
-    //             createInput(input,col,idCount,true)
-    //             // listenValue(input)
-    //             spot.append(input)
-    //             clickInput(input)
-    //             shaveUl(spot)
-    //             makeWhiteColor(col.color,input,copy)
-                    
-    //         })
-    //     }
-        
-    //     li.addEventListener('click',async e=>{
-    //         // identify rgb input
-    //         const input = document.createElement('input')
-    //         input.style.background = col.color;
-    //         createInput(input,col,idCount,true)
-    //         // listenValue(input)
-    //         spot.append(input)
-    //         clickInput(input)
-    //         shaveUl(spot)
-    //         makeWhiteColor(col.color,input,copy)
-    //         copyColor(input)
-    //         copyMessagePop(midline,spot,copy_message)
-    //     })
-    
-    // }) 
-    // for(let i in arr){
-    //     pal_container.append(arr[i])
-    // }
-}
-// xml.onreadystatechange = function(event) {
-//     if(event.target.readyState == 4 && event.target.status == 200) {
-//         endTime = (new Date()).getTime();
-//         // ShowData();
-//     }
-// }
-// xml.onprogress = function() {
-//     let current_index = xml.responseText.length;
-//     if(lastIndex==current_index) return;
-//     let s = xml.responseText.substring(lastIndex,current_index);
-//     lastIndex = current_index;
-//     // console.log("PROGRESS:",s)
-// }
-// function ShowData(){
-//     let duration = (endTime - startTime) / 1000;
-//     let bitsLoaded = download_size * 8;
-//     let speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
-//     // alert("Speed: " + speedMbps + " Mbps");
-//     console.log("duration "+duration)
-//     console.log("bits "+bitsLoaded)
-//     console.log(bitsLoaded)
-//     console.log(("Speed: " + speedMbps + " Mbps"))
-
-// }
-// startTime = (new Date()).getTime();
+let last_index = 0;
+let rang = []
+let current_index;
+xml.open(meth,url,true)
 xml.send()
+let percentage = .25
+
+// parse xml data
+function parse(){
+    console.log('you are parsing data!')
+    const data = JSON.parse(xml.responseText)
+    const myData = (data.colors)
+    current_index = [...myData].length * percentage
+    let d1 = [...myData].slice(last_index,current_index)
+    // console.log(d1)
+    last_index = current_index;
+    percentage+=.25
+    d1.forEach((col,index) => {
+        const li = document.createElement('li')
+        li.classList.add('.color-pal-list-item')
+        li.setAttribute('style',`
+                background:${col.color};
+                opacity:.9;
+                height:25px;
+                width:25px;
+                border:.5px solid #fff;
+                transition:.25s;
+                z-index:999;
+                `)
+        li.classList.add('hover-li')
+        // push li into arrow
+            rang.push(li)
+        if(!detectMob()){
+            li.addEventListener('mouseover',e=>{
+                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                // console.log(rgbColor)
+                idCount=index+1
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                    setRGBAndHex(res,e.target,rgbColor,true)
+                // identify rgb input
+                const input = document.createElement('input')
+                input.style.background = col.color;
+                createInput(input,col,idCount,true)
+                // listenValue(input)
+                spot.append(input)
+                clickInput(input)
+                shaveUl(spot)
+                makeWhiteColor(col.color,input,copy)
+                    
+            })
+        }
+        else{
+            li.addEventListener('touchstart',e=>{
+                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                // console.log(rgbColor)
+                idCount=index+1
+                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                    setRGBAndHex(res,e.target,rgbColor,true)
+                // identify rgb input
+                const input = document.createElement('input')
+                input.style.background = col.color;
+                createInput(input,col,idCount,true)
+                // listenValue(input)
+                spot.append(input)
+                clickInput(input)
+                shaveUl(spot)
+                makeWhiteColor(col.color,input,copy)
+                    
+            })
+        }
+        
+        li.addEventListener('click',async e=>{
+            // identify rgb input
+            const input = document.createElement('input')
+            input.style.background = col.color;
+            createInput(input,col,idCount,true)
+            // listenValue(input)
+            spot.append(input)
+            clickInput(input)
+            shaveUl(spot)
+            makeWhiteColor(col.color,input,copy)
+            copyColor(input)
+            copyMessagePop(midline,spot,copy_message)
+        })
+    
+    }) 
+    for(let i in rang){
+        pal_container.append(rang[i])
+    }
+    rang = []
 }
-xmlFn(xml,meth,url)
+xml.onload = () => parse()
+pal_container.onscroll = (e) => {
+    let top = e.target.scrollTop;
+    let height = e.target.scrollHeight;
+    let palHeight = e.target.clientHeight;
+    scroll_arr.push(top)
+    scroll_arr = scroll_arr.slice(-2)
+    let copy = [...scroll_arr].map(String)
+    const upward = () => top < scroll_arr[scroll_arr.length-2]
+    const downward = () => top > scroll_arr[scroll_arr.length-2]
+    // if current scroll is less than array's 2nd-to-last index, GO UP
+    if(upward()){
+        if((copy[0].length) > 2 && (copy[1].length) < 2){
+            return null;
+        }
+        else{
+            console.log('up')
+            console.log(scroll_arr)
+        }
+    
+    }
+    // if top scroll is less than array's 2nd-to-last index, GO DOWN
+    if(downward()){
+        console.log('down')
+        console.log(scroll_arr)
+
+    }
+
+    let tooClose = top/height >= .51;
+    if(((top) >= height*.5 && !tooClose)){
+        console.log("CHECKPOINT: "+top)
+        console.log("HEIGHT: "+height)
+        parse();
+    }
+}
 
 
 //___________________________
