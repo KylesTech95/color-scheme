@@ -349,101 +349,125 @@ for(let i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 102
 {
     myData += "k"; // add one byte of data;
 }
-let download_size = 5*1024*1024;
-let startTime, endTime;
+// let download_size = 5*1024*1024;
+// let startTime, endTime;
+// let lastIndex = 0;
+
+
+
 xml.open(meth,url,true)
+// xml.responseText='blob'
 xml.onload = (d) => {
-    let data = JSON.parse(d.target.response)
-    // console.log(data.colors.length)
-    let arr = [], arr_inv = [];
-    data.colors.forEach((col,index) => {
-        const li = document.createElement('li')
-        li.classList.add('.color-pal-list-item')
-        li.setAttribute('style',`
-                background:${col.color};
-                opacity:.9;
-                height:25px;
-                width:25px;
-                border:.5px solid #fff;
-                transition:.25s;
-                z-index:999;
-                `)
-        li.classList.add('hover-li')
-        // push li into arrow
-            arr.push(li)
-        if(!detectMob()){
-            li.addEventListener('mouseover',e=>{
-                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // console.log(rgbColor)
-                idCount=index+1
-                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                    setRGBAndHex(res,e.target,rgbColor,true)
-                // identify rgb input
-                const input = document.createElement('input')
-                input.style.background = col.color;
-                createInput(input,col,idCount,true)
-                // listenValue(input)
-                spot.append(input)
-                clickInput(input)
-                shaveUl(spot)
-                makeWhiteColor(col.color,input,copy)
+    if(d.target.status==200){
+        // do method
+    }
+    // let data = JSON.parse(d.target.response)
+    // // console.log(data.colors.length)
+    // let arr = [], arr_inv = [];
+    // data.colors.forEach((col,index) => {
+    //     const li = document.createElement('li')
+    //     li.classList.add('.color-pal-list-item')
+    //     li.setAttribute('style',`
+    //             background:${col.color};
+    //             opacity:.9;
+    //             height:25px;
+    //             width:25px;
+    //             border:.5px solid #fff;
+    //             transition:.25s;
+    //             z-index:999;
+    //             `)
+    //     li.classList.add('hover-li')
+    //     // push li into arrow
+    //         arr.push(li)
+    //     if(!detectMob()){
+    //         li.addEventListener('mouseover',e=>{
+    //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+    //             // console.log(rgbColor)
+    //             idCount=index+1
+    //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    //                 setRGBAndHex(res,e.target,rgbColor,true)
+    //             // identify rgb input
+    //             const input = document.createElement('input')
+    //             input.style.background = col.color;
+    //             createInput(input,col,idCount,true)
+    //             // listenValue(input)
+    //             spot.append(input)
+    //             clickInput(input)
+    //             shaveUl(spot)
+    //             makeWhiteColor(col.color,input,copy)
                     
-            })
-        }
-        else{
-            li.addEventListener('touchstart',e=>{
-                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // console.log(rgbColor)
-                idCount=index+1
-                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                    setRGBAndHex(res,e.target,rgbColor,true)
-                // identify rgb input
-                const input = document.createElement('input')
-                input.style.background = col.color;
-                createInput(input,col,idCount,true)
-                // listenValue(input)
-                spot.append(input)
-                clickInput(input)
-                shaveUl(spot)
-                makeWhiteColor(col.color,input,copy)
+    //         })
+    //     }
+    //     else{
+    //         li.addEventListener('touchstart',e=>{
+    //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+    //             // console.log(rgbColor)
+    //             idCount=index+1
+    //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+    //                 setRGBAndHex(res,e.target,rgbColor,true)
+    //             // identify rgb input
+    //             const input = document.createElement('input')
+    //             input.style.background = col.color;
+    //             createInput(input,col,idCount,true)
+    //             // listenValue(input)
+    //             spot.append(input)
+    //             clickInput(input)
+    //             shaveUl(spot)
+    //             makeWhiteColor(col.color,input,copy)
                     
-            })
-        }
+    //         })
+    //     }
         
-        li.addEventListener('click',async e=>{
-            // identify rgb input
-            const input = document.createElement('input')
-            input.style.background = col.color;
-            createInput(input,col,idCount,true)
-            // listenValue(input)
-            spot.append(input)
-            clickInput(input)
-            shaveUl(spot)
-            makeWhiteColor(col.color,input,copy)
-            copyColor(input)
-            copyMessagePop(midline,spot,copy_message)
-        })
+    //     li.addEventListener('click',async e=>{
+    //         // identify rgb input
+    //         const input = document.createElement('input')
+    //         input.style.background = col.color;
+    //         createInput(input,col,idCount,true)
+    //         // listenValue(input)
+    //         spot.append(input)
+    //         clickInput(input)
+    //         shaveUl(spot)
+    //         makeWhiteColor(col.color,input,copy)
+    //         copyColor(input)
+    //         copyMessagePop(midline,spot,copy_message)
+    //     })
     
-    }) 
-    for(let i in arr){
-        pal_container.append(arr[i])
-    }
+    // }) 
+    // for(let i in arr){
+    //     pal_container.append(arr[i])
+    // }
 }
-xml.onreadystatechange = function(event) {
-    if(event.target.readyState == 4 && event.target.status == 200) {
-        endTime = (new Date()).getTime();
-        ShowData();
-    }
-}
-function ShowData()
-{
-    let duration = (endTime - startTime) / 1000;
-    let bitsLoaded = download_size * 8;
-    let speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
-    alert("Speed: " + speedMbps + " Mbps");
-}
-startTime = (new Date()).getTime();
-xml.send(myData);
+
+
+
+// xml.onreadystatechange = function(event) {
+//     if(event.target.readyState == 4 && event.target.status == 200) {
+//         endTime = (new Date()).getTime();
+//         // ShowData();
+//     }
+// }
+// xml.onprogress = function() {
+//     let current_index = xml.responseText.length;
+//     if(lastIndex==current_index) return;
+//     let s = xml.responseText.substring(lastIndex,current_index);
+//     lastIndex = current_index;
+//     // console.log("PROGRESS:",s)
+// }
+// function ShowData(){
+//     let duration = (endTime - startTime) / 1000;
+//     let bitsLoaded = download_size * 8;
+//     let speedMbps = ((bitsLoaded / duration) / 1024 / 1024).toFixed(2);
+//     // alert("Speed: " + speedMbps + " Mbps");
+//     console.log("duration "+duration)
+//     console.log("bits "+bitsLoaded)
+//     console.log(bitsLoaded)
+//     console.log(("Speed: " + speedMbps + " Mbps"))
+
+// }
+// startTime = (new Date()).getTime();
+xml.send();
+
+
 
 //___________________________
 // spot-container event listeners 

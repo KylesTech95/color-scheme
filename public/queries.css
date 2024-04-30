@@ -7,6 +7,10 @@
  .play-icon{
     transform:scale(4)
  }   
+ #color-pal{
+  height:200px;
+  width:200px;
+ }
  .section-scroll-btn{
     /* left:2.5%; */
     display:none;
