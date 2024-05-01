@@ -8,7 +8,7 @@ import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
 import {postFn,postfetch} from './components/post.js'
 
-
+let newHR = document.createElement('hr')
 const wrapper = document.getElementById('wrapper')
 const spot = document.querySelector('.choice-spot')
 const ch_container = document.getElementById('choice-container')
@@ -26,6 +26,7 @@ let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 let btnPal = document.querySelector('.option-2')
+let allContainers = document.querySelectorAll('.color-pal-list-container')
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -230,6 +231,7 @@ xml.send()
 let percentage = .25
 let control = .5;
 let deviceTypeControl = .5
+
 // parse xml data
 function parse(){
     // console.log('you are parsing data!')
@@ -322,7 +324,6 @@ const restoreTile = elem => {
     elem.classList.remove('no-pointer')
     elem.style.opacity=1;
 }
-let newHR = document.createElement('hr')
 const bringTilesBack =  (container) => {
     let allLi = [...container.children]
     if(allLi){
@@ -341,7 +342,26 @@ let limit = container.getBoundingClientRect().y+container.clientHeight;
         }
     })
 }
-xml.onload = () => parse()
+let testi = []
+const partialParse = arr => {
+    let containers = [...arr];
+    // console.log(containers);
+    // console.log('you are parsing data!')
+    const data = JSON.parse(xml.responseText)
+    const myData = (data.colors)
+    let j = 0;
+    for(let i = 0; i < myData.length; i+=1024){
+        testi.push(myData.slice(j,i<1?1024: i))
+        j = i;
+    }
+    console.log(testi)
+}
+if(window.innerWidth >= 1000){
+    xml.onload = () => parse()   
+}
+else{
+    xml.onload = () => partialParse(allContainers)
+}
 pal_container.onscroll = (e) => {
     let top = e.target.scrollTop;
     let height = e.target.scrollHeight;
