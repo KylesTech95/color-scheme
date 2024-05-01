@@ -343,18 +343,97 @@ let limit = container.getBoundingClientRect().y+container.clientHeight;
     })
 }
 let testi = []
+let split_range = []
+
 const partialParse = arr => {
     let containers = [...arr];
     // console.log(containers);
     // console.log('you are parsing data!')
     const data = JSON.parse(xml.responseText)
     const myData = (data.colors)
-    let j = 0;
-    for(let i = 0; i < myData.length; i+=1024){
-        testi.push(myData.slice(j,i<1?1024: i))
-        j = i;
+    
+    let quotient = myData.length/4
+    for(let i = 0; i < myData.length; i+=quotient){
+        testi.push(myData.slice(i,i+quotient))
     }
-    console.log(testi)
+    
+    containers.forEach((container,index) => {
+        let data = testi[index];
+        console.log(data)
+        
+        data.forEach((col,index) => {
+            const li = document.createElement('li')
+            li.classList.add('.color-pal-list-item')
+            li.setAttribute('style',`
+                    background:${col.color};
+                    opacity:.9;
+                    height:25px;
+                    width:25px;
+                    border:.5px solid #fff;
+                    transition:.25s;
+                    z-index:999;
+                    `)
+            li.classList.add('hover-li')
+            // push li into arrow
+                split_range.push(li)
+            if(!detectMob()){
+                li.addEventListener('mouseover',e=>{
+                    let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                    // // console.log(rgbColor)
+                    idCount=index+1
+                    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                        setRGBAndHex(res,e.target,rgbColor,true)
+                    // identify rgb input
+                    const input = document.createElement('input')
+                    input.style.background = col.color;
+                    createInput(input,col,idCount,true)
+                    // listenValue(input)
+                    spot.append(input)
+                    clickInput(input)
+                    shaveUl(spot)
+                    makeWhiteColor(col.color,input,copy)
+                        
+                })
+            }
+            else{
+                li.addEventListener('touchstart',e=>{
+                    let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                    // // console.log(rgbColor)
+                    idCount=index+1
+                    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                        setRGBAndHex(res,e.target,rgbColor,true)
+                    // identify rgb input
+                    const input = document.createElement('input')
+                    input.style.background = col.color;
+                    createInput(input,col,idCount,true)
+                    // listenValue(input)
+                    spot.append(input)
+                    clickInput(input)
+                    shaveUl(spot)
+                    makeWhiteColor(col.color,input,copy)
+                        
+                })
+            }
+            
+            li.addEventListener('click',async e=>{
+                // identify rgb input
+                const input = document.createElement('input')
+                input.style.background = col.color;
+                createInput(input,col,idCount,true)
+                // listenValue(input)
+                spot.append(input)
+                clickInput(input)
+                shaveUl(spot)
+                makeWhiteColor(col.color,input,copy)
+                copyColor(input)
+                copyMessagePop(midline,spot,copy_message)
+            })
+        
+        }) 
+        for(let i = 0; i < split_range.length; i++){
+            // container.append(split_range[i])
+        }
+    })
 }
 if(window.innerWidth >= 1000){
     xml.onload = () => parse()   
@@ -391,7 +470,7 @@ pal_container.onscroll = (e) => {
         if(((top) >= height*(control))){
             // console.log("CHECKPOINT: "+top)
             // console.log("HEIGHT: "+height)
-            parse();
+            if(window.innerWidth >= 1000)parse();
             bringTilesBack(pal_container)
         }
     }
