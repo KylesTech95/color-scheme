@@ -216,141 +216,18 @@ clickScrolls()
 //         return data.color
 //     })
 // })
-
-
-let scrollHeight = pal_container.scrollHeight;
-let fixedHeight = pal_container.clientHeight;
 let captureTrace = []
-let goingUp = (top,capture) => (top < capture[capture.length-2])
-let goingDown = (top,capture) => (top > capture[capture.length-2])
 
-const adjustArrSize = (container,pal_image) => {
-        container.onscroll=e=>{
-            let scTop = e.target.scrollTop;
-            let capture = Math.floor(scTop);
-            captureTrace.push(capture)
-            if(captureTrace.length > 2)captureTrace.shift()
-
-            if(captureTrace.length > 1){
-                // if(goingUp(scTop,captureTrace)){
-                //     console.log('going Up')
-                //    }
-                // if(goingDown(scTop,captureTrace)){
-                //     console.log('going Down')
-                //   }
-            }
-            return [...container.children].forEach((a,b) => {
-                if(a.getBoundingClientRect().y > pal_image.top && a.getBoundingClientRect().y < pal_image.bottom){
-                    // a.style.background ='red';
-                    a.style.visibility='visible'
-                      
-                }
-                else{
-                    // a.style.background = 'black';
-                    // a.style.background = 'transparent';
-                    a.style.visibility='hidden'
-
-                }
-            })
-            
-        }
-}
-let pal_image = {
-    top:hashPal.getBoundingClientRect().y-hashPal.getBoundingClientRect().y,
-    bottom:hashPal.clientHeight+250,
-}
-// fetch(`/colors`).then(res=>res.json()).then(data=>{ // data
-//     // console.log(data.colors.length)
-//     let arr = [], arr_inv = [];
-//     data.colors.forEach((col,index) => {
-//         const li = document.createElement('li')
-//         li.classList.add('.color-pal-list-item')
-//         li.setAttribute('style',`
-//                 background:${col.color};
-//                 opacity:.9;
-//                 height:25px;
-//                 width:25px;
-//                 border:.5px solid #fff;
-//                 transition:.25s;
-//                 z-index:999;
-//                 `)
-//         li.classList.add('hover-li')
-//         // push li into arrow
-//             arr.push(li)
-//         if(!detectMob()){
-//             li.addEventListener('mouseover',e=>{
-//                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-//                 // console.log(rgbColor)
-//                 idCount=index+1
-//                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-//                     setRGBAndHex(res,e.target,rgbColor,true)
-//                 // identify rgb input
-//                 const input = document.createElement('input')
-//                 input.style.background = col.color;
-//                 createInput(input,col,idCount,true)
-//                 // listenValue(input)
-//                 spot.append(input)
-//                 clickInput(input)
-//                 shaveUl(spot)
-//                 makeWhiteColor(col.color,input,copy)
-                    
-//             })
-//         }
-//         else{
-//             li.addEventListener('touchstart',e=>{
-//                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-//                 // console.log(rgbColor)
-//                 idCount=index+1
-//                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-//                     setRGBAndHex(res,e.target,rgbColor,true)
-//                 // identify rgb input
-//                 const input = document.createElement('input')
-//                 input.style.background = col.color;
-//                 createInput(input,col,idCount,true)
-//                 // listenValue(input)
-//                 spot.append(input)
-//                 clickInput(input)
-//                 shaveUl(spot)
-//                 makeWhiteColor(col.color,input,copy)
-                    
-//             })
-//         }
-        
-//         li.addEventListener('click',async e=>{
-//             // identify rgb input
-//             const input = document.createElement('input')
-//             input.style.background = col.color;
-//             createInput(input,col,idCount,true)
-//             // listenValue(input)
-//             spot.append(input)
-//             clickInput(input)
-//             shaveUl(spot)
-//             makeWhiteColor(col.color,input,copy)
-//             copyColor(input)
-//             copyMessagePop(midline,spot,copy_message)
-//         })
-    
-//     })
-    
-//     // append items in pallette container
-//     // adjustArrSize(pal_container,pal_image)
-    
-//     for(let i in arr){
-//         pal_container.append(arr[i])
-//     }
-    
-    
-//     })
 const xml = new XMLHttpRequest;
 const meth = 'GET'
 const url = '/colors'
-const txtAreaTest=document.getElementById('random')
 let last_index = 0;
 let rang = []
 let current_index;
 xml.open(meth,url,true)
 xml.send()
 let percentage = .25
+let control = .5;
 
 // parse xml data
 function parse(){
@@ -361,7 +238,7 @@ function parse(){
     let d1 = [...myData].slice(last_index,current_index)
     // console.log(d1)
     last_index = current_index;
-    percentage+=.25
+    percentage+=.5
     d1.forEach((col,index) => {
         const li = document.createElement('li')
         li.classList.add('.color-pal-list-item')
@@ -436,20 +313,22 @@ function parse(){
     }
     rang = []
 }
+let newHR = document.createElement('hr')
+const bringTilesBack =  (container) => {
+    let allLi = [...container.children]
+    if(allLi){
+        allLi.reduce((a,b)=>b.classList.contains('hide-me') && (b.getBoundingClientRect().y <= newHR.getBoundingClientRect().y) ? b.classList.remove('hide-me'):null)
+        control+=.01
+    }
+}
 function removeTiles(container,tiles){
 let tileArr =[...tiles]
 let limit = container.getBoundingClientRect().y+container.clientHeight;
-let newHR = document.createElement('hr')
     newHR.style=`position:absolute;border:3px solid red; width:100%;`
     container.append(newHR)
-    // for(let i = 0; i < tileArr.length; i++){
-    //     if(tileArr[i].getBoundingClientRect().y > newHR.getBoundingClientRect().y){
-    //         tileArr[i].parentNode.removeChild(tileArr[i])
-    //     }
-    // }
-    return [...tiles].reduce((prev,curr)=>{
-        if(curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){
-            curr.style.background='red'
+    return [...tiles].reduce((prev,curr,index)=>{
+        if(curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){ 
+            curr.classList.add('hide-me')   
         }
     })
 }
@@ -469,22 +348,22 @@ pal_container.onscroll = (e) => {
             return null;
         }
         else{
-            console.log('up')
-            console.log(scroll_arr)
+            // console.log('up')
+            // console.log(scroll_arr)
             removeTiles(hashPal,pal_container.children)
-            
+            control-=.1
         }
     
     }
     // if top scroll is less than array's 2nd-to-last index, GO DOWN
     if(downward()){
-        console.log('down')
-        console.log(scroll_arr)
-        let tooClose = top/height >= .51;
-        if(((top) >= height*.5 && !tooClose)){
+        // console.log('down')
+        // console.log(scroll_arr)
+        if(((top) >= height*(control))){
             console.log("CHECKPOINT: "+top)
             console.log("HEIGHT: "+height)
             parse();
+            bringTilesBack(pal_container)
         }
     }
 }

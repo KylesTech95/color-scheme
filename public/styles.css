@@ -578,6 +578,13 @@ form#form{
 #color-pal::-webkit-resizer{
     outline: 2px dashed red;
 }
+
+.hide-me{
+    visibility:hidden;
+    height:0;
+    width:0;
+    opacity:0;
+}
 .color-pal-list-container{
     overflow-x:hidden;
     overflow-y:scroll;
