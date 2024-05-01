@@ -16,6 +16,7 @@ const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const pal_container = document.querySelector('.color-pal-list-container')
 const palID = document.getElementById('color-pal-container')
+const hashPal = document.getElementById('color-pal')
 let copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
@@ -254,7 +255,6 @@ const adjustArrSize = (container,pal_image) => {
             
         }
 }
-const hashPal = document.getElementById('color-pal')
 let pal_image = {
     top:hashPal.getBoundingClientRect().y-hashPal.getBoundingClientRect().y,
     bottom:hashPal.clientHeight+250,
@@ -436,6 +436,23 @@ function parse(){
     }
     rang = []
 }
+function removeTiles(container,tiles){
+let tileArr =[...tiles]
+let limit = container.getBoundingClientRect().y+container.clientHeight;
+let newHR = document.createElement('hr')
+    newHR.style=`position:absolute;border:3px solid red; width:100%;`
+    container.append(newHR)
+    // for(let i = 0; i < tileArr.length; i++){
+    //     if(tileArr[i].getBoundingClientRect().y > newHR.getBoundingClientRect().y){
+    //         tileArr[i].parentNode.removeChild(tileArr[i])
+    //     }
+    // }
+    return [...tiles].reduce((prev,curr)=>{
+        if(curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){
+            curr.style.background='red'
+        }
+    })
+}
 xml.onload = () => parse()
 pal_container.onscroll = (e) => {
     let top = e.target.scrollTop;
@@ -447,13 +464,15 @@ pal_container.onscroll = (e) => {
     const upward = () => top < scroll_arr[scroll_arr.length-2]
     const downward = () => top > scroll_arr[scroll_arr.length-2]
     // if current scroll is less than array's 2nd-to-last index, GO UP
-    if(upward()){
+    if(upward()&&top>10){
         if((copy[0].length) > 2 && (copy[1].length) < 2){
             return null;
         }
         else{
             console.log('up')
             console.log(scroll_arr)
+            removeTiles(hashPal,pal_container.children)
+            
         }
     
     }
@@ -461,14 +480,12 @@ pal_container.onscroll = (e) => {
     if(downward()){
         console.log('down')
         console.log(scroll_arr)
-
-    }
-
-    let tooClose = top/height >= .51;
-    if(((top) >= height*.5 && !tooClose)){
-        console.log("CHECKPOINT: "+top)
-        console.log("HEIGHT: "+height)
-        parse();
+        let tooClose = top/height >= .51;
+        if(((top) >= height*.5 && !tooClose)){
+            console.log("CHECKPOINT: "+top)
+            console.log("HEIGHT: "+height)
+            parse();
+        }
     }
 }
 

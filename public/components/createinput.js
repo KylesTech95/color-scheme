@@ -5,6 +5,7 @@ export default function createInput(input,data,id,bool){
         input.style.background = data.current_color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
+        input.setAttribute('top',window.innerHeight/2)
         // input.setAttribute('disabled','true')
             input.setAttribute('autocomplete','off')
             input.setAttribute('spellcheck','false')
@@ -21,6 +22,7 @@ export default function createInput(input,data,id,bool){
         // input.setAttribute('disabled','true')
         input.setAttribute('autocomplete','off')
         input.setAttribute('spellcheck','false')
+        input.setAttribute('top',window.innerHeight/2)
         input.setAttribute('value',data.color)
         input.setAttribute('disabled',true)
         }
