@@ -228,7 +228,7 @@ xml.open(meth,url,true)
 xml.send()
 let percentage = .25
 let control = .5;
-
+let deviceTypeControl = .5
 // parse xml data
 function parse(){
     console.log('you are parsing data!')
@@ -238,7 +238,7 @@ function parse(){
     let d1 = [...myData].slice(last_index,current_index)
     // console.log(d1)
     last_index = current_index;
-    percentage+=.5
+    percentage+=deviceTypeControl
     d1.forEach((col,index) => {
         const li = document.createElement('li')
         li.classList.add('.color-pal-list-item')
@@ -483,6 +483,8 @@ const result_container = document.getElementById('result-container')
 if(window.innerWidth < 1000){
     wrapper.removeChild(palID)
      ch_container.appendChild(palID)
+     percentage = .125;
+     deviceTypeControl = .175
     
 }
 // spot-container: add event listener (click) to show "coppied!" consistently
