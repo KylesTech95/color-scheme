@@ -63,7 +63,7 @@ const rotateRight = (scroll) => {
     scroll.addEventListener('click', e => {
     idCount+=1;
     if(idCount>4096)idCount=1;
-    // // console.log(idCount)
+    // // // console.log(idCount)
     // create input
     const input = document.createElement('input')
     input.classList.add('color-input')
@@ -80,7 +80,7 @@ const rotateRight = (scroll) => {
     rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
     // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
     
-    // // console.log(rgbColor)
+    // // // console.log(rgbColor)
 
     setRGBAndHex(res,data,rgbColor)
         })
@@ -91,7 +91,7 @@ const rotateRight = (scroll) => {
         idCount+=1;
 
         if(idCount>4096)idCount=1;
-        // // console.log(idCount)
+        // // // console.log(idCount)
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
@@ -103,7 +103,7 @@ const rotateRight = (scroll) => {
         shaveUl(sp)
         // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-        // // console.log(rgbColor)
+        // // // console.log(rgbColor)
         setRGBAndHex(res,data,rgbColor)
         })
       }
@@ -115,7 +115,7 @@ const rotateLeft = (scroll) => {
     scroll.addEventListener('click', e => {
     idCount-=1;
     if(idCount<1)idCount=4096;
-    // // console.log(idCount)
+    // // // console.log(idCount)
 
     const input = document.createElement('input')
     input.classList.add('color-input')
@@ -131,7 +131,7 @@ const rotateLeft = (scroll) => {
 
     // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
     let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-    // // console.log(rgbColor)
+    // // // console.log(rgbColor)
     rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
     setRGBAndHex(res,data,rgbColor)
         })
@@ -142,7 +142,7 @@ const rotateLeft = (scroll) => {
 
         idCount-=1;
         if(idCount<1)idCount=4096;
-        // // console.log(idCount)
+        // // // console.log(idCount)
         const input = document.createElement('input')
         input.classList.add('color-input')
         fetch(`/colors/${idCount}`).then(res=>res.json()).then(data=>{
@@ -154,7 +154,7 @@ const rotateLeft = (scroll) => {
             shaveUl(sp)
             // let rgbColor = data.current_color.match(/(\d+)/g).join`,`.split`,`;
             let rgbColor = data.current_color.replace(/\(|\)|rgb/g,'').split(",")
-            // // console.log(rgbColor)
+            // // // console.log(rgbColor)
             setRGBAndHex(res,data,rgbColor)
         })
       }
@@ -171,7 +171,7 @@ const clickScrolls = () => {
                 return rotateRight(scroll);
             break;
             default:
-                // console.log(undefined);
+                // // console.log(undefined);
                 return undefined;
             break;
         }
@@ -204,11 +204,11 @@ clickScrolls()
 //     g = ((i>>4) & 0xf) * 0x11;
 //     b = (i & 0xf) * 0x11;
 //     colour = "rgb("+r+","+g+","+b+")";
-// //     // console.log(colour)
+// // //     // console.log(colour)
 //     arr.push(colour)
     
 // }
-// // console.log(arr)
+// // // console.log(arr)
 
 // insert_btn.style.left = `${document.body.clientWidth/2}px`
 // insert_btn.addEventListener('click', e => {
@@ -231,12 +231,12 @@ let control = .5;
 let deviceTypeControl = .5
 // parse xml data
 function parse(){
-    console.log('you are parsing data!')
+    // console.log('you are parsing data!')
     const data = JSON.parse(xml.responseText)
     const myData = (data.colors)
     current_index = [...myData].length * percentage
     let d1 = [...myData].slice(last_index,current_index)
-    // console.log(d1)
+    // // console.log(d1)
     last_index = current_index;
     percentage+=deviceTypeControl
     d1.forEach((col,index) => {
@@ -257,7 +257,7 @@ function parse(){
         if(!detectMob()){
             li.addEventListener('mouseover',e=>{
                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // console.log(rgbColor)
+                // // console.log(rgbColor)
                 idCount=index+1
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                     setRGBAndHex(res,e.target,rgbColor,true)
@@ -276,7 +276,7 @@ function parse(){
         else{
             li.addEventListener('touchstart',e=>{
                 let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // console.log(rgbColor)
+                // // console.log(rgbColor)
                 idCount=index+1
                 // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
                     setRGBAndHex(res,e.target,rgbColor,true)
@@ -348,8 +348,8 @@ pal_container.onscroll = (e) => {
             return null;
         }
         else{
-            // console.log('up')
-            // console.log(scroll_arr)
+            // // console.log('up')
+            // // console.log(scroll_arr)
             removeTiles(hashPal,pal_container.children)
             control-=.1
         }
@@ -357,11 +357,11 @@ pal_container.onscroll = (e) => {
     }
     // if top scroll is less than array's 2nd-to-last index, GO DOWN
     if(downward()){
-        // console.log('down')
-        // console.log(scroll_arr)
+        // // console.log('down')
+        // // console.log(scroll_arr)
         if(((top) >= height*(control))){
-            console.log("CHECKPOINT: "+top)
-            console.log("HEIGHT: "+height)
+            // console.log("CHECKPOINT: "+top)
+            // console.log("HEIGHT: "+height)
             parse();
             bringTilesBack(pal_container)
         }
@@ -373,13 +373,13 @@ pal_container.onscroll = (e) => {
 // spot-container event listeners 
 if(!detectMob()){
     spot.addEventListener('mouseover',e=>{
-        // console.log(copy)
+        // // console.log(copy)
         copy.classList.remove('copy-current')
         copy.classList.add('copy-hover')
     })
 }
 spot.addEventListener('mouseout',e=>{
-    // console.log(copy)
+    // // console.log(copy)
     copy.classList.add('copy-current')
     copy.classList.remove('copy-hover')
 })
@@ -397,14 +397,14 @@ spot.addEventListener('mouseout',e=>{
 //     e.preventDefault();
 //     // post request
 //     postFn(post,{a:inputs[0].value,b:inputs[1].value}).then(data=>{
-//         // // console.log(data.result)
+// //         // // console.log(data.result)
 //         resActual.textContent = data.result;
 //     })
 //     // settimeout for get request
 //    setTimeout(()=>{
 //      //get request
 //      fetch(get).then(res=>res.json()).then(data=>{
-//         // console.log(data)
+// //         // console.log(data)
 //     })
 //    },500)
 
@@ -415,7 +415,7 @@ spot.addEventListener('mouseout',e=>{
 // clear database function
 // async function clearFn(){
 //     let ft = await fetch('/cleared')
-//     // console.log('db cleared!')
+// //     // console.log('db cleared!')
 //     resActual.textContent = 0;
 // }
 
@@ -428,12 +428,12 @@ window.addEventListener('scroll',e=>{
         scroll_arr.push(current)
         // if current scroll is less than array's 2nd-to-last index, GO UP
         if(current < scroll_arr[scroll_arr.length-2]){
-            // console.log('going up')
+            // // console.log('going up')
             scroll_dir = true
         }
         // if current scroll is less than array's 2nd-to-last index, GO DOWN
         if(current > scroll_arr[scroll_arr.length-2]){
-            // console.log('going down')
+            // // console.log('going down')
             scroll_dir = false
         }
         // force scroll
@@ -492,13 +492,13 @@ spot.addEventListener('mouseover',e=>{
     const input = document.querySelector('.color-input')
     try{
         if(e.target.classList.contains('color-input')){
-            console.log('you clicked input')
+            // console.log('you clicked input')
             copyMessagePop(midline,spot,copy_message)
             copyColor(input)
         }
     }
     catch(err){
         err = 'this is not the input you are looking for'
-        console.log(err)
+        // console.log(err)
     }
 })
