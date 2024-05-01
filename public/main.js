@@ -358,80 +358,86 @@ const partialParse = arr => {
     }
     
     containers.forEach((container,index) => {
-        let data = testi[index];
-        console.log(container)
-        console.log(data)
-        let tester = [1,2,3]
-        // data.forEach((col,index) => {
-        //     const li = document.createElement('li')
-        //     li.classList.add('.color-pal-list-item')
-        //     li.setAttribute('style',`
-        //             background:${col.color};
-        //             opacity:.9;
-        //             height:25px;
-        //             width:25px;
-        //             border:.5px solid #fff;
-        //             transition:.25s;
-        //             z-index:999;
-        //             `)
-        //     li.classList.add('hover-li')
-        //     // push li into arrow
-        //         split_range.push(li)
-        //     if(!detectMob()){
-        //         li.addEventListener('mouseover',e=>{
-        //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-        //             // // console.log(rgbColor)
-        //             idCount=index+1
-        //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-        //                 setRGBAndHex(res,e.target,rgbColor,true)
-        //             // identify rgb input
-        //             const input = document.createElement('input')
-        //             input.style.background = col.color;
-        //             createInput(input,col,idCount,true)
-        //             // listenValue(input)
-        //             spot.append(input)
-        //             clickInput(input)
-        //             shaveUl(spot)
-        //             makeWhiteColor(col.color,input,copy)
-                        
-        //         })
-        //     }
-        //     else{
-        //         li.addEventListener('touchstart',e=>{
-        //             let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-        //             // // console.log(rgbColor)
-        //             idCount=index+1
-        //             // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-        //                 setRGBAndHex(res,e.target,rgbColor,true)
-        //             // identify rgb input
-        //             const input = document.createElement('input')
-        //             input.style.background = col.color;
-        //             createInput(input,col,idCount,true)
-        //             // listenValue(input)
-        //             spot.append(input)
-        //             clickInput(input)
-        //             shaveUl(spot)
-        //             makeWhiteColor(col.color,input,copy)
-                        
-        //         })
-        //     }
-            
-        //     li.addEventListener('click',async e=>{
-        //         // identify rgb input
-        //         const input = document.createElement('input')
-        //         input.style.background = col.color;
-        //         createInput(input,col,idCount,true)
-        //         // listenValue(input)
-        //         spot.append(input)
-        //         clickInput(input)
-        //         shaveUl(spot)
-        //         makeWhiteColor(col.color,input,copy)
-        //         copyColor(input)
-        //         copyMessagePop(midline,spot,copy_message)
-        //     })
-        
-        // }) 
-        container.append([...tester].map((x,ind)=>x*index))        
+        for(let j = 0; j < testi.length; j++){
+            if(j==index){
+                let array = []
+                let data = testi[j];
+                console.log(data)
+                data.forEach((col,index) => {
+                    const li = document.createElement('li')
+                    li.classList.add('.color-pal-list-item')
+                    li.setAttribute('style',`
+                            background:${col.color};
+                            opacity:.9;
+                            height:25px;
+                            width:25px;
+                            border:.5px solid #fff;
+                            transition:.25s;
+                            z-index:999;
+                            `)
+                    li.classList.add('hover-li')
+                    // push li into arrow
+                        array.push(li)
+                    if(!detectMob()){
+                        li.addEventListener('mouseover',e=>{
+                            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                            // // console.log(rgbColor)
+                            idCount=index+1
+                            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                                setRGBAndHex(res,e.target,rgbColor,true)
+                            // identify rgb input
+                            const input = document.createElement('input')
+                            input.style.background = col.color;
+                            createInput(input,col,idCount,true)
+                            // listenValue(input)
+                            spot.append(input)
+                            clickInput(input)
+                            shaveUl(spot)
+                            makeWhiteColor(col.color,input,copy)
+                                
+                        })
+                    }
+                    else{
+                        li.addEventListener('touchstart',e=>{
+                            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                            // // console.log(rgbColor)
+                            idCount=index+1
+                            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                                setRGBAndHex(res,e.target,rgbColor,true)
+                            // identify rgb input
+                            const input = document.createElement('input')
+                            input.style.background = col.color;
+                            createInput(input,col,idCount,true)
+                            // listenValue(input)
+                            spot.append(input)
+                            clickInput(input)
+                            shaveUl(spot)
+                            makeWhiteColor(col.color,input,copy)
+                                
+                        })
+                    }
+                    
+                    li.addEventListener('click',async e=>{
+                        // identify rgb input
+                        const input = document.createElement('input')
+                        input.style.background = col.color;
+                        createInput(input,col,idCount,true)
+                        // listenValue(input)
+                        spot.append(input)
+                        clickInput(input)
+                        shaveUl(spot)
+                        makeWhiteColor(col.color,input,copy)
+                        copyColor(input)
+                        copyMessagePop(midline,spot,copy_message)
+                    })
+                
+                }) 
+                // console.log(array)
+                for(let k=0;k<array.length;k++){
+                    container.appendChild(array[k])
+                }
+            }
+        }        
     })
 }
 if(window.innerWidth >= 1000){

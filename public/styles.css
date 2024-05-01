@@ -598,9 +598,6 @@ form#form{
     gap:8px;
     position:relative;
 }
-.color-pal-list-container:nth-child(2){
-    background:Red;
-}
 
 .pal-btn{
     padding:1rem;
