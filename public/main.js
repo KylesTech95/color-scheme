@@ -603,18 +603,28 @@ if(window.innerWidth < 1000){
      function pressBtnPal(){
          c++
          let arr = document.querySelectorAll('.color-pal-list-container')
-         if(c%2!=0){
-             arr[0].classList.add('no-item')
-             arr[1].classList.add('flex-item')
-             arr[0].classList.remove('flex-item')
-             arr[1].classList.remove('no-item')
+         for(let l = 0; l < allContainers.length; l++){
+            if(c%4!==l){
+             allContainers[l].classList.add('no-item')
+             allContainers[l].classList.remove('flex-item')
          }
          else{
-             arr[0].classList.remove('no-item')
-             arr[1].classList.remove('flex-item')
-             arr[0].classList.add('flex-item')
-             arr[1].classList.add('no-item')
+             allContainers[l].classList.remove('no-item')
+             allContainers[l].classList.add('flex-item')
          }
+         }
+        //  if(c%2!=0){
+        //      arr[0].classList.add('no-item')
+        //      arr[1].classList.add('flex-item')
+        //      arr[0].classList.remove('flex-item')
+        //      arr[1].classList.remove('no-item')
+        //  }
+        //  else{
+        //      arr[0].classList.remove('no-item')
+        //      arr[1].classList.remove('flex-item')
+        //      arr[0].classList.add('flex-item')
+        //      arr[1].classList.add('no-item')
+        //  }
      }
      btnPal.addEventListener('click',pressBtnPal)
 }
