@@ -580,9 +580,7 @@ form#form{
 }
 
 .hide-me{
-    visibility:hidden;
-    height:0;
-    width:0;
+    pointer-events: none;
     opacity:0;
 }
 .color-pal-list-container{
