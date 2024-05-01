@@ -579,9 +579,8 @@ form#form{
     outline: 2px dashed red;
 }
 
-.hide-me{
+.no-pointer{
     pointer-events: none;
-    opacity:0;
 }
 .color-pal-list-container{
     overflow-x:hidden;

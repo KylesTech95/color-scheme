@@ -313,11 +313,19 @@ function parse(){
     }
     rang = []
 }
+const hideTiles = elem => {
+    elem.classList.add('no-pointer')
+    elem.style.opacity=0;  
+}
+const restoreTile = elem => {
+    elem.classList.remove('no-pointer')
+    elem.style.opacity=1;
+}
 let newHR = document.createElement('hr')
 const bringTilesBack =  (container) => {
     let allLi = [...container.children]
     if(allLi){
-        allLi.reduce((a,b)=>b.classList.contains('hide-me') && (b.getBoundingClientRect().y <= newHR.getBoundingClientRect().y) ? b.classList.remove('hide-me'):null)
+        allLi.reduce((a,b)=>b.classList.contains('no-pointer') && (b.getBoundingClientRect().y <= newHR.getBoundingClientRect().y) ? restoreTile(b) : null)
         control+=.01
     }
 }
@@ -327,8 +335,8 @@ let limit = container.getBoundingClientRect().y+container.clientHeight;
     newHR.style=`position:absolute;border:3px solid red; width:100%;`
     container.append(newHR)
     return [...tiles].reduce((prev,curr,index)=>{
-        if(curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){ 
-            curr.classList.add('hide-me')   
+        if(curr.getBoundingClientRect().y < newHR.getBoundingClientRect().y+100 && curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){ 
+            hideTiles(curr) 
         }
     })
 }
