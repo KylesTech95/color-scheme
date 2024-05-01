@@ -25,6 +25,7 @@ let idCount = 0;
 let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
+let btnPal = document.querySelector('.option-2')
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -489,11 +490,32 @@ navArr.forEach((item,i)=>{
 })
 const result_container = document.getElementById('result-container')
 if(window.innerWidth < 1000){
+    btnPal.classList.remove('no-item')
     wrapper.removeChild(palID)
      ch_container.appendChild(palID)
      percentage = .125;
      deviceTypeControl = .175
-    
+     let c = 0;
+     function pressBtnPal(){
+         c++
+         let arr = document.querySelectorAll('.color-pal-list-container')
+         if(c%2!=0){
+             arr[0].classList.add('no-item')
+             arr[1].classList.add('flex-item')
+             arr[0].classList.remove('flex-item')
+             arr[1].classList.remove('no-item')
+         }
+         else{
+             arr[0].classList.remove('no-item')
+             arr[1].classList.remove('flex-item')
+             arr[0].classList.add('flex-item')
+             arr[1].classList.add('no-item')
+         }
+     }
+     btnPal.addEventListener('click',pressBtnPal)
+}
+else{
+    btnPal.classList.add('no-item')
 }
 // spot-container: add event listener (click) to show "coppied!" consistently
 spot.addEventListener('mouseover',e=>{
@@ -510,3 +532,4 @@ spot.addEventListener('mouseover',e=>{
         // console.log(err)
     }
 })
+

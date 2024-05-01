@@ -582,6 +582,7 @@ form#form{
 .no-pointer{
     pointer-events: none;
 }
+
 .color-pal-list-container{
     overflow-x:hidden;
     overflow-y:scroll;
@@ -590,13 +591,29 @@ form#form{
     height:100%;
     width:100%;
     /* border:3px solid violet; */
-    display:flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap:wrap;
     gap:8px;
     position:relative;
+}
+.color-pal-list-container:nth-child(2){
+    background:red;
+}
+.pal-btn{
+    padding:1rem;
+    background:#333;
+    z-index:999;
+    cursor:pointer;
+    border-radius:12px;
+    color:ghostwhite;
+}
+.flex-item{
+    display:flex;
+}
+.no-item{
+    display:none;
 }
 .hover-li:hover{
     transform:scale(1.5);
