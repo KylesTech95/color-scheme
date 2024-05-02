@@ -30,7 +30,7 @@ let btnPal = document.querySelector('.option-2')
 let allBtns = document.querySelectorAll('.pal-btn')
 
 const configButtonsOnPal = (palCon,container,btns) => {
-    let halfHeight = window.innerHeight/2;
+    let halfHeight = window.innerHeight;
     let margin = 25
     btns.forEach((btn,inc) => {
         // console.log(btn)
@@ -369,7 +369,7 @@ const partialParse = arr => {
     for(let i = 0; i < myData.length; i+=quotient){
         testi.push(myData.slice(i,i+quotient))
     }
-    
+
     containers.forEach((container,index) => {
         for(let j = 0; j < testi.length; j++){
             if(j==index){
@@ -388,7 +388,6 @@ const partialParse = arr => {
                             transition:.25s;
                             z-index:999;
                             `)
-                    li.classList.add('hover-li')
                     // push li into arrow
                         array.push(li)
                     if(!detectMob()){
@@ -422,6 +421,7 @@ const partialParse = arr => {
                             input.style.background = col.color;
                             createInput(input,col,idCount,true)
                             // listenValue(input)
+        
                             spot.append(input)
                             clickInput(input)
                             shaveUl(spot)

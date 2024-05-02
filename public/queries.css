@@ -45,7 +45,8 @@
  .pal-btn:hover{
   transform:scale(.9);
   transition:.25s;
-  background:rgb(85, 85, 96);
+  border:none;
+  /* background:rgb(85, 85, 96); */
  }
  .blk-bg{
   background:#333;
