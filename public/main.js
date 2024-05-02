@@ -484,7 +484,7 @@ pal_container.onscroll = (e) => {
         else{
             // // console.log('up')
             // // console.log(scroll_arr)
-            removeTiles(hashPal,pal_container.children)
+            // removeTiles(hashPal,pal_container.children)
             control-=.1
         }
     
