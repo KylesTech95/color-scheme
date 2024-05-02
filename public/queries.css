@@ -24,8 +24,36 @@
  #choice-container{
    gap:0;
  }
+ #color-pal-container{
+  align-items: end;
+  justify-content: end;
+  margin-right:3.25rem;
+ }
  .color-pal-list-container{
   gap:8px;
+ }
+ .pal-btn{
+  display:block;
+  transition:.75s;
+  padding:1rem;
+  z-index:999;
+  cursor:pointer;
+  border-radius:12px;
+  color:ghostwhite;
+  position:absolute;
+ }
+ .pal-btn:hover{
+  transform:scale(.9);
+  transition:.25s;
+  background:rgb(85, 85, 96);
+ }
+ .blk-bg{
+  background:#333;
+  transition:.25s;
+ }
+ .red-bg{
+  background:red;
+  transition:.25s;
  }
 
 

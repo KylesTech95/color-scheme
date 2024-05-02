@@ -29,14 +29,15 @@ let scroll_dir;
 let btnPal = document.querySelector('.option-2')
 let allBtns = document.querySelectorAll('.pal-btn')
 
-const configButtonsOnPal = (container,btns) => {
+const configButtonsOnPal = (palCon,container,btns) => {
+    let margin = 25;
     btns.forEach((btn,inc) => {
         // console.log(btn)
-        btn.style.top = `${25+(400/(btns.length)*inc)}px`
-        btn.style.left = container.getBoundingClientRect().x
+        btn.style.top = `${margin+((400/(btns.length)*inc))}px`
+        btn.style.left = window.innerWidth < 650 ? container.getBoundingClientRect().x : (container.getBoundingClientRect().x+25)+"px"
     })
 }
-configButtonsOnPal(palID,allBtns)
+configButtonsOnPal(pal_container,palID,allBtns)
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -341,17 +342,7 @@ const bringTilesBack =  (container) => {
         control+=.01
     }
 }
-function removeTiles(container,tiles){
-let tileArr =[...tiles]
-let limit = container.getBoundingClientRect().y+container.clientHeight;
-    newHR.style=`position:absolute;border:3px solid red; width:100%;`
-    container.append(newHR)
-    return [...tiles].reduce((prev,curr,index)=>{
-        if(curr.getBoundingClientRect().y < newHR.getBoundingClientRect().y+100 && curr.getBoundingClientRect().y > newHR.getBoundingClientRect().y){ 
-            hideTiles(curr) 
-        }
-    })
-}
+
 let testi = []
 let split_range = []
 
@@ -482,20 +473,13 @@ pal_container.onscroll = (e) => {
             return null;
         }
         else{
-            // // console.log('up')
-            // // console.log(scroll_arr)
-            // removeTiles(hashPal,pal_container.children)
             control-=.1
         }
     
     }
     // if top scroll is less than array's 2nd-to-last index, GO DOWN
     if(downward()){
-        // // console.log('down')
-        // // console.log(scroll_arr)
         if(((top) >= height*(control))){
-            // console.log("CHECKPOINT: "+top)
-            // console.log("HEIGHT: "+height)
             if(window.innerWidth >= 1000){parse()}
             bringTilesBack(pal_container)
         }
@@ -626,11 +610,15 @@ if(window.innerWidth < 1000){
         allBtns.forEach((bb,i)=>{
             if(bb!==target){
                 allContainers[i].classList.add('no-item')
-                allContainers[i].classList.remove('flex-item')                
+                allContainers[i].classList.remove('flex-item')  
+                bb.classList.remove('red-bg')
+                bb.classList.add('blk-bg')
             }
             else{
                 allContainers[i].classList.remove('no-item')
                 allContainers[i].classList.add('flex-item')
+                bb.classList.remove('blk-bg')
+                bb.classList.add('red-bg')
             }
         })
      }
