@@ -612,10 +612,11 @@ background:blue;
 background:yellow;    
 } */
 
-
-.pal-btn{
-    display:none;
+#pal-btn-container{
+display:none;
+z-index:999;
 }
+
 
 .flex-item{
     display:flex;
