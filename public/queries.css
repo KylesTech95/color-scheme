@@ -72,7 +72,7 @@
  }   
  #result-container,
  .choice-spot{
-  transform:translate(0,-50px)
+  transform:translate(0,-100px)
  }
 .choice-spot{
   margin-bottom:-2rem;
@@ -189,6 +189,10 @@ margin-right:3.25rem;
 .color-pal-list-container{
 gap:8px;
 }
+#result-container,
+ .choice-spot{
+  transform:translate(0,-25px)
+ }
 .pal-btn{
 display:flex;
 flex-direction: column;
