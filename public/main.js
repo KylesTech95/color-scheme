@@ -28,7 +28,8 @@ let scroll_arr=[]
 let scroll_dir;
 let btnPal = document.querySelector('.option-2')
 let allBtns = document.querySelectorAll('.pal-btn')
-
+const mainTitle = document.getElementById('title-main')
+mainTitle.style.left = document.body.clientWidth/2+"px"
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -249,7 +250,6 @@ function parse(){
         li.classList.add('.color-pal-list-item')
         li.setAttribute('style',`
                 background:${col.color};
-                opacity:.9;
                 height:25px;
                 width:25px;
                 border:.5px solid #fff;
@@ -371,7 +371,7 @@ const partialParse = arr => {
                     li.classList.add('.color-pal-list-item')
                     li.setAttribute('style',`
                             background:${col.color};
-                            opacity:.9;
+        
                             height:50px;
                             width:50px;
                             border:.5px solid #fff;

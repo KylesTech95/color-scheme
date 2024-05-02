@@ -34,6 +34,9 @@
       justify-content: center;
       
     }
+    #title-main{
+      transform:translate(0,-35px)
+    }
     .res-item>div{
       display:none;
      }
@@ -117,10 +120,22 @@
   background:red;
   transition:.25s;
  }
-
-
+ .nav-btn-top{
+  right:-15px;
+  top:-50px
 }
+ #nav-container{
+  top:-75px;
+  right:-25px;
+ }
+}
+
+
+
 @media screen and (max-width:1000px) and (max-height:450px){
+  #title-main{
+    transform:translate(0,-20px)
+  }
 .choice-spot{
   width:75%;
   transition:.5s;
@@ -225,12 +240,12 @@ transition:.25s;
   margin-top:2rem;
   transition:.25s;
   position:fixed;
-  right:-40px;
+  right:-65px;
   top:-10px;
 }
 #nav-container{
   top:-50px;
-  right:-50px;
+  right:-75px;
 }
 
 }
