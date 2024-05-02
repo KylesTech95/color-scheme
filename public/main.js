@@ -15,6 +15,7 @@ const ch_container = document.getElementById('choice-container')
 const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const pal_container = document.querySelector('.color-pal-list-container')
+let allContainers = document.querySelectorAll('.color-pal-list-container')
 const palID = document.getElementById('color-pal-container')
 const hashPal = document.getElementById('color-pal')
 let copy = document.querySelector('.copy-icon')
@@ -26,7 +27,16 @@ let destination = palID.clientHeight-115
 let scroll_arr=[]
 let scroll_dir;
 let btnPal = document.querySelector('.option-2')
-let allContainers = document.querySelectorAll('.color-pal-list-container')
+let allBtns = document.querySelectorAll('.pal-btn')
+
+const configButtonsOnPal = (container,btns) => {
+    btns.forEach((btn,inc) => {
+        // console.log(btn)
+        btn.style.top = `${25+(400/(btns.length)*inc)}px`
+        btn.style.left = container.getBoundingClientRect().x
+    })
+}
+configButtonsOnPal(palID,allBtns)
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -611,33 +621,22 @@ if(window.innerWidth < 1000){
      percentage = .125;
      deviceTypeControl = .175
      let c = 0;
-     function pressBtnPal(){
-         c++
-         let arr = document.querySelectorAll('.color-pal-list-container')
-         for(let l = 0; l < allContainers.length; l++){
-            if(c%4!==l){
-             allContainers[l].classList.add('no-item')
-             allContainers[l].classList.remove('flex-item')
-         }
-         else{
-             allContainers[l].classList.remove('no-item')
-             allContainers[l].classList.add('flex-item')
-         }
-         }
-        //  if(c%2!=0){
-        //      arr[0].classList.add('no-item')
-        //      arr[1].classList.add('flex-item')
-        //      arr[0].classList.remove('flex-item')
-        //      arr[1].classList.remove('no-item')
-        //  }
-        //  else{
-        //      arr[0].classList.remove('no-item')
-        //      arr[1].classList.remove('flex-item')
-        //      arr[0].classList.add('flex-item')
-        //      arr[1].classList.add('no-item')
-        //  }
+     function pressBtnPal(event){
+        let target = event.target
+        allBtns.forEach((bb,i)=>{
+            if(bb!==target){
+                allContainers[i].classList.add('no-item')
+                allContainers[i].classList.remove('flex-item')                
+            }
+            else{
+                allContainers[i].classList.remove('no-item')
+                allContainers[i].classList.add('flex-item')
+            }
+        })
      }
-     btnPal.addEventListener('click',pressBtnPal)
+     allBtns.forEach(btn=>{
+        btn.addEventListener('click',pressBtnPal)
+     })
 }
 else{
     btnPal.classList.add('no-item')

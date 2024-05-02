@@ -564,6 +564,7 @@ form#form{
     /* bordeR:4px solid yellow; */
     display:flex;
     flex-direction: column;
+    position:relative;
     justify-content: end;
     align-items: center;
     /* border:8px solid rgb(0,51,238); */
@@ -590,7 +591,7 @@ form#form{
     scrollbar-width:none;
     height:100%;
     width:100%;
-    /* border:3px solid violet; */
+    border:3px solid violet;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
@@ -598,6 +599,19 @@ form#form{
     gap:8px;
     position:relative;
 }
+.color-pal-list-container:nth-child(1){
+background:red;    
+}
+.color-pal-list-container:nth-child(2){
+background:green;
+}
+.color-pal-list-container:nth-child(3){
+background:blue;    
+}
+.color-pal-list-container:nth-child(4){
+background:yellow;    
+}
+
 
 .pal-btn{
     padding:1rem;
@@ -606,7 +620,9 @@ form#form{
     cursor:pointer;
     border-radius:12px;
     color:ghostwhite;
+    position:absolute;
 }
+
 .flex-item{
     display:flex;
 }
