@@ -53,6 +53,7 @@
       border-radius:12px;
       color:ghostwhite;
      }
+
  .play-icon{
     transform:scale(4)
  }   
@@ -162,6 +163,9 @@ width:200px;
 .choice-spot{
   width:300px;
 }
+#wrapper{
+  transform:scale(.9);
+}
 #color-pal-container{
 align-items: end;
 justify-content: end;
@@ -193,6 +197,24 @@ transition:.25s;
 background:red;
 transition:.25s;
 }
-
+.nav-btn-top{
+  z-index:999;
+  height:50px;
+  width:50px;
+  border-radius: 18px;
+  background:#000;
+  margin-top:2rem;
+  transition:.25s;
+  position:fixed;
+  right:-40px;
+  top:-10px;
+}
+#nav-container{
+  top:-50px;
+  right:-50px;
+}
+.full{
+  height:300px;
+}
 
 }
