@@ -375,7 +375,7 @@ const partialParse = arr => {
             if(j==index){
                 let array = []
                 let data = testi[j];
-                console.log(data)
+                // console.log(data)
                 data.forEach((col,index) => {
                     const li = document.createElement('li')
                     li.classList.add('.color-pal-list-item')

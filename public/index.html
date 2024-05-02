@@ -124,7 +124,7 @@
     </section> -->
     </div>
 </body>
-<!-- <script type="module">
+<script type="module">
     import {onCLS, onFID, onLCP, onFCP} from 'https://unpkg.com/web-vitals@3?module'
     import {postFn} from './components/post.js'
     const vitality = {}
@@ -134,37 +134,30 @@
     let ress = `${name} - Difference from last: ${delta}`
     console.log(ress)
 }
-
     onFID(e=>{
-    
-        console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
+    console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
         })
     onCLS(e=>{
     console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
     })
     onFCP(e=>{
-    
     console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
     })
     onLCP(e=>{
-    
     console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
     })
-    // let events = ['ontouchstart','click','load','dragstart','resize','dragend','drag','scroll']
-    // for(let i = 0; i < events.length; i++){
-    //     window.addEventListener(events[i], ()=>{
-    //     //  onCLS(console.log)
-    //     //  onCLS(logDelta)         
-    //     //  onFID(console.log)
-    //     //  onFID(logDelta)         
-    //     //  onFCP(console.log)
-    //     //  onFCP(logDelta)         
-    //     //  onLCP(console.log)
-    //     //  onLCP(logDelta)
-    //     })
+    let events = ['click','resize','scroll','change','load','loadstart','loadend','progress','error']
 
-    // }
-
-</script> -->
+    events.forEach(event => {
+        window.addEventListener(event,()=>{
+            onFID(logDelta)
+            onCLS(logDelta)
+            onFCP(logDelta)
+            onLCP(logDelta)
+        })
+    })
+    
+    
+</script>
 <script type="module" src="main.js"></script>
 </html>
