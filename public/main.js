@@ -350,7 +350,18 @@ const partialParse = arr => {
     // console.log(containers);
     // console.log('you are parsing data!')
     const data = JSON.parse(xml.responseText)
-    const myData = (data.colors)
+    let myData = (data.colors)
+    myData = myData.sort((a,b)=>{
+        let aColor = a.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
+        let bColor = b.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
+        if(aColor[0]==bColor[0]&&aColor[1]==bColor[1]){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    })
+    // console.log(myData)
     
     let quotient = myData.length/4
     for(let i = 0; i < myData.length; i+=quotient){
