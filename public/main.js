@@ -390,8 +390,8 @@ const partialParse = arr => {
                     li.setAttribute('style',`
                             background:${col.color};
                             opacity:.9;
-                            height:25px;
-                            width:25px;
+                            height:50px;
+                            width:50px;
                             border:.5px solid #fff;
                             transition:.25s;
                             z-index:999;

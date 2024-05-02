@@ -599,7 +599,7 @@ form#form{
     gap:8px;
     position:relative;
 }
-.color-pal-list-container:nth-child(1){
+/* .color-pal-list-container:nth-child(1){
 background:red;    
 }
 .color-pal-list-container:nth-child(2){
@@ -610,7 +610,7 @@ background:blue;
 }
 .color-pal-list-container:nth-child(4){
 background:yellow;    
-}
+} */
 
 
 .pal-btn{

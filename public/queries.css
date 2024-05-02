@@ -24,6 +24,9 @@
  #choice-container{
    gap:0;
  }
+ .color-pal-list-container{
+  gap:8px;
+ }
 
 
 }
