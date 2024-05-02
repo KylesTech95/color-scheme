@@ -4,6 +4,9 @@
     transition:.5s;
     top:-3.25rem;
     }
+    #wrapper{
+      transform:scale(.9);
+    }
     #pal-btn-container{
       position:fixed;
       top:10px;
@@ -53,12 +56,23 @@
       border-radius:12px;
       color:ghostwhite;
      }
-
+.nav-list-container{
+  justify-content: center;
+  align-items: center;
+  margin-top:2rem;
+}
+.full{
+  height:300px;
+}
+.nav-link{
+  padding:1rem 0;
+}
  .play-icon{
     transform:scale(4)
  }   
- #result-container{
-  margin-top:2rem;
+ #result-container,
+ .choice-spot{
+  transform:translate(0,-50px)
  }
 .choice-spot{
   margin-bottom:-2rem;
@@ -75,7 +89,8 @@
    position:fixed;
    top:10px;
    right: 5px;
-   height:200px;
+   min-height:200px;
+   max-height:330px;
    width:200px;
  }
  #scroll-container{
@@ -212,9 +227,6 @@ transition:.25s;
 #nav-container{
   top:-50px;
   right:-50px;
-}
-.full{
-  height:300px;
 }
 
 }
