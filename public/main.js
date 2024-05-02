@@ -30,12 +30,12 @@ let btnPal = document.querySelector('.option-2')
 let allBtns = document.querySelectorAll('.pal-btn')
 
 const configButtonsOnPal = (palCon,container,btns) => {
-    let halfHeight = window.innerHeight;
+    let halfHeight = window.innerHeight/2;
     let margin = 25
     btns.forEach((btn,inc) => {
         // console.log(btn)
         btn.style.top = `${halfHeight-(((400)/(btns.length)*inc))}px`
-        btn.style.left = window.innerWidth < 650 ? container.getBoundingClientRect().x+(margin/3)+"px" : (container.getBoundingClientRect().x+margin)+"px"
+        btn.style.left = window.innerWidth < 650 ? container.getBoundingClientRect().x+"px" : (container.getBoundingClientRect().x+margin)+"px"
     })
 }
 configButtonsOnPal(pal_container,palID,allBtns)

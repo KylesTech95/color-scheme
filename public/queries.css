@@ -12,11 +12,13 @@
   width:200px;
  }
  .section-scroll-btn{
-    /* left:2.5%; */
     display:none;
  }
  #color-pal{
    resize:none;
+   position:fixed;
+   top:0;
+   right: 0;
  }
  #scroll-container{
    display:none;
