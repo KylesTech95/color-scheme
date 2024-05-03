@@ -8,33 +8,32 @@ import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
 import {postFn,postfetch} from './components/post.js'
 
-let newHR = document.createElement('hr')
+const newHR = document.createElement('hr')
 const wrapper = document.getElementById('wrapper')
 const spot = document.querySelector('.choice-spot')
-let section_scroll_btn = document.querySelectorAll('.section-scroll-btn')
 const ch_container = document.getElementById('choice-container')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const pal_container = document.querySelector('.color-pal-list-container')
-let allContainers = document.querySelectorAll('.color-pal-list-container')
+const allContainers = document.querySelectorAll('.color-pal-list-container')
 const palID = document.getElementById('color-pal-container')
 const hashPal = document.getElementById('color-pal')
-let copy = document.querySelector('.copy-icon')
+const copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
 const fingers = document.querySelectorAll('.hover-span')
+const btnPal = document.querySelector('.option-2')
+const allBtns = document.querySelectorAll('.pal-btn')
+const mainTitle = document.getElementById('title-main')
+
 let idCount = 0;
 let destination = palID.clientHeight-115
 let scroll_arr=[]
 let arr_of_arrs = []
-let scroll_dir;
-let btnPal = document.querySelector('.option-2')
-let allBtns = document.querySelectorAll('.pal-btn')
-const mainTitle = document.getElementById('title-main')
-mainTitle.style.left = document.body.clientWidth/2+"px"
 let noClick = false;
+let scroll_dir;
 
 
-
+mainTitle.style.left = document.body.clientWidth/2+"px"
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
   }

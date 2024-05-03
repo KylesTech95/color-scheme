@@ -2,7 +2,7 @@
     .choice-spot{
     width:75%;
     transition:.5s;
-    top:-3.25rem;
+    top:-5.25rem;
     }
     #wrapper{
       transform:scale(.9);
@@ -75,7 +75,7 @@
  }   
  #result-container,
  .choice-spot{
-  transform:translate(0,-100px)
+  transform:translate(0,-150px)
  }
 .choice-spot{
   margin-bottom:-2rem;
@@ -139,7 +139,7 @@
 .choice-spot{
   width:75%;
   transition:.5s;
-  top:-3.25rem;
+  top:-5.5rem;
   }
 .play-icon{
   transform:scale(4)
