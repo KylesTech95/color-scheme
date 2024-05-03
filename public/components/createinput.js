@@ -2,7 +2,7 @@
 export default function createInput(input,data,id,bool){
     if(!bool){
         // console.log(data)
-        input.style.background = data.current_color;
+        // input.style.background = data.current_color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
         input.setAttribute('top',window.innerHeight/2)
@@ -16,7 +16,7 @@ export default function createInput(input,data,id,bool){
     }
     else{
         // console.log(data)
-        input.style.background = data.color;
+        // input.style.background = data.color;
         input.classList.add('color-input')
         input.setAttribute('type','text')
         // input.setAttribute('disabled','true')

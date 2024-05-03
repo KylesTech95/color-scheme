@@ -250,6 +250,7 @@ function parse(){
         li.classList.add('.color-pal-list-item')
         li.setAttribute('style',`
                 background:${col.color};
+                --webkit-background:${col.color};
                 height:25px;
                 width:25px;
                 border:.5px solid #fff;
@@ -371,7 +372,7 @@ const partialParse = arr => {
                     li.classList.add('.color-pal-list-item')
                     li.setAttribute('style',`
                             background:${col.color};
-        
+                            --webkit-background:${col.color};
                             height:50px;
                             width:50px;
                             border:.5px solid #fff;
