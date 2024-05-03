@@ -183,7 +183,7 @@ const clickScrolls = () => {
     })
 
 }
-clickScrolls()
+
 
 //____________________________
 // post fetch Fn
@@ -624,6 +624,7 @@ if(window.innerWidth < 1000){
 }
 else{
     btnPal.classList.add('no-item')
+    clickScrolls()
 }
 // spot-container: add event listener (click) to show "coppied!" consistently
 spot.addEventListener('mouseover',e=>{
