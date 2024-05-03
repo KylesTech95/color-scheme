@@ -138,7 +138,7 @@
     overflow-y:scroll;
   }
   #title-main{
-    transform:translate(0,225px);
+    transform:translate(0,300px);
     font-size:26px;
   }
 .choice-spot{
@@ -213,7 +213,7 @@ gap:8px;
 }
 #result-container,
  .choice-spot{
-  transform:translate(0,175px)
+  transform:translate(0,115px)
  }
  .outter-shell{
   max-width:75px;
