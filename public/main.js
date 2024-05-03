@@ -11,8 +11,8 @@ import {postFn,postfetch} from './components/post.js'
 let newHR = document.createElement('hr')
 const wrapper = document.getElementById('wrapper')
 const spot = document.querySelector('.choice-spot')
+let section_scroll_btn = document.querySelectorAll('.section-scroll-btn')
 const ch_container = document.getElementById('choice-container')
-const insert_btn = document.getElementById('insert-color')
 const scrolls = document.querySelectorAll('#scroll-container>.scroll')
 const pal_container = document.querySelector('.color-pal-list-container')
 let allContainers = document.querySelectorAll('.color-pal-list-container')
@@ -25,11 +25,15 @@ const fingers = document.querySelectorAll('.hover-span')
 let idCount = 0;
 let destination = palID.clientHeight-115
 let scroll_arr=[]
+let arr_of_arrs = []
 let scroll_dir;
 let btnPal = document.querySelector('.option-2')
 let allBtns = document.querySelectorAll('.pal-btn')
 const mainTitle = document.getElementById('title-main')
 mainTitle.style.left = document.body.clientWidth/2+"px"
+let noClick = false;
+
+
 
 function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
@@ -184,57 +188,20 @@ const clickScrolls = () => {
 
 }
 
-
-//____________________________
-// post fetch Fn
-// const postfetch = async(api,d) => {
-//     const response = await fetch(api,
-//     {
-//       method:'POST',
-//       mode:"cors",
-//       cache:"no-cache",
-//       credentials: "same-origin", // include, *same-origin, omit
-//       headers: { "Content-Type": "application/json"},
-//       redirect: "follow", // manual, *follow, error
-//       referrerPolicy: "no-referrer",
-//       body:JSON.stringify(d),
-//     })
-//     // testing postFetch
-//     return response.json()
-// }
-// let r,g,b,colour;
-// let arr = []
-// for(let i=0; i < 1<<12; i++) {
-//     r = ((i>>8) & 0xf) * 0x11;
-//     g = ((i>>4) & 0xf) * 0x11;
-//     b = (i & 0xf) * 0x11;
-//     colour = "rgb("+r+","+g+","+b+")";
-// // //     // console.log(colour)
-//     arr.push(colour)
-    
-// }
-// // // console.log(arr)
-
-// insert_btn.style.left = `${document.body.clientWidth/2}px`
-// insert_btn.addEventListener('click', e => {
-//     postfetch('/colors-insert',{rgb:[...arr]}).then((data)=>{
-//         return data.color
-//     })
-// })
-let captureTrace = []
-
+// XML HTTP REQUEST
 const xml = new XMLHttpRequest;
-const meth = 'GET'
+const method = 'GET'
 const url = '/colors'
 let last_index = 0;
 let rang = []
 let current_index;
-xml.open(meth,url,true)
-xml.send()
 let percentage = .25
 let control = .5;
 let deviceTypeControl = .5
 
+// open xml & send
+xml.open(method,url,true)
+xml.send()
 // parse xml data
 function parse(){
     // console.log('you are parsing data!')
@@ -319,10 +286,6 @@ function parse(){
     }
     rang = []
 }
-const hideTiles = elem => {
-    elem.classList.add('no-pointer')
-    elem.style.opacity=0;  
-}
 const restoreTile = elem => {
     elem.classList.remove('no-pointer')
     elem.style.opacity=1;
@@ -335,13 +298,9 @@ const bringTilesBack =  (container) => {
     }
 }
 
-let testi = []
-let split_range = []
 
 const partialParse = arr => {
     let containers = [...arr];
-    // console.log(containers);
-    // console.log('you are parsing data!')
     const data = JSON.parse(xml.responseText)
     let myData = (data.colors)
     myData = myData.sort((a,b)=>{
@@ -358,14 +317,14 @@ const partialParse = arr => {
     
     let quotient = myData.length/4
     for(let i = 0; i < myData.length; i+=quotient){
-        testi.push(myData.slice(i,i+quotient))
+        arr_of_arrs.push(myData.slice(i,i+quotient))
     }
 
     containers.forEach((container,index) => {
-        for(let j = 0; j < testi.length; j++){
+        for(let j = 0; j < arr_of_arrs.length; j++){
             if(j==index){
                 let array = []
-                let data = testi[j];
+                let data = arr_of_arrs[j];
                 // console.log(data)
                 data.forEach((col,index) => {
                     const li = document.createElement('li')
@@ -478,7 +437,6 @@ pal_container.onscroll = (e) => {
     }
 }
 
-
 //___________________________
 // spot-container event listeners 
 if(!detectMob()){
@@ -487,12 +445,12 @@ if(!detectMob()){
         copy.classList.remove('copy-current')
         copy.classList.add('copy-hover')
     })
+    spot.addEventListener('mouseout',e=>{
+        // // console.log(copy)
+        copy.classList.add('copy-current')
+        copy.classList.remove('copy-hover')
+    })
 }
-spot.addEventListener('mouseout',e=>{
-    // // console.log(copy)
-    copy.classList.add('copy-current')
-    copy.classList.remove('copy-hover')
-})
 //___________________________________________
 //API - combine numbers (sum)
 //sum api
@@ -530,7 +488,6 @@ spot.addEventListener('mouseout',e=>{
 // }
 
 // scroll event listener
-let noClick = false;
 window.addEventListener('scroll',e=>{
 // compare current scroll and previous scroll
     noClick = true;
