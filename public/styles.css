@@ -243,7 +243,7 @@ body{
     opacity:.75;    
 }
 .base:hover{
-animation:pulse .75s infinite alternate ease;
+/* animation:pulse .75s infinite alternate ease; */
 cursor:pointer;
 }
 #title-main{
@@ -255,7 +255,7 @@ cursor:pointer;
     width:100%;
     
   }
-@keyframes pulse {
+/* @keyframes pulse {
     from{
         opacity:.5;
         height:75px;
@@ -267,7 +267,7 @@ cursor:pointer;
         width:100px;
         background:rgba(196, 222, 108, 0.657);
     }
-}
+} */
 .copy-icon{
     position:absolute;
     right:20px;
