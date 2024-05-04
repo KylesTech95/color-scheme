@@ -4,11 +4,11 @@ const dir_pre = `http//localhost:`
 const port = !process.env.PORT ? 3000 : process.env.PORT
 let quarter
 module.exports = function(app,pool,sequelize,router){
+    // functions
     const rgb2Hex = (n) => {
         const hex = n.toString(16)
         return hex.length < 1 ?  `0${hex}`:hex
     }
-    // function that converts number to hex with 3 arguments (r,g,b)
     const rgbToHex = (r, g, b) => {
         // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
         return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
@@ -34,19 +34,32 @@ module.exports = function(app,pool,sequelize,router){
         let tmp = []
         if(typeof(query.search)!=='string'){
         query.search.forEach((s,i)=>{
-                tmp.push(s)
+         tmp.push(s.replace(/\s/g,''))
             })
+        return d.filter(col=>{
+            return tmp.includes(col.color) 
+        })||[]
         }
         else{
-            query.search
+            query.search.replace(/\s/g,'')
+            return d.filter(col=>{
+                return col.color==query.search
+            })||[]
         }
     }
 
+// lookup a valid color via rgb/hex
     app.route("/colors/lookup").get(async(req,res)=>{
-       let availableColors = await colorsAvailable(req.query)
-       console.log(availableColors)
-        return !validateColor(req.query) ? res.json({message:'What are you searching for?'}) : Object.values(req.query).length > 1 ? res.json({colors:Object.values(req.query).map(x=>x.search.replace(/\s/g,''))}) : res.json({color:req.query.search.replace(/\s/g,'')})
+       if(validateColor(req.query)){
+        let availableColors = await colorsAvailable(req.query)
+        res.json({colors:availableColors.map(x=>x.color)})
+       }
+       else{
+        res.json({message:'color not validated'})
+       }
+        // return !validateColor(req.query) ? res.json({message:'What are you searching for?'}) : Object.values(req.query).length > 1 ? res.json({colors:Object.values(req.query).map(x=>x.search.replace(/\s/g,''))}) : res.json({color:req.query.search.replace(/\s/g,'')})
     })
+// lookup all colors
     app.route('/colors').get(async(req,res)=>{
         //http://localhost:7671/colors/
         let colors;
@@ -55,11 +68,10 @@ module.exports = function(app,pool,sequelize,router){
             return c
         })})
     })
-
+// about message
     app.route('/about').get((req,res)=>{
         res.json({message:'about-page'})
     })
-
 // get a color from id param
     app.route('/colors/:id').get(async(req,res)=>{
         const { id } = req.params
