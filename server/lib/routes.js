@@ -2,7 +2,10 @@ require('dotenv').config()
 const SumFn = require('./addition.js')
 const dir_pre = `http//localhost:`
 const port = !process.env.PORT ? 3000 : process.env.PORT
+var path = require('path');
+
 let quarter
+
 module.exports = function(app,pool,sequelize,router){
     // functions
     const rgb2Hex = (n) => {
@@ -50,15 +53,19 @@ module.exports = function(app,pool,sequelize,router){
 
 // lookup a valid color via rgb/hex
     app.route("/colors/lookup").get(async(req,res)=>{
-       if(validateColor(req.query)){
-        let availableColors = await colorsAvailable(req.query)
-        res.json({colors:availableColors.map(x=>x.color)})
+       try{
+        if(validateColor(req.query)){
+            let availableColors = await colorsAvailable(req.query)
+            res.json({colors:availableColors.map(x=>x.color)})
+           }
+           else{
+            res.json({message:'color not validated'})
+           }
        }
-       else{
-        res.json({message:'color not validated'})
+       catch(err){
+        console.log(err)
        }
-        // return !validateColor(req.query) ? res.json({message:'What are you searching for?'}) : Object.values(req.query).length > 1 ? res.json({colors:Object.values(req.query).map(x=>x.search.replace(/\s/g,''))}) : res.json({color:req.query.search.replace(/\s/g,'')})
-    })
+})
 // lookup all colors
     app.route('/colors').get(async(req,res)=>{
         //http://localhost:7671/colors/

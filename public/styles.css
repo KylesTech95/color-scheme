@@ -122,7 +122,14 @@ position:relative;
     position:absolute;
     right:0;
 }
-
+#lookup-submit{
+    z-index:999;
+    background:red;
+    cursor:pointer;
+}
+input#search{
+    z-index:999;
+}
 #insert-color:hover{
     transition:.25s;
     cursor:pointer;
