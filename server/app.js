@@ -8,8 +8,8 @@ const app = express();
 const router = express.Router()
 
 const PORT = !process.env.PORT ? 3000 : process.env.PORT
-const routes = require('./../lib/routes.js')
-const middleware = require('./../lib/middleware.js')
+const routes = require('./lib/routes.js')
+const middleware = require('./lib/middleware.js')
 
 middleware(app,express,cors,bodyParser)
 routes(app,pool,sequelize,router)

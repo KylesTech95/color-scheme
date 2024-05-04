@@ -4,36 +4,49 @@ const dir_pre = `http//localhost:`
 const port = !process.env.PORT ? 3000 : process.env.PORT
 let quarter
 module.exports = function(app,pool,sequelize,router){
-const validateColor = (color) => {
-    for(let i in color){
-        if( !/^search$/.test(i) ){ 
-            return false;
-        } 
-        if(/^([A-Fa-f0-9]{6}|[a-fA-F0-9]{3})$/.test(color[i]) || 
-            /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(color[i])){
-            return true
-        }
-        else{
-            return false;
+    const rgb2Hex = (n) => {
+        const hex = n.toString(16)
+        return hex.length < 1 ?  `0${hex}`:hex
+    }
+    // function that converts number to hex with 3 arguments (r,g,b)
+    const rgbToHex = (r, g, b) => {
+        // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
+        return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
+    }
+    const validateColor = (color) => {
+        for(let i in color){
+            if( !/^search$/.test(i) ){ 
+                return false;
+            } 
+            if(/^([A-Fa-f0-9]{6}|[a-fA-F0-9]{3})$/.test(color[i]) || 
+                /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(color[i])){
+                return true
+            }
+            else{
+                return false;
+            }
         }
     }
-}
+    const colorsAvailable = async(query) => {
+        let colors = await fetch(`http://localhost:${process.env.PORT}/colors`)
+        let r = await colors.json()
+        let d = r.colors;
+        let tmp = []
+        if(typeof(query.search)!=='string'){
+        query.search.forEach((s,i)=>{
+                tmp.push(s)
+            })
+        }
+        else{
+            query.search
+        }
+    }
 
     app.route("/colors/lookup").get(async(req,res)=>{
+       let availableColors = await colorsAvailable(req.query)
+       console.log(availableColors)
         return !validateColor(req.query) ? res.json({message:'What are you searching for?'}) : Object.values(req.query).length > 1 ? res.json({colors:Object.values(req.query).map(x=>x.search.replace(/\s/g,''))}) : res.json({color:req.query.search.replace(/\s/g,'')})
-        //res.json({message:'What are you searching for?'})
-
     })
-    // app.route("/colors-fetch").get(async(req,res)=>{
-    //     let colors = '/colors'
-    //     let col_api=(`http://localhost:7671`+colors)
-    //     // console.log(col_api)
-    //     let getColors = await fetch(col_api)
-    //     let r = await getColors.json();
-    //     let data = r.colors;
-    //     console.log(data)
-    // })
-    // all colors
     app.route('/colors').get(async(req,res)=>{
         //http://localhost:7671/colors/
         let colors;
@@ -49,15 +62,6 @@ const validateColor = (color) => {
 
 // get a color from id param
     app.route('/colors/:id').get(async(req,res)=>{
-        const rgb2Hex = (n) => {
-            const hex = n.toString(16)
-            return hex.length < 1 ?  `0${hex}`:hex
-        }
-        // function that converts number to hex with 3 arguments (r,g,b)
-        const rgbToHex = (r, g, b) => {
-            // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
-            return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
-        }
         const { id } = req.params
         try{
             // console.log(id)
