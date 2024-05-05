@@ -16,6 +16,16 @@ function setCursorPosition(inputElem, position) {
       inputElem.setSelectionRange(position, position);
     }
 }
+const handleKeydown = e => {
+    if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgb\(\)]/ig.test(e.key)){
+        e.preventDefault()
+    }
+    else{
+        console.log(e.key)
+    }
+}
+input.addEventListener('keydown',handleKeydown)
+
 setCursorPosition(input,4)
 
 // fetch lookup colors api
@@ -54,6 +64,7 @@ const addInput = e => {
         setCursorPosition(e.target,4)
     }   
     inputs.forEach(inp=>inp.addEventListener('click',inputHandle))
+    inputs.forEach(inp=>inp.addEventListener('keydown',handleKeydown))
 
 }
 
