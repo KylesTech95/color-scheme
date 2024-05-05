@@ -5,6 +5,7 @@ const input = document.getElementById('search')
 const input_container = document.querySelector('.input-div')
 const append_container = document.querySelector('.append-div')
 const inputs = document.querySelectorAll('.search-input')
+const inv_container = document.querySelector('.color-inv-list-container')
 let val;
 let prefix = 'http://'
 let host = window.location.host;
@@ -16,6 +17,7 @@ function setCursorPosition(inputElem, position) {
       inputElem.setSelectionRange(position, position);
     }
 }
+setCursorPosition(input,4)
 const handleKeydown = e => {
     if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgb\(\)]/ig.test(e.key)){
         e.preventDefault()
@@ -24,9 +26,11 @@ const handleKeydown = e => {
         console.log(e.key)
     }
 }
+const handleClick = e => {
+    setCursorPosition(e.target,4)
+}
+input.addEventListener('click',handleClick)
 input.addEventListener('keydown',handleKeydown)
-
-setCursorPosition(input,4)
 
 // fetch lookup colors api
 // fetch('/colors/lookup')
@@ -37,7 +41,26 @@ subBtn.onclick = e => {
     e.preventDefault();
     const inputs = document.querySelectorAll('.search-input')
     query =[...inputs].map(x=>x.value).join`&search=`
-    fetch(api+query).then(res=>res.json()).then(d=>console.log(d))
+    fetch(api+query).then(res=>res.json()).then(d=>{
+        let data = d.colors;
+        for(let i = 0; i < data.length; i++){
+            const li = document.createElement('div')
+            li.classList.add('inventory-div')
+            if(inv_container.children.length > 0){
+                return [...inv_container.children].forEach(con=>{
+                    if(con.background!==data[i]){
+                        li.style.background = `${data[i]}`
+                        inv_container.appendChild(li) 
+                    }
+                })
+            }
+            else{
+                li.style.background = `${data[i]}`
+                inv_container.appendChild(li) 
+            }
+        }
+    })
+    // console.log('heyy')
 
 }
 const addInput = e => {
