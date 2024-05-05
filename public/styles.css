@@ -124,9 +124,16 @@ position:relative;
 }
 #lookup-submit{
     z-index:999;
-    background:red;
     cursor:pointer;
 }
+#lookup-color{
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .append-div{
     display:flex;
     flex-direction: column;
@@ -136,8 +143,8 @@ position:relative;
 .input-div{
     display:flex;
     gap:1rem;
-    border:3px solid red;
-
+    height:50px;
+    width:100%;
 }
 
 .add{
@@ -152,6 +159,17 @@ position:relative;
     transition:.75s;
     cursor:pointer;
     z-index:999;
+    /* display:none; */
+    opacity:0;
+    animation:showAdd .75s ease-in forwards;
+}
+@keyframes showAdd{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 .add:hover{
     transform:scale(.9);
@@ -160,6 +178,7 @@ position:relative;
 input#search{
     z-index:999;
 }
+
 #insert-color:hover{
     transition:.25s;
     cursor:pointer;
