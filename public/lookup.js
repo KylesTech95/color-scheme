@@ -4,6 +4,7 @@ const addBtn = document.querySelectorAll('.add')
 const input = document.getElementById('search')
 const input_container = document.querySelector('.input-div')
 const append_container = document.querySelector('.append-div')
+const inputs = document.querySelectorAll('.search-input')
 let val;
 let prefix = 'http://'
 let host = window.location.host;
@@ -15,7 +16,7 @@ function setCursorPosition(inputElem, position) {
       inputElem.setSelectionRange(position, position);
     }
 }
-setCursorPosition(input, 4 )
+setCursorPosition(input,4)
 
 // fetch lookup colors api
 // fetch('/colors/lookup')
@@ -43,13 +44,19 @@ const addInput = e => {
     newDiv.appendChild(n_input)
     newDiv.appendChild(newAdd)
     append_container.appendChild(newDiv)
+    const inputs = document.querySelectorAll('.search-input')
     newAdd.addEventListener('click',addInput)
     let parent = e.target.parentElement
     parent.removeChild(e.target)
     parent.style = 'width:100%;'
     setCursorPosition(n_input, 4 )
-    
+    const inputHandle = e =>{
+        setCursorPosition(e.target,4)
+    }   
+    inputs.forEach(inp=>inp.addEventListener('click',inputHandle))
 
 }
+
+
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
-console.log(addBtn)
+
