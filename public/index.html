@@ -140,7 +140,12 @@
     <section id="lookup-color">
         <form action="/colors/lookup" method="GET" id="form">
             <label for="search">Search</label>
-            <input type="text" name="search" id="search">
+            <div class="append-div">
+                <div class="input-div">
+                    <input type="text" name="search" id="search" class="search-input">
+                    <span id="add-btn" class="add add-input">+</span>
+                </div>
+            </div>
             <button type="submit" id="lookup-submit">Submit</button>
         </form>
     </section>

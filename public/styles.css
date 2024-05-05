@@ -127,6 +127,36 @@ position:relative;
     background:red;
     cursor:pointer;
 }
+.append-div{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.input-div{
+    display:flex;
+    gap:1rem;
+    border:3px solid red;
+
+}
+
+.add{
+    border:4px solid #333;
+    border-radius:12px;
+    height:50px;
+    width:50px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    transition:.75s;
+    cursor:pointer;
+    z-index:999;
+}
+.add:hover{
+    transform:scale(.9);
+    transition:.25s;
+}
 input#search{
     z-index:999;
 }
