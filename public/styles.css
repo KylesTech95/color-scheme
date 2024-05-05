@@ -560,6 +560,7 @@ position:relative;
 }
 .inventory-div{
     height:5%;
+    border:2px solid red;
 }
 form#form{
     display:flex;

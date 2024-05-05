@@ -18,12 +18,13 @@ function setCursorPosition(inputElem, position) {
     }
 }
 setCursorPosition(input,4)
+let index = 0;
 const handleKeydown = e => {
     if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgb\(\)]/ig.test(e.key)){
         e.preventDefault()
     }
     else{
-        console.log(e.key)
+        // console.log('passing key')
     }
 }
 const handleClick = e => {
@@ -43,25 +44,26 @@ subBtn.onclick = e => {
     query =[...inputs].map(x=>x.value).join`&search=`
     fetch(api+query).then(res=>res.json()).then(d=>{
         let data = d.colors;
+        let arr = []
+        // iterate through the data(rest api)
         for(let i = 0; i < data.length; i++){
             const li = document.createElement('div')
             li.classList.add('inventory-div')
-            if(inv_container.children.length > 0){
-                return [...inv_container.children].forEach(con=>{
-                    if(con.background!==data[i]){
-                        li.style.background = `${data[i]}`
-                        inv_container.appendChild(li) 
-                    }
-                })
-            }
-            else{
-                li.style.background = `${data[i]}`
-                inv_container.appendChild(li) 
-            }
+            li.style.background = data[i]
+            arr.push(li)
+            
         }
-    })
+        arr.filter((a,i)=>{
+            let sty = a.style.background;
+            console.log(sty)
+        })
+        arr.forEach(el=>{
+            console.log(el)
+            inv_container.appendChild(el)
+        })
     // console.log('heyy')
 
+})
 }
 const addInput = e => {
     const newDiv = document.createElement('div')
@@ -90,7 +92,6 @@ const addInput = e => {
     inputs.forEach(inp=>inp.addEventListener('keydown',handleKeydown))
 
 }
-
 
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
 
