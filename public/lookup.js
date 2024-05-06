@@ -52,9 +52,30 @@ subBtn.onclick = e => {
             li.style.background = data[i]
             arr.push(li)
         }
-            arr.forEach(el=>{
-                inv_container.appendChild(el)
-            })
+        let colorDivs = document.querySelectorAll('.inventory-div')
+
+            if(colorDivs.length > 0){
+                
+                console.log([...colorDivs])
+                colorDivs.forEach(d=>{
+                    arr.forEach(item=>{
+                        if(item.style.background === d.style.background){
+                            inv_container.removeChild(d)
+                        }
+                    })
+                })
+
+                arr.forEach(el=>{
+                    inv_container.appendChild(el)
+                })
+            }
+            else{
+                console.log('div did not exist until now')
+                arr.forEach(el=>{
+                    inv_container.appendChild(el)
+                })
+            }
+            
 })
 }
 const addInput = e => {
