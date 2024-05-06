@@ -1,3 +1,5 @@
+import { copyColor } from "./components/copymachine.js"
+
 // form vars
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
@@ -47,7 +49,9 @@ subBtn.onclick = e => {
         let arr = []
         // iterate through the data(rest api)
         for(let i = 0; i < data.length; i++){
-            const li = document.createElement('div')
+            const li = document.createElement('input')
+            
+            li.value=data[i]
             li.classList.add('inventory-div')
             li.style.background = data[i]
             arr.push(li)
@@ -75,6 +79,13 @@ subBtn.onclick = e => {
                     inv_container.appendChild(el)
                 })
             }
+            const updatedDivs = document.querySelectorAll('.inventory-div')
+                updatedDivs.forEach(d=>{
+                    d.addEventListener('click',e=>{
+                        console.log(e.target)
+                        copyColor(e.target)
+                    })
+                })
             
 })
 }
