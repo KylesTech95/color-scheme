@@ -51,18 +51,10 @@ subBtn.onclick = e => {
             li.classList.add('inventory-div')
             li.style.background = data[i]
             arr.push(li)
-            
         }
-        arr.filter((a,i)=>{
-            let sty = a.style.background;
-            console.log(sty)
-        })
-        arr.forEach(el=>{
-            console.log(el)
-            inv_container.appendChild(el)
-        })
-    // console.log('heyy')
-
+            arr.forEach(el=>{
+                inv_container.appendChild(el)
+            })
 })
 }
 const addInput = e => {
