@@ -1,5 +1,8 @@
 import { copyColor } from "./components/copymachine.js"
-
+let a = [1,2,3]
+console.log(a)
+a.shift()
+console.log(a)
 // form vars
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
@@ -22,7 +25,7 @@ function setCursorPosition(inputElem, position) {
 setCursorPosition(input,4)
 let index = 0;
 const handleKeydown = e => {
-    if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgb\(\)]/ig.test(e.key)){
+    if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgbva\(\)]/ig.test(e.key)){
         e.preventDefault()
     }
     else{
@@ -79,16 +82,29 @@ subBtn.onclick = e => {
                     inv_container.appendChild(el)
                 })
             }
+        
+            // copy the input within the inventory by click
             const updatedDivs = document.querySelectorAll('.inventory-div')
+            const container = document.querySelector('.color-inv-list-container')
+
                 updatedDivs.forEach(d=>{
                     d.addEventListener('click',e=>{
                         console.log(e.target)
                         copyColor(e.target)
                     })
                 })
+                if(updatedDivs.length > 4){
+                    let first = 0;
+                    container.removeChild(updatedDivs[first])
+                    
+                }
+            
+
             
 })
 }
+
+// add new input
 const addInput = e => {
     const newDiv = document.createElement('div')
     const n_input = document.createElement('input')
@@ -116,6 +132,5 @@ const addInput = e => {
     inputs.forEach(inp=>inp.addEventListener('keydown',handleKeydown))
 
 }
-
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
 

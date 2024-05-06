@@ -177,9 +177,10 @@ position:relative;
     transition:.25s;
 }
 input#search{
-    z-index:999;
+    z-index:999;    
+}
+.search-input{
     text-align: center;
-    
 }
 
 #insert-color:hover{
@@ -588,7 +589,7 @@ form#form{
     }
     .color-inv-list-container{
         border:2px solid yellow;
-        height:100%;
+        /* height:100%; */
         width:inherit;
         display:flex;
         flex-direction: column;

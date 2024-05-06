@@ -209,7 +209,7 @@ width:200px;
 #lookup-color{
   position:absolute;
   bottom:0px;
-  height:0vh
+  height:100%;
 }
 /* #wrapper{
   transform:scale(.9);
