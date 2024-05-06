@@ -50,7 +50,7 @@ subBtn.onclick = e => {
         // iterate through the data(rest api)
         for(let i = 0; i < data.length; i++){
             const li = document.createElement('input')
-            
+            li.spellcheck=false;
             li.value=data[i]
             li.classList.add('inventory-div')
             li.style.background = data[i]
