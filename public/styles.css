@@ -559,9 +559,9 @@ position:relative;
     font-size:20px;
 }
 .inventory-div{
-    height:100%;
+    height:50px;
     width:100%;
-    border:2px solid red;
+    border:4px solid #333;
     color:transparent;
     caret-color:transparent;
     outline: none;
@@ -572,13 +572,11 @@ form#form{
     flex-direction: column;
     justify-content:center;
     width:100%;
-    border:3px solid red;
 }
 
 #color-inventory{
     width:100%;
     height:75vh;
-    border:2px solid red;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -616,10 +614,10 @@ form#form{
     font-size:18px;
 }
 .color-inventory-list-container{
-    height:100px;
+    /* height:100px;
     width:400px;
     max-height:100px;
-    max-width:400px;
+    max-width:400px; */
     /* border:3px solid yellow; */
     display:flex;
     justify-content: start;

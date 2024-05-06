@@ -60,10 +60,16 @@
       border-radius:12px;
       color:ghostwhite;
      }
+     
 .nav-list-container{
   justify-content: center;
   align-items: center;
   margin-top:2rem;
+}
+#lookup-color{
+  position:absolute;
+  bottom:0px;
+  height:40vh
 }
 .full{
   height:300px;
@@ -200,6 +206,11 @@ width:200px;
 .choice-spot{
   width:300px;
 }
+#lookup-color{
+  position:absolute;
+  bottom:0px;
+  height:0vh
+}
 /* #wrapper{
   transform:scale(.9);
 } */
@@ -215,6 +226,7 @@ gap:8px;
  .choice-spot{
   transform:translate(0,115px)
  }
+
  .outter-shell{
   max-width:75px;
   min-width:75px;
@@ -244,6 +256,9 @@ transition:.25s;
 .red-bg{
 background:red;
 transition:.25s;
+}
+.color-inv-list-container{
+  flex-direction: row;
 }
 .nav-btn-top{
   z-index:999;
