@@ -89,7 +89,7 @@ subBtn.onclick = e => {
                         copyColor(e.target)
                     })
                 })
-                if(updatedDivs.length > 4){
+                if(updatedDivs.length > 3){
                     let first = 0;
                     container.removeChild(updatedDivs[first])
                     
@@ -100,11 +100,34 @@ subBtn.onclick = e => {
 })
 }
 
+const subtractInput = e => {
+    const newAdd = document.createElement('span')
+    newAdd.classList.add('add')
+    newAdd.classList.add('add-input')
+    newAdd.textContent='+'
+    
+    const subtract = document.createElement('div')
+    subtract.classList.add('subtract')
+    subtract.textContent='-'
+    // e.target.parentElement.removeChild(e.target.previousSibling)
+    // e.target.parentElement.removeChild(e.target)
+    const inputs = document.querySelectorAll('.search-input')
+    for(let i in inputs){
+        if(inputs[i]==inputs[inputs.length-1]){
+            e.target.parentElement.removeChild(inputs[i])
+            e.target.parentElement.removeChild(e.target.previousSibling)
+            e.target.parentElement.removeChild(e.target)
+        }
+    }
+}
 // add new input
 const addInput = e => {
     const newDiv = document.createElement('div')
     const n_input = document.createElement('input')
     const newAdd = document.createElement('span')
+    const subtract = document.createElement('div')
+    subtract.classList.add('subtract')
+    subtract.textContent='-'
     n_input.setAttribute('type','text')
     n_input.setAttribute('value','rgb()')
     n_input.classList.add('search-input')
@@ -113,12 +136,19 @@ const addInput = e => {
     newAdd.classList.add('add-input')
     newAdd.textContent='+'
     newDiv.appendChild(n_input)
-    newDiv.appendChild(newAdd)
-    append_container.appendChild(newDiv)
     const inputs = document.querySelectorAll('.search-input')
-    newAdd.addEventListener('click',addInput)
+    newDiv.appendChild(newAdd)
+    newDiv.appendChild(subtract)
     let parent = e.target.parentElement
+    parent.removeChild(e.target.nextSibling)
     parent.removeChild(e.target)
+
+    append_container.appendChild(newDiv)
+    // const inputs = document.querySelectorAll('.search-input')
+    newAdd.addEventListener('click',addInput)
+    subtract.addEventListener('click',subtractInput)
+    
+    console.log(parent)
     parent.style = 'width:100%;'
     setCursorPosition(n_input, 4 )
     const inputHandle = e =>{

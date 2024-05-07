@@ -1,6 +1,7 @@
+
 @media screen and (max-width:1000px){
   body{
-    overflow:hidden;
+    /* overflow:hidden; */
   }
     .choice-spot{
     width:75%;
@@ -9,7 +10,7 @@
     }
     
     #pal-btn-container{
-      position:fixed;
+      position:absolute;
       top:10px;
       left:5px;
       display:Flex;
@@ -36,7 +37,7 @@
       
     }
     #title-main{
-      transform:translate(0,405px)
+      transform:translate(0,5px)
     }
     .res-item>div{
       display:none;
@@ -69,7 +70,8 @@
 #lookup-color{
   position:absolute;
   bottom:0px;
-  height:40vh
+  height:20vh;
+  flex-direction: column;
 }
 .full{
   height:300px;
@@ -82,7 +84,7 @@
  }   
  #result-container,
  .choice-spot{
-  transform:translate(0,-125px)
+  transform:translate(0,-230px)
  }
 .choice-spot{
   margin-bottom:-2rem;
@@ -96,9 +98,9 @@
  }
  #color-pal{
    resize:none;
-   position:fixed;
-   top:10px;
-   right: 5px;
+   position:absolute;
+   top:0px;
+   right: -20px;
    min-height:200px;
    max-height:330px;
    width:200px;
@@ -138,21 +140,21 @@
 }
 
 
-
+/*landscape for phone*/
 @media screen and (max-width:1000px) and (max-height:450px){
-  body{
-    overflow-y:scroll;
-  }
-  #title-main{
-    transform:translate(0,30  0px);
-    font-size:26px;
-  }
+body{
+  overflow-y:scroll;
+}
+#title-main{
+  transform:translate(0,30  0px);
+  font-size:26px;
+}
 .choice-spot{
-  width:75%;
-  transition:.5s;
-  top:-5.5rem;
+width:75%;
+transition:.5s;
+top:-5.5rem;
 
-  }
+}
 .play-icon{
   transform:scale(4)
 }   
@@ -209,8 +211,13 @@ width:200px;
 #lookup-color{
   position:absolute;
   bottom:0px;
-  height:100%;
+  right:0;
+  transform:translate(0,200px);
+  flex-direction: row;
+  border:2px solid red;
+
 }
+
 /* #wrapper{
   transform:scale(.9);
 } */
@@ -224,7 +231,7 @@ gap:8px;
 }
 #result-container,
  .choice-spot{
-  transform:translate(0,115px)
+  transform:translate(0,25px)
  }
 
  .outter-shell{
