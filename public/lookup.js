@@ -1,8 +1,4 @@
 import { copyColor } from "./components/copymachine.js"
-let a = [1,2,3]
-console.log(a)
-a.shift()
-console.log(a)
 // form vars
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
