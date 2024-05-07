@@ -7,9 +7,7 @@ console.log(a)
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
 const input = document.getElementById('search')
-const input_container = document.querySelector('.input-div')
 const append_container = document.querySelector('.append-div')
-const inputs = document.querySelectorAll('.search-input')
 const inv_container = document.querySelector('.color-inv-list-container')
 let val;
 let prefix = 'http://'
@@ -62,8 +60,10 @@ subBtn.onclick = e => {
         let colorDivs = document.querySelectorAll('.inventory-div')
 
             if(colorDivs.length > 0){
-                
-                console.log([...colorDivs])
+                const updatedInvContainer = document.querySelector('.color-inv-list-container')
+                arr.forEach(el=>{
+                    updatedInvContainer.appendChild(el)
+                })
                 colorDivs.forEach(d=>{
                     arr.forEach(item=>{
                         if(item.style.background === d.style.background){
@@ -72,9 +72,9 @@ subBtn.onclick = e => {
                     })
                 })
 
-                arr.forEach(el=>{
-                    inv_container.appendChild(el)
-                })
+                // arr.forEach(el=>{
+                //     updatedInvContainer.appendChild(el)
+                // })
             }
             else{
                 console.log('div did not exist until now')
