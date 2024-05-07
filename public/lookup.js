@@ -5,9 +5,6 @@ const addBtn = document.querySelectorAll('.add')
 const input = document.getElementById('search')
 const append_container = document.querySelector('.append-div')
 const inv_container = document.querySelector('.color-inv-list-container')
-let val;
-let prefix = 'http://'
-let host = window.location.host;
 let api = '/colors/lookup/?search='
 let query = []
 function setCursorPosition(inputElem, position) {
@@ -17,7 +14,6 @@ function setCursorPosition(inputElem, position) {
     }
 }
 setCursorPosition(input,4)
-let index = 0;
 const handleKeydown = e => {
     if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgbva\(\)]/ig.test(e.key)){
         e.preventDefault()
@@ -112,12 +108,20 @@ const subtractInput = e => {
     // e.target.parentElement.removeChild(e.target.previousSibling)
     // e.target.parentElement.removeChild(e.target)
     const inputs = document.querySelectorAll('.search-input')
-    for(let i in inputs){
-        if(inputs[i]==inputs[inputs.length-1]){
-            e.target.parentElement.removeChild(inputs[i])
+    let dfk = [inputs.length-1]
+    for(let i=0;i<inputs.length;i++){
+
+        if(inputs[i] == inputs[dfk]){
+            e.target.parentElement.removeChild(inputs[dfk])
             e.target.parentElement.removeChild(e.target.previousSibling)
-            e.target.parentElement.removeChild(e.target)
+            e.target.parentElement.removeChild(e.target);
+            inputs[dfk-1].parentElement.appendChild(newAdd)
+            inputs[dfk-1].parentElement.appendChild(subtract)
+            newAdd.addEventListener('click',addInput)
+            subtract.addEventListener('click',subtractInput)
         }
+
+
     }
 }
 // add new input
