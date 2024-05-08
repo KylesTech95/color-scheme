@@ -96,6 +96,7 @@ subBtn.onclick = e => {
 })
 }
 
+let dfk
 const subtractInput = e => {
     const newAdd = document.createElement('span')
     newAdd.classList.add('add')
@@ -108,17 +109,24 @@ const subtractInput = e => {
     // e.target.parentElement.removeChild(e.target.previousSibling)
     // e.target.parentElement.removeChild(e.target)
     const inputs = document.querySelectorAll('.search-input')
-    let dfk = [inputs.length-1]
+    const appendDiv = document.querySelector('.append-div')
+     dfk = [inputs.length-1]
     for(let i=0;i<inputs.length;i++){
-
-        if(inputs[i] == inputs[dfk]){
+        if(inputs[i] == inputs[dfk] && i > 0){
+            appendDiv.removeChild(inputs[dfk].parentElement)
             e.target.parentElement.removeChild(inputs[dfk])
             e.target.parentElement.removeChild(e.target.previousSibling)
             e.target.parentElement.removeChild(e.target);
-            inputs[dfk-1].parentElement.appendChild(newAdd)
-            inputs[dfk-1].parentElement.appendChild(subtract)
+            if((dfk-1) > 0){
+                inputs[dfk-1].parentElement.appendChild(newAdd)
+                inputs[dfk-1].parentElement.appendChild(subtract)
+                subtract.addEventListener('click',subtractInput)
+            }
+            else{
+                inputs[dfk-1].parentElement.appendChild(newAdd)
+            }
             newAdd.addEventListener('click',addInput)
-            subtract.addEventListener('click',subtractInput)
+            
         }
 
 
@@ -144,7 +152,8 @@ const addInput = e => {
     newDiv.appendChild(newAdd)
     newDiv.appendChild(subtract)
     let parent = e.target.parentElement
-    parent.removeChild(e.target.nextSibling)
+    let grandparent = parent.parentElement
+    if(grandparent.children.length > 1) parent.removeChild(e.target.nextSibling)
     parent.removeChild(e.target)
 
     append_container.appendChild(newDiv)
@@ -164,9 +173,10 @@ const addInput = e => {
 }
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
 
-window.addEventListener("keydown", function(e) {
-    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1){
-        e.preventDefault()
-        }
+
+window.addEventListener("keydown", function(e) {    
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1){
+            e.preventDefault()
+        }  
 }, 
 false);

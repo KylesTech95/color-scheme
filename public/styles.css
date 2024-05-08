@@ -199,6 +199,8 @@ input#search{
 }
 .search-input{
     text-align: center;
+    border-radius:12px;
+    font-size:16px;
 }
 
 #insert-color:hover{
