@@ -15,7 +15,7 @@ function setCursorPosition(inputElem, position) {
 }
 setCursorPosition(input,4)
 const handleKeydown = e => {
-    if(!/[0-9]|ArrowLeft|ArrowRight|\,|Backspace|Alt|Control|[rgbva\(\)]/ig.test(e.key)){
+    if(!/[0-9]|\,|Backspace|Alt|Control|[rgbva\(\)]/ig.test(e.key)){
         e.preventDefault()
     }
     else{
@@ -164,3 +164,9 @@ const addInput = e => {
 }
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
 
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1){
+        e.preventDefault()
+        }
+}, 
+false);

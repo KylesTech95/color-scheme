@@ -144,7 +144,7 @@ position:relative;
 #lookup-color{
     height:100vh;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap:1rem;
@@ -217,6 +217,7 @@ input#search{
 
 body{
     overflow-y:scroll;
+    overflow-x:hidden;
     scroll-behavior: smooth;
     width:100%;
     height:100vh;
@@ -608,7 +609,7 @@ form#form{
     .color-inv-list-container{
         /* border:2px solid yellow; */
         /* height:100%; */
-        width:inherit;
+        width:50%;
         display:flex;
         flex-direction: column;
         align-items: center;
