@@ -147,7 +147,7 @@ position:relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:1rem;
+    gap:2px;
 }
 
 .append-div{
@@ -155,6 +155,7 @@ position:relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap:.25rem;
 }
 .input-div{
     display:flex;
@@ -167,8 +168,8 @@ position:relative;
 .subtract{
     border:4px solid #333;
     border-radius:12px;
-    height:50px;
-    width:50px;
+    height:40px;
+    width:40px;
     display:flex;
     border-radius:50%;
     flex-direction: column;
@@ -180,6 +181,7 @@ position:relative;
     /* display:none; */
     opacity:0;
     animation:showAdd .75s ease-in forwards;
+    font-size:30px;
 }
 @keyframes showAdd{
     from{
@@ -193,6 +195,12 @@ position:relative;
 .subtract:hover{
     transform:scale(.9);
     transition:.25s;
+}
+.subtract:hover{
+    background:red;
+}
+.add:hover{
+    background:green;
 }
 input#search{
     z-index:999;    

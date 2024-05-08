@@ -115,7 +115,7 @@ const subtractInput = e => {
         if(inputs[i] == inputs[dfk] && i > 0){
             appendDiv.removeChild(inputs[dfk].parentElement)
             e.target.parentElement.removeChild(inputs[dfk])
-            e.target.parentElement.removeChild(e.target.previousSibling)
+            if(i < 2)e.target.parentElement.removeChild(e.target.previousSibling)
             e.target.parentElement.removeChild(e.target);
             if((dfk-1) > 0){
                 inputs[dfk-1].parentElement.appendChild(newAdd)
@@ -157,11 +157,12 @@ const addInput = e => {
     parent.removeChild(e.target)
 
     append_container.appendChild(newDiv)
+    if(inputs.length==3) newDiv.removeChild(newDiv.children[1])
+
     // const inputs = document.querySelectorAll('.search-input')
     newAdd.addEventListener('click',addInput)
     subtract.addEventListener('click',subtractInput)
     
-    console.log(parent)
     parent.style = 'width:100%;'
     setCursorPosition(n_input, 4 )
     const inputHandle = e =>{
