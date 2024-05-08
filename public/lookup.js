@@ -157,7 +157,7 @@ const addInput = e => {
     parent.removeChild(e.target)
 
     append_container.appendChild(newDiv)
-    if(inputs.length==3) newDiv.removeChild(newDiv.children[1])
+    if(inputs.length==2) newDiv.removeChild(newDiv.children[1])
 
     // const inputs = document.querySelectorAll('.search-input')
     newAdd.addEventListener('click',addInput)
