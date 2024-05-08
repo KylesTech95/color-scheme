@@ -1,8 +1,11 @@
+@media screen and (max-width:400px)and (max-height:900px){
+  #lookup-color{
+    width:100%;
+    background:rgba(224, 224, 185, 0.935)
+  }
+}
 
 @media screen and (max-width:1000px){
-  body{
-    /* overflow:hidden; */
-  }
     .choice-spot{
     width:75%;
     transition:.5s;
@@ -210,11 +213,9 @@ width:200px;
 }
 #lookup-color{
   position:absolute;
-  bottom:0px;
-  right:0;
-  transform:translate(0,200px);
+  bottom:-200px;
+  right:225px;
   flex-direction: row;
-  border:2px solid red;
 
 }
 
@@ -233,7 +234,9 @@ gap:8px;
  .choice-spot{
   transform:translate(0,25px)
  }
-
+.inventory-div{
+  width:50px;
+}
  .outter-shell{
   max-width:75px;
   min-width:75px;

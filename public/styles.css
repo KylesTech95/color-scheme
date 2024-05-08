@@ -124,7 +124,22 @@ position:relative;
 }
 #lookup-submit{
     z-index:999;
+    font-size:18px;
+    margin-top:.5rem;
+    border-radius:12px;
+    background:#333;
+    border: 4px solid ghostwhite;
+    color:ghostwhite;
+    padding:.5rem 1rem;
     cursor:pointer;
+    cursor:pointer;
+    transition:.75s;
+}
+#lookup-submit:hover{
+    background:ghostwhite;;
+    border: 4px solid #333;
+    color:#333;
+    transition:.25s;
 }
 #lookup-color{
     height:100vh;
@@ -143,7 +158,7 @@ position:relative;
 }
 .input-div{
     display:flex;
-    gap:1rem;
+    gap:.25rem;
     height:50px;
     width:100%;
 }
@@ -155,6 +170,7 @@ position:relative;
     height:50px;
     width:50px;
     display:flex;
+    border-radius:50%;
     flex-direction: column;
     align-items:center;
     justify-content: center;
@@ -590,7 +606,7 @@ form#form{
     position:relative;
     }
     .color-inv-list-container{
-        border:2px solid yellow;
+        /* border:2px solid yellow; */
         /* height:100%; */
         width:inherit;
         display:flex;

@@ -127,16 +127,19 @@
         </form>
     </section> -->
     <section id="lookup-color">
-        <form action="/colors/lookup" method="GET" id="form">
-            <label for="search">Search</label>
-            <div class="append-div">
-                <div class="input-div">
-                    <input type="text" name="search" id="search" class="search-input" spellcheck=false value="rgb()">
-                    <span id="add-btn" class="add add-input">+</span>
+        <div class="container-div">
+            <form action="/colors/lookup" method="GET" id="form">
+                <label for="search">Search</label>
+                <div class="append-div">
+                    <div class="input-div">
+                        <input type="text" name="search" id="search" class="search-input" spellcheck=false value="rgb()">
+                        <span id="add-btn" class="add add-input">+</span>
+                    </div>
                 </div>
-            </div>
-            <button type="submit" id="lookup-submit">Submit</button>
-        </form>
+                <button type="submit" id="lookup-submit">Submit</button>
+            </form>
+        </div>
+        
 
         <div id="color-inventory">
             <ul class="color-inv-list-container">
