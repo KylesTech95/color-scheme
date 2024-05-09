@@ -84,6 +84,7 @@
   position:absolute;
   bottom:0px;
   height:20vh;
+  width:100%;
   flex-direction: column;
 }
 .full{
@@ -227,6 +228,7 @@ width:200px;
   bottom:-200px;
   right:225px;
   flex-direction: row;
+  width:50%;
 
 }
 
