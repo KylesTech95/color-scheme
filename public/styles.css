@@ -12,12 +12,13 @@ html{
 .no-pointer{
     pointer-events:none;
 }
+/* red middle line  */
 #mid-line{
     position:absolute;
     width:100%;
     bordeR:3px solid #f00;
 }
-
+/* left and right scroll buttons */
 .section-scroll-btn{
     position:fixed;
     left:10%;
@@ -30,6 +31,7 @@ html{
     padding:.5rem;
     z-index:999;
 }
+
 .section-scroll-btn:nth-child(1){
 top:50px;
 }

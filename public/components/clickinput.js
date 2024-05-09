@@ -7,4 +7,4 @@ import { copyColor } from "./copymachine.js"
         input.setAttribute('onkeydown',"return false;")
         copyColor(input)
     }
-}  
+}       
