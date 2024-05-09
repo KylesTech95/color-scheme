@@ -11,7 +11,9 @@
     transition:.5s;
     top:-5.25rem;
     }
-    
+    #color-inventory{
+      justify-content: center;
+    }
     #pal-btn-container{
       position:absolute;
       top:10px;
@@ -23,6 +25,10 @@
       z-index:999;
       gap:1rem;
 
+    }
+    .inventory-div{
+      width:50px;
+      color:transparent;
     }
     .outter-shell{
       /* border:2px solid purple; */
@@ -38,6 +44,10 @@
       align-items: center;
       justify-content: center;
       
+    }
+    .color-inv-list-container{
+      flex-direction: row;
+      justify-content: center;
     }
     #title-main{
       transform:translate(0,5px)
@@ -122,6 +132,7 @@
 
  .color-pal-list-container{
   gap:8px;
+  justify-content: center;
  }
 
  .blk-bg{
@@ -268,9 +279,7 @@ transition:.25s;
 background:red;
 transition:.25s;
 }
-.color-inv-list-container{
-  flex-direction: row;
-}
+
 .nav-btn-top{
   z-index:999;
   height:50px;
