@@ -1,10 +1,4 @@
 require('dotenv').config()
-const SumFn = require('./addition.js')
-const dir_pre = `http//localhost:`
-const port = !process.env.PORT ? 3000 : process.env.PORT
-var path = require('path');
-
-let quarter
 
 module.exports = function(app,pool,sequelize,router){
     // functions
