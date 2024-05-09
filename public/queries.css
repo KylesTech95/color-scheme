@@ -28,6 +28,9 @@
     transition:.5s;
     top:-5.25rem;
     }
+    .color-input{
+      font-size:20px;
+    }
     #color-inventory{
       justify-content: center;
     }
