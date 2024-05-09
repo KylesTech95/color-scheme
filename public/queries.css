@@ -82,8 +82,9 @@
 }
 #lookup-color{
   position:absolute;
-  bottom:0px;
+  /* bottom:0px; */
   height:20vh;
+  bottom:-100px;
   width:100%;
   flex-direction: column;
 }
