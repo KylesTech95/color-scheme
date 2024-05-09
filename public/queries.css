@@ -1,7 +1,22 @@
 @media screen and (max-width:400px)and (max-height:900px){
   #lookup-color{
     width:100%;
-    background:rgba(224, 224, 185, 0.935)
+    background:rgba(224, 224, 185, 0.935);
+    margin-bottom:-1.75rem;
+      position:absolute;
+      /* height:20vh; */
+      height:25%;
+      bottom:0px;
+      width:100%;
+      flex-direction: row;
+      gap: 2.5rem;
+  }
+  form#form{
+    transform:translate(0,30px)
+  }
+  .color-inv-list-container{
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -45,10 +60,7 @@
       justify-content: center;
       
     }
-    .color-inv-list-container{
-      flex-direction: row;
-      justify-content: center;
-    }
+    
     #title-main{
       transform:translate(0,5px)
     }
@@ -80,14 +92,7 @@
   align-items: center;
   margin-top:2rem;
 }
-#lookup-color{
-  margin-bottom:-3rem;
-  position:absolute;
-  height:20vh;
-  bottom:0px;
-  width:100%;
-  flex-direction: column;
-}
+
 .full{
   height:300px;
 }
