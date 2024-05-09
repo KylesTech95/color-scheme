@@ -11,6 +11,10 @@
       flex-direction: row;
       gap: 2.5rem;
   }
+  #result-container,
+ .choice-spot{
+  transform:translate(0,-200px)
+ }
   form#form{
     transform:translate(0,30px)
   }
@@ -102,10 +106,7 @@
  .play-icon{
     transform:scale(4)
  }   
- #result-container,
- .choice-spot{
-  transform:translate(0,-230px)
- }
+ 
 .choice-spot{
   margin-bottom:-2rem;
 }
