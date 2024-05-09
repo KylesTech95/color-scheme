@@ -86,6 +86,7 @@ subBtn.onclick = e => {
                         gen = (e.target)
                         copyColor(e.target)
                         e.target.style.color ="#"+333;
+                        e.target.disabled=true;
                         return [...updatedDivs].map((x,y)=>x!==gen ? x.style.color='transparent' : x.style.color='#333')
                     })
                 })
