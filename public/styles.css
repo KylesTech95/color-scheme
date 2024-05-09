@@ -152,7 +152,7 @@ position:relative;
     transition:.25s;
 }
 #lookup-color{
-    height:100vh;
+    height:50vh;
     display:flex;
     flex-direction: column;
     align-items: center;
