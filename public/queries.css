@@ -2,7 +2,7 @@
   #lookup-color{
     width:100%;
     background:rgba(224, 224, 185, 0.935);
-    margin-bottom:-1.75rem;
+      transform:translate(0,200px);
       position:absolute;
       /* height:20vh; */
       height:25%;
