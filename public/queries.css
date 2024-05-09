@@ -2,7 +2,7 @@
   #lookup-color{
     width:100%;
     background:rgba(224, 224, 185, 0.935);
-      transform:translate(0,200px);
+    margin-bottom:-1.75rem;
       position:absolute;
       /* height:20vh; */
       height:25%;
@@ -10,17 +10,15 @@
       width:100%;
       flex-direction: row;
       gap: 2.5rem;
+      transform:translate(0,100px);
   }
   #result-container,
  .choice-spot{
-  transform:translate(0,-200px)
+  transform:translate(0,-185px)
  }
+  
   form#form{
     transform:translate(0,30px)
-  }
-  .color-inv-list-container{
-    flex-direction: column;
-    justify-content: center;
   }
 }
 
@@ -64,7 +62,10 @@
       justify-content: center;
       
     }
-    
+    .color-inv-list-container{
+      flex-direction: row;
+      justify-content: center;
+    }
     #title-main{
       transform:translate(0,5px)
     }
@@ -106,7 +107,10 @@
  .play-icon{
     transform:scale(4)
  }   
- 
+ /* #result-container,
+ .choice-spot{
+  transform:translate(0,-230px)
+ } */
 .choice-spot{
   margin-bottom:-2rem;
 }
@@ -233,8 +237,10 @@ width:200px;
 #lookup-color{
   margin-bottom:0;
   position:absolute;
-  bottom:-200px;
+  bottom:-400px;
   right:225px;
+  background:none;
+  box-shadow:none;
   flex-direction: row;
   width:50%;
 
