@@ -1,5 +1,6 @@
 import { copyColor } from "./components/copymachine.js"
 // form vars
+
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
 const input = document.getElementById('search')
@@ -183,3 +184,13 @@ window.addEventListener("keydown", function(e) {
         }  
 }, 
 false);
+
+
+// adjust the window to scroll to the top onload
+// change inputs to blur() (not focus) onload
+const inputs = document.querySelectorAll('.search-input');
+window.onload = e =>{
+    inputs.forEach(inp=>inp.blur());
+    window.scrollTo(0,0)
+    
+}
