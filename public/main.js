@@ -571,6 +571,7 @@ if(window.innerWidth < 1000){
                 bb.classList.add('pal-btn-starting-hover')
                 bb.classList.add('red-bg')
                 bb.textContent = 'PRESSED'
+                window.navigator.vibrate(150) // After touch vibrate for 150ms
             }
         })
      }
