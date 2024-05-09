@@ -81,10 +81,10 @@
   margin-top:2rem;
 }
 #lookup-color{
+  margin-bottom:-3rem;
   position:absolute;
-  /* bottom:0px; */
   height:20vh;
-  bottom:-100px;
+  bottom:0px;
   width:100%;
   flex-direction: column;
 }
@@ -225,6 +225,7 @@ width:200px;
   width:300px;
 }
 #lookup-color{
+  margin-bottom:0;
   position:absolute;
   bottom:-200px;
   right:225px;
