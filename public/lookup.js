@@ -79,10 +79,13 @@ subBtn.onclick = e => {
             const updatedDivs = document.querySelectorAll('.inventory-div')
             const container = document.querySelector('.color-inv-list-container')
 
-                updatedDivs.forEach(d=>{
+                updatedDivs.forEach((d,index)=>{
+                    let gen;
                     d.addEventListener('click',e=>{
-                        console.log(e.target)
+                        gen = (e.target)
                         copyColor(e.target)
+                        e.target.style.color ="#"+333;
+                        return [...updatedDivs].map((x,y)=>x!==gen ? x.style.color='transparent' : x.style.color='#333')
                     })
                 })
                 if(updatedDivs.length > 3){
@@ -96,7 +99,6 @@ subBtn.onclick = e => {
 })
 }
 
-let dfk
 const subtractInput = e => {
     const newAdd = document.createElement('span')
     newAdd.classList.add('add')
@@ -110,7 +112,7 @@ const subtractInput = e => {
     // e.target.parentElement.removeChild(e.target)
     const inputs = document.querySelectorAll('.search-input')
     const appendDiv = document.querySelector('.append-div')
-     dfk = [inputs.length-1]
+    let dfk = [inputs.length-1]
     for(let i=0;i<inputs.length;i++){
         if(inputs[i] == inputs[dfk] && i > 0){
             appendDiv.removeChild(inputs[dfk].parentElement)
