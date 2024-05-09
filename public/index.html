@@ -12,13 +12,14 @@
     <title>Color Mix</title>
 </head>
 <body id="topper">
+    <!-- middle line tracker-->
     <hr id="mid-line"/>
     <!--color mix nav-->
     <div id="wrapper">
-        <!-- click on buttons to navigate to links on page-->
+        <!-- Title-->
             <h1 id="title-main" class="title-major title major-title major">The Color API</h1>
-
-
+ 
+            <!--insert colors into database -->
         <div id="insert-color"></div>
 
         <!--Navigation menu-->
@@ -43,6 +44,7 @@
                 </span>
             
         </div>
+        <!--arrow keys scroll / keyboard scroll-->
         <div id="scroll-container">
             <div class="scroll" id="btn-scroll-up">
                 <span class="material-symbols-outlined play-icon">
@@ -60,7 +62,7 @@
             </div>
         </div>
 
-        <!--results container matching the color code-->
+        <!--results container-->
         <div id="result-container">
             <div class="result-color res-item">
                 <div class="res-color">RGB:</div>
@@ -73,6 +75,7 @@
         </div>
 
     </section>
+    <!--pal-btn container (container of buttons to change color-scheme)-->
     <div id="pal-btn-container">
         <div class="outter-shell">
             <div class="pal-btn option-1 red-bg pal-btn-starting-hover">PRESSED</div>
@@ -107,25 +110,7 @@
         </div>
     </section>
 
-<!-- enctype="multipart/form-data" may not allow names to show up in body
-        when sending post requests from client to the server
-        -->
-    <!-- <section id="test-container">
-        
-        <form action="/post-sum-fn" id="form" method="POST" class="test-form" onsubmit="return false"> 
-            <div class="number-container">
-                <input type="number" name="a" class="num-input"/>
-                <input type="number" name="b" class="num-input"/>
-            </div>
-            <div class="result-container">
-                <h4 class="result-actual">0</h4>
-            </div>
-            <div class="btn-container">
-                <input type="submit" id="submit-btn"/>
-                <input type="reset" id="form" onclick="clearFn()">
-            </div>
-        </form>
-    </section> -->
+    <!--lookup the color with rgb-->
     <section id="lookup-color">
         <div class="container-div">
             <form action="/colors/lookup" method="GET" id="form">
@@ -140,7 +125,7 @@
             </form>
         </div>
         
-
+<!--inventory of colors-->
         <div id="color-inventory">
             <ul class="color-inv-list-container">
                 
