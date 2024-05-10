@@ -70,12 +70,6 @@ module.exports = function(app,pool,sequelize,router){
             return c
         })})
     })
-
-    //mp4
-    app.route('/read-video').get(async(req,res)=>{        
-        let file = fs.readFileSync(path.resolve('media/keyboard-vid.mp4'))
-        res.json({video:file})
-    })
 // about message
     app.route('/about').get((req,res)=>{
         res.sendFile(path.resolve('public/about.html'))
