@@ -43,6 +43,7 @@ module.exports = function(app,pool,sequelize,router){
         }
         else{
             query.search.replace(/\s/g,'')
+            console.log(query.search)
             return d.filter(col=>{
                 let rgb = col.color.match(/\d+/g)
                 let hex = rgbToHex(rgb[0],rgb[1],rgb[2]).slice(1,-1)
