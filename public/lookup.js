@@ -40,6 +40,7 @@ subBtn.onclick = e => {
     query =[...inputs].map(x=>x.value).join`&search=`
     fetch(api+query).then(res=>res.json()).then(d=>{
         let data = d.colors;
+        console.log(data)
         let arr = []
         // iterate through the data(rest api)
         for(let i = 0; i < data.length; i++){

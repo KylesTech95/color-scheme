@@ -34,14 +34,19 @@ module.exports = function(app,pool,sequelize,router){
         query.search.forEach((s,i)=>{
          tmp.push(s.replace(/\s/g,''))
             })
+            console.log(tmp)
         return d.filter(col=>{
-            return tmp.includes(col.color) 
+            let rgb = col.color.match(/\d+/g)
+            let hex = rgbToHex(rgb[0],rgb[1],rgb[2]).slice(1,-1)
+            return (tmp.includes(col.color)||tmp.includes(hex))
         })||[]
         }
         else{
             query.search.replace(/\s/g,'')
             return d.filter(col=>{
-                return col.color==query.search
+                let rgb = col.color.match(/\d+/g)
+                let hex = rgbToHex(rgb[0],rgb[1],rgb[2]).slice(1,-1)
+                return (col.color == query.search || hex == query.search)
             })||[]
         }
     }
