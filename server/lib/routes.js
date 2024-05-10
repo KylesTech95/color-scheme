@@ -1,5 +1,6 @@
 require('dotenv').config()
-
+let fs = require('fs')
+const path = require('path')
 module.exports = function(app,pool,sequelize,router){
     // functions
     const rgb2Hex = (n) => {
@@ -69,9 +70,22 @@ module.exports = function(app,pool,sequelize,router){
             return c
         })})
     })
+
+    //mp4
+    app.route('/read-video').get(async(req,res)=>{        
+        console.log(fs.readFileSync(path.resolve('media/keyboard-vid.mp4'),function(err,data){
+            if (!err) {
+                console.log("d: ",data);
+                res.send(data)
+            } else {
+               console.log(err);
+            }
+        }))
+        res.json({message:'nothing'})
+    })
 // about message
     app.route('/about').get((req,res)=>{
-        res.json({message:'about-page'})
+        res.sendFile(path.resolve('public/about.html'))
     })
 // get a color from id param
     app.route('/colors/:id').get(async(req,res)=>{
