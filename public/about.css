@@ -11,7 +11,7 @@ body{
     justify-content: center;
     background:ghostwhite;
     height:100%;
-    animation: changebg 10s ease-in-out forwards infinite alternate;
+    animation: changebg 10s forwards infinite alternate;
 }
 
 .keyboard-video{
@@ -20,8 +20,8 @@ body{
 }
 section#title-container{
 width:100%;
-height:100vh;
-border:2px solid purple;
+height:30vh;
+/* border:2px solid purple; */
 }
 #title-container-actual{
     width:inherit;
