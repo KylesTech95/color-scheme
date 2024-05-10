@@ -7,6 +7,11 @@ h2s.forEach((h2,iterate)=>{
     },250*(iterate+1))
 })
 
-fetch('/media/keyboard-vid.mp4').then(res=>res.json()).then(data=>{
-    console.log(data.message)
-})
+let xml = new XMLHttpRequest()
+xml.open('GET','/read-video',true)
+
+xml.onload = (d) => {
+console.log(d)
+}
+
+xml.send();
