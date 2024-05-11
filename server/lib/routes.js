@@ -16,7 +16,7 @@ module.exports = function(app,pool,sequelize,router){
             if( !/^search$/.test(i) ){ 
                 return false;
             } 
-            if(/^([A-Fa-f0-9]{6}|[a-fA-F0-9]{3})$/.test(color[i]) || 
+            if(/([a-fA-F0-9]{3,6})/.test(color[i]) || 
                 /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(color[i])){
                 return true
             }
@@ -34,20 +34,19 @@ module.exports = function(app,pool,sequelize,router){
         query.search.forEach((s,i)=>{
          tmp.push(s.replace(/\s/g,''))
             })
-            console.log(tmp)
+          tmp = tmp.map(x=>!/rgb/g.test(x) ? '#'+x : x)
         return d.filter(col=>{
             let rgb = col.color.match(/\d+/g)
-            let hex = rgbToHex(rgb[0],rgb[1],rgb[2]).slice(1,-1)
+            let hex = rgbToHex(rgb[0],rgb[1],rgb[2])
             return (tmp.includes(col.color)||tmp.includes(hex))
         })||[]
         }
         else{
             query.search.replace(/\s/g,'')
-            console.log(query.search)
             return d.filter(col=>{
                 let rgb = col.color.match(/\d+/g)
-                let hex = rgbToHex(rgb[0],rgb[1],rgb[2]).slice(1,-1)
-                return (col.color == query.search || hex == query.search)
+                let hex = rgbToHex(rgb[0],rgb[1],rgb[2])
+                return (col.color == query.search || new RegExp(`${query.search}`,'g').test(hex))
             })||[]
         }
     }
@@ -57,6 +56,7 @@ module.exports = function(app,pool,sequelize,router){
        try{
         if(validateColor(req.query)){
             let availableColors = await colorsAvailable(req.query)
+            console.log(availableColors)
             res.json({colors:availableColors.map(x=>x.color)})
            }
            else{
