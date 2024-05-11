@@ -11,7 +11,9 @@ module.exports = function(app,pool,sequelize,router){
         // // console.log(`#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`)
         return `#${rgb2Hex(+r)}${rgb2Hex(+g)}${rgb2Hex(+b)}`;
     }
+    // validate the color a rgb format or Hex format
     const validateColor = (color) => {
+        // iterate through colors
         for(let i in color){
             if( !/^search$/.test(i) ){ 
                 return false;
@@ -25,6 +27,7 @@ module.exports = function(app,pool,sequelize,router){
             }
         }
     }
+    // Compare colors in database to input
     const colorsAvailable = async(query) => {
         let colors = await fetch(`http://localhost:${process.env.PORT}/colors`)
         let r = await colors.json()
@@ -46,12 +49,12 @@ module.exports = function(app,pool,sequelize,router){
             return d.filter(col=>{
                 let rgb = col.color.match(/\d+/g)
                 let hex = rgbToHex(rgb[0],rgb[1],rgb[2])
-                return (col.color == query.search || new RegExp(`${query.search}`,'g').test(hex))
+                hex = hex.slice(1,hex.length)
+                return (col.color == query.search || (new RegExp(`${query.search}`,'g').test(hex) && hex == query.search))
             })||[]
         }
     }
-
-// lookup a valid color via rgb/hex
+    // lookup a valid color via rgb/hex
     app.route("/colors/lookup").get(async(req,res)=>{
        try{
         if(validateColor(req.query)){
@@ -66,8 +69,8 @@ module.exports = function(app,pool,sequelize,router){
        catch(err){
         console.log(err)
        }
-})
-// lookup all colors
+    })
+    // lookup all colors
     app.route('/colors').get(async(req,res)=>{
         //http://localhost:7671/colors/
         let colors;
@@ -76,11 +79,11 @@ module.exports = function(app,pool,sequelize,router){
             return c
         })})
     })
-// about message
+    // about message
     app.route('/about').get((req,res)=>{
         res.sendFile(path.resolve('public/about.html'))
     })
-// get a color from id param
+    // get a color from id param
     app.route('/colors/:id').get(async(req,res)=>{
         const { id } = req.params
         try{
@@ -100,12 +103,12 @@ module.exports = function(app,pool,sequelize,router){
             // console.log(err)
         }
     })
-// delete all colors
+    // delete all colors
     app.route('/colors/del').get(async(req,res)=>{
         await pool.query('truncate colors;alter sequence colors_id_seq restart with 1;')
         res.redirect("/")
     })
-// insert colors into db
+    // insert colors into db
 // app.route('/colors-insert').post(async(req,res)=>{
 //     let { rgb } = req.body
 //     rgb_rest = [...rgb].slice(2784);
