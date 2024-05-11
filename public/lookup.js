@@ -8,6 +8,18 @@ const append_container = document.querySelector('.append-div')
 const inv_container = document.querySelector('.color-inv-list-container')
 let api = '/colors/lookup/?search='
 let query = []
+let lastInput
+
+const oneInput = document.querySelector('.search-input')
+    // onchange event listener
+    oneInput.addEventListener('change',e=>{
+            if((/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
+            /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
+                lastInput = e.target.value
+                console.log(lastInput)
+            }
+        })
+    
 function setCursorPosition(inputElem, position) {
     if (inputElem.setSelectionRange) {
       inputElem.focus();
@@ -125,10 +137,13 @@ const subtractInput = e => {
     const appendDiv = document.querySelector('.append-div')
     let dfk = [inputs.length-1]
     for(let i=0;i<inputs.length;i++){
+        if(lastInput == inputs[i].value)console.log('matched!')
         if(inputs[i] == inputs[dfk] && i > 0){
             appendDiv.removeChild(inputs[dfk].parentElement)
             e.target.parentElement.removeChild(inputs[dfk])
-            if(i < 2)e.target.parentElement.removeChild(e.target.previousSibling)
+            if(i < 2){
+                e.target.parentElement.removeChild(e.target.previousSibling)
+            }
             e.target.parentElement.removeChild(e.target);
             if((dfk-1) > 0){
                 inputs[dfk-1].parentElement.appendChild(newAdd)
@@ -164,14 +179,31 @@ const addInput = e => {
     const inputs = document.querySelectorAll('.search-input')
     newDiv.appendChild(newAdd)
     newDiv.appendChild(subtract)
+
     let parent = e.target.parentElement
     let grandparent = parent.parentElement
     if(grandparent.children.length > 1) parent.removeChild(e.target.nextSibling)
     parent.removeChild(e.target)
 
     append_container.appendChild(newDiv)
-    if(inputs.length==2) newDiv.removeChild(newDiv.children[1])
 
+    const inputsUpdated = document.querySelectorAll('.search-input')
+    // onchange event listener
+    inputsUpdated.forEach((inp,index)=>{
+        console.log(inp)
+        inp.addEventListener('change',e=>{
+            console.log(e.target.value)
+            console.log(e.target.value.length)
+            if(index==inputsUpdated.length-1 && (/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
+            /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
+                lastInput = e.target.value
+                console.log(lastInput)
+            }
+        })
+    })
+
+
+    if(inputs.length==2) newDiv.removeChild(newDiv.children[1])
     // const inputs = document.querySelectorAll('.search-input')
     newAdd.addEventListener('click',addInput)
     subtract.addEventListener('click',subtractInput)
@@ -223,3 +255,17 @@ else{
 }
 const typeBtn = document.getElementById('lookup-type')
 typeBtn.addEventListener('click',handleTypeChange)
+
+// const inps = document.querySelectorAll('.search-input')
+// inps.forEach((inp,index)=>{
+//     console.log(inp)
+//     inp.addEventListener('change',e=>{
+//         console.log(e.target.value)
+//         console.log(e.target.value.length)
+//         if(index==inps.length-1 && (/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
+//         /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
+//             lastInput = e.target.value
+//             console.log(lastInput)
+//         }
+//     })
+// })
