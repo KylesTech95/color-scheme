@@ -59,7 +59,7 @@ module.exports = function(app,pool,sequelize,router){
        try{
         if(validateColor(req.query)){
             let availableColors = await colorsAvailable(req.query)
-            console.log(availableColors)
+            // console.log(availableColors)
             res.json({colors:availableColors.map(x=>x.color)})
            }
            else{
