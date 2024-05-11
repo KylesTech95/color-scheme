@@ -1,6 +1,6 @@
 import { copyColor } from "./components/copymachine.js"
 // form vars
-
+const typeBtn = document.getElementById('lookup-type')
 let subBtn = document.getElementById('lookup-submit')
 const addBtn = document.querySelectorAll('.add')
 const input = document.getElementById('search')
@@ -12,14 +12,33 @@ let lastInput
 
 const oneInput = document.querySelector('.search-input')
     // onchange event listener
-    oneInput.addEventListener('change',e=>{
-            if((/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
-            /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
-                lastInput = e.target.value
-                console.log(lastInput)
-            }
+oneInput.addEventListener('change',e=>{
+        if((/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
+        /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
+            lastInput = e.target.value
+            console.log(lastInput)
+        }
+    })
+const handleTypeChange = (ev) => {
+    let inputsTemp = document.querySelectorAll('.search-input')
+        if(ev.target.textContent == 'RGB'){
+            ev.target.textContent = 'HEX'
+            console.log(inputsTemp)
+            inputsTemp.forEach(inp=>{
+                inp.value=''
+                inp.placeholder='Ex: 44550, 000, 99ddcc'
+            })
+        }
+    else{
+            ev.target.textContent = 'RGB'
+            inputsTemp.forEach(inp=>{
+            inp.value='rgb()'
+            inp.placeholder='Ex: rgb(255,255,0)'
         })
-    
+    }
+    }
+    typeBtn.addEventListener('click',handleTypeChange)
+
 function setCursorPosition(inputElem, position) {
     if (inputElem.setSelectionRange) {
       inputElem.focus();
@@ -77,10 +96,6 @@ subBtn.onclick = e => {
                         }
                     })
                 })
-
-                // arr.forEach(el=>{
-                //     updatedInvContainer.appendChild(el)
-                // })
             }
             else{
                 console.log('div did not exist until now')
@@ -92,29 +107,28 @@ subBtn.onclick = e => {
             // copy the input within the inventory by click
             const updatedDivs = document.querySelectorAll('.inventory-div')
             const container = document.querySelector('.color-inv-list-container')
-
                 updatedDivs.forEach((d,index)=>{
                     let gen;
                     d.addEventListener('click',e=>{
                         gen = (e.target)
                         copyColor(e.target)
-                        // e.target.style.color ="#"+333;
-                        return [...updatedDivs].map((x,y)=>{
-                            if(x!==gen){
-                                x.style.color='transparent';
-                                x.disabled=false;
-                            }
-                            else{
-                                x.style.color='#333';
-                                x.disabled=true;
-                            }
-                        })
+                        if(window.innerWidth > 1000){
+                            return [...updatedDivs].map((x,y)=>{
+                                if(x!==gen){
+                                    x.style.color='transparent';
+                                    x.disabled=false;
+                                }
+                                else{
+                                    x.style.color='#333';
+                                    x.disabled=true;
+                                }
+                            })
+                        }
                     })
                 })
-                if(updatedDivs.length > 3){
+                if(updatedDivs.length > 6){
                     let first = 0;
-                    container.removeChild(updatedDivs[first])
-                    
+                    container.removeChild(updatedDivs[first])   
                 }
             
 
@@ -186,11 +200,14 @@ const addInput = e => {
     parent.removeChild(e.target)
 
     append_container.appendChild(newDiv)
-
     const inputsUpdated = document.querySelectorAll('.search-input')
+
+    // handle type change on btn click
+    typeBtn.addEventListener('click',handleTypeChange)
+    // const inputsUpdated = document.querySelectorAll('.search-input')
     // onchange event listener
     inputsUpdated.forEach((inp,index)=>{
-        console.log(inp)
+        // console.log(inp)
         inp.addEventListener('change',e=>{
             console.log(e.target.value)
             console.log(e.target.value.length)
@@ -236,25 +253,6 @@ window.onload = e =>{
     window.scrollTo(0,0)
     
 }
-
-const handleTypeChange = e => {
-    if(e.target.textContent == 'RGB'){
-        e.target.textContent = 'HEX'
-        inputs.forEach(inp=>{
-            inp.value=''
-            inp.placeholder='Ex: 44550, 000, 99ddcc'
-        })
-    }
-else{
-        e.target.textContent = 'RGB'
-        inputs.forEach(inp=>{
-        inp.value='rgb()'
-        inp.placeholder='Ex: rgb(255,255,0)'
-    })
-}
-}
-const typeBtn = document.getElementById('lookup-type')
-typeBtn.addEventListener('click',handleTypeChange)
 
 // const inps = document.querySelectorAll('.search-input')
 // inps.forEach((inp,index)=>{
