@@ -1,4 +1,5 @@
 const h2s = document.querySelectorAll('.h2-class')
+const daddys = document.querySelectorAll('.daddy-container')
 const video = {
     keyboard: document.querySelector('.keyboard-video'),
     all:document.querySelectorAll('video')
@@ -10,5 +11,11 @@ h2s.forEach((h2,iterate)=>{
     },250*(iterate+1))
 })
 
+// show daddy-containers
+const showDaddyContainers = (array) => {
+return [...array].map(daddy=>daddy.classList.remove('hidden'))
+}
 
-
+setTimeout(()=>{
+    showDaddyContainers(daddys)
+},1250)

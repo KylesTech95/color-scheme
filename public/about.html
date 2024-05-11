@@ -19,24 +19,67 @@
                 the Color
             </h2>
             <h2 class="h2-class api translate-left">
-                Api
+                App
             </h2>
         </div>
 </section>
 
 <!--explanation container-->
-<section id="explanation-container">
-<p class="explanation">
-   <b>Welcome to the Color App.</b><br>
-   The purpose of this application is to search/retrieve & copy colors from an SQL database.
-   Behind the scenes, The Color Api holds four-thouand and ninety-six (4096) colors to choose from.
-    
-</p>
+<section id="explanation-container" class="daddy-container hidden">
+<div class="title-container">
+    <h3 class="title-actual">
+        <b>Welcome to the Color App.</b>
+    </h3>
+</div>
+<div class="paragraph-container p-container">
+    <p>
+        The purpose of this application is to search/retrieve & copy colors from an SQL database.
+        Behind the scenes, The Color Api holds four-thouand and ninety-six (4096) colors to choose from.
+     </p>
+     <p>The color pallette supplies four-thouand and ninety-six (4096) of those colors by <em>fetching</em> or <em>getting</em> the list of colors from the <a target="_blank" href="/colors" style="text-decoration: none; cursor:pointer;"><code style="color: #f00; padding:.25rem;text-decoration:underline">/colors</code></a> endpoint.</p>
+     <br>
+     <p>
+        Data formatted in <b>r</b>,<b>g</b>&<b>b</b> bring three colors colors together, 
+        each ranging between 0 & 255, <em>as a multiple of 17</em>.
+        <br>
+        <code><b style="font-size:20px;">(number) % 17 is equal to 0 </b></code>
+        <br>
+        When using the color-search module, <b>ONLY</b> colors in the database, or palette, are available to search.
+        In addition, users can search for Hex values as long as the hex value matches the RGB value in the database.
+     </p>
+</div>
 </section>
-<section id="features-container">
+<section id="features-container" class="daddy-container hidden">
+
+<div class="feature-div-container">
+    <div class="feature-div">
+        <div class="video-container">
+            <video src="" class="video-feature"></video>
+            <div class="label-container">
+                <h3 class="feature-label">Copy & paste with ease</h3>
+            </div>
+        </div>
+    </div>
+    <div class="feature-div">
+        <div class="video-container">
+            <video src="" class="video-feature"></video>
+            <div class="label-container">
+                <h3 class="feature-label">Search colors in Hex & RGB format</h3>
+            </div>
+        </div>
+    </div>
+    <div class="feature-div">
+        <div class="video-container">
+            <video src="" class="video-feature"></video>
+            <div class="label-container">
+                <h3 class="feature-label">Mobile & Desktop Friendly</h3>
+            </div>
+        </div>
+    </div>
+</div>
 
 </section>
-<section id="controls-container">
+<section id="controls-container" class="daddy-container hidden">
 
 </section>
 
