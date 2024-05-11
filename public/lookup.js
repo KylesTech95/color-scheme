@@ -204,3 +204,22 @@ window.onload = e =>{
     window.scrollTo(0,0)
     
 }
+
+const handleTypeChange = e => {
+    if(e.target.textContent == 'RGB'){
+        e.target.textContent = 'HEX'
+        inputs.forEach(inp=>{
+            inp.value=''
+            inp.placeholder='Ex: 44550, 000, 99ddcc'
+        })
+    }
+else{
+        e.target.textContent = 'RGB'
+        inputs.forEach(inp=>{
+        inp.value='rgb()'
+        inp.placeholder='Ex: rgb(255,255,0)'
+    })
+}
+}
+const typeBtn = document.getElementById('lookup-type')
+typeBtn.addEventListener('click',handleTypeChange)
