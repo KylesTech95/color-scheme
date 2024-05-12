@@ -24,7 +24,7 @@ const fingers = document.querySelectorAll('.hover-span')
 const btnPal = document.querySelector('.option-2')
 const allBtns = document.querySelectorAll('.pal-btn')
 const mainTitle = document.getElementById('title-main')
-
+let stringTest;
 let idCount = 0;
 let destination = palID.clientHeight-115
 let scroll_arr=[]
@@ -200,39 +200,75 @@ let deviceTypeControl = .5
 
 // open xml & send
 xml.open(method,url,true)
+xml.responseType='blob' // convert type to blob
 xml.send()
+
 // parse xml data
 function parse(){
-    // console.log('you are parsing data!')
-    const data = JSON.parse(xml.responseText)
-    const myData = (data.colors)
-    current_index = [...myData].length * percentage
-    let d1 = [...myData].slice(last_index,current_index)
-    // // console.log(d1)
-    last_index = current_index;
-    percentage+=deviceTypeControl
-    d1.forEach((col,index) => {
-        const li = document.createElement('li')
-        li.classList.add('.color-pal-list-item')
-        li.setAttribute('style',`
-                background:${col.color};
-                --webkit-background:${col.color};
-                height:25px;
-                width:25px;
-                border:.5px solid #fff;
-                transition:.25s;
-                z-index:999;
-                `)
-        li.classList.add('hover-li')
-        // push li into arrow
-            rang.push(li)
-        if(!detectMob()){
-            li.addEventListener('mouseover',e=>{
-                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // // console.log(rgbColor)
-                idCount=index+1
-                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                    setRGBAndHex(res,e.target,rgbColor,true)
+    let fs = new FileReader()
+    fs.onload = e => {
+    const data = JSON.parse(e.target.result)
+        const myData = (data.colors)
+        current_index = [...myData].length * percentage
+        let d1 = [...myData].slice(last_index,current_index)
+        // // console.log(d1)
+        last_index = current_index;
+        percentage+=deviceTypeControl
+        d1.forEach((col,index) => {
+            const li = document.createElement('li')
+            li.classList.add('.color-pal-list-item')
+            li.setAttribute('style',`
+                    background:${col.color};
+                    --webkit-background:${col.color};
+                    height:25px;
+                    width:25px;
+                    border:.5px solid #fff;
+                    transition:.25s;
+                    z-index:999;
+                    `)
+            li.classList.add('hover-li')
+            // push li into arrow
+                rang.push(li)
+            if(!detectMob()){
+                li.addEventListener('mouseover',e=>{
+                    let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                    // // console.log(rgbColor)
+                    idCount=index+1
+                    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                        setRGBAndHex(res,e.target,rgbColor,true)
+                    // identify rgb input
+                    const input = document.createElement('input')
+                    input.style.background = col.color;
+                    createInput(input,col,idCount,true)
+                    // listenValue(input)
+                    spot.append(input)
+                    clickInput(input)
+                    shaveUl(spot)
+                    makeWhiteColor(col.color,input,copy)
+                        
+                })
+            }
+            else{
+                li.addEventListener('touchstart',e=>{
+                    let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                    // // console.log(rgbColor)
+                    idCount=index+1
+                    // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                        setRGBAndHex(res,e.target,rgbColor,true)
+                    // identify rgb input
+                    const input = document.createElement('input')
+                    input.style.background = col.color;
+                    createInput(input,col,idCount,true)
+                    // listenValue(input)
+                    spot.append(input)
+                    clickInput(input)
+                    shaveUl(spot)
+                    makeWhiteColor(col.color,input,copy)
+                        
+                })
+            }
+            
+            li.addEventListener('click',async e=>{
                 // identify rgb input
                 const input = document.createElement('input')
                 input.style.background = col.color;
@@ -242,48 +278,17 @@ function parse(){
                 clickInput(input)
                 shaveUl(spot)
                 makeWhiteColor(col.color,input,copy)
-                    
+                copyColor(input)
+                copyMessagePop(midline,spot,copy_message)
             })
-        }
-        else{
-            li.addEventListener('touchstart',e=>{
-                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                // // console.log(rgbColor)
-                idCount=index+1
-                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                    setRGBAndHex(res,e.target,rgbColor,true)
-                // identify rgb input
-                const input = document.createElement('input')
-                input.style.background = col.color;
-                createInput(input,col,idCount,true)
-                // listenValue(input)
-                spot.append(input)
-                clickInput(input)
-                shaveUl(spot)
-                makeWhiteColor(col.color,input,copy)
-                    
-            })
-        }
         
-        li.addEventListener('click',async e=>{
-            // identify rgb input
-            const input = document.createElement('input')
-            input.style.background = col.color;
-            createInput(input,col,idCount,true)
-            // listenValue(input)
-            spot.append(input)
-            clickInput(input)
-            shaveUl(spot)
-            makeWhiteColor(col.color,input,copy)
-            copyColor(input)
-            copyMessagePop(midline,spot,copy_message)
-        })
-    
-    }) 
-    for(let i in rang){
-        pal_container.append(rang[i])
+        }) 
+        for(let i in rang){
+            pal_container.append(rang[i])
+        }
+        rang = []
     }
-    rang = []
+    fs.readAsText(stringTest)    
 }
 const restoreTile = elem => {
     elem.classList.remove('no-pointer')
@@ -296,117 +301,134 @@ const bringTilesBack =  (container) => {
         control+=.01
     }
 }
-
-
+// parse xml data
 const partialParse = arr => {
     let containers = [...arr];
-    const data = JSON.parse(xml.responseText)
-    let myData = (data.colors)
-    myData = myData.sort((a,b)=>{
-        let aColor = a.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
-        let bColor = b.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
-        if(aColor[0]==bColor[0]&&aColor[1]==bColor[1]){
-            return 1;
-        }
-        else{
-            return -1;
-        }
-    })
-    // console.log(myData)
-    
-    let quotient = myData.length/4
-    for(let i = 0; i < myData.length; i+=quotient){
-        arr_of_arrs.push(myData.slice(i,i+quotient))
-    }
-
-    containers.forEach((container,index) => {
-        for(let j = 0; j < arr_of_arrs.length; j++){
-            if(j==index){
-                let array = []
-                let data = arr_of_arrs[j];
-                // console.log(data)
-                data.forEach((col,index) => {
-                    const li = document.createElement('li')
-                    li.classList.add('.color-pal-list-item')
-                    li.setAttribute('style',`
-                            background:${col.color};
-                            --webkit-background:${col.color};
-                            height:50px;
-                            width:50px;
-                            border:.5px solid #fff;
-                            transition:.25s;
-                            z-index:999;
-                            `)
-                    // push li into arrow
-                        array.push(li)
-                    if(!detectMob()){
-                        li.addEventListener('mouseover',e=>{
-                            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                            // // console.log(rgbColor)
-                            idCount=index+1
-                            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                                setRGBAndHex(res,e.target,rgbColor,true)
-                            // identify rgb input
-                            const input = document.createElement('input')
-                            input.style.background = col.color;
-                            createInput(input,col,idCount,true)
-                            // listenValue(input)
-                            spot.append(input)
-                            clickInput(input)
-                            shaveUl(spot)
-                            makeWhiteColor(col.color,input,copy)
-                                
-                        })
-                    }
-                    else{
-                        li.addEventListener('touchstart',e=>{
-                            let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
-                            // // console.log(rgbColor)
-                            idCount=index+1
-                            // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
-                                setRGBAndHex(res,e.target,rgbColor,true)
-                            // identify rgb input
-                            const input = document.createElement('input')
-                            input.style.background = col.color;
-                            createInput(input,col,idCount,true)
-                            // listenValue(input)
-        
-                            spot.append(input)
-                            clickInput(input)
-                            shaveUl(spot)
-                            makeWhiteColor(col.color,input,copy)
-                                
-                        })
-                    }
-                    
-                    li.addEventListener('click',async e=>{
-                        // identify rgb input
-                        const input = document.createElement('input')
-                        input.style.background = col.color;
-                        createInput(input,col,idCount,true)
-                        // listenValue(input)
-                        spot.append(input)
-                        clickInput(input)
-                        shaveUl(spot)
-                        makeWhiteColor(col.color,input,copy)
-                        copyColor(input)
-                        copyMessagePop(midline,spot,copy_message)
-                    })
-                
-                }) 
-                // console.log(array)
-                for(let k=0;k<array.length;k++){
-                    container.appendChild(array[k])
-                }
+    let fs = new FileReader();
+    fs.onload = e => {
+        const data = JSON.parse(e.target.result) // response is already in blob format
+        let myData = (data.colors)
+        myData = myData.sort((a,b)=>{
+            let aColor = a.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
+            let bColor = b.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
+            if(aColor[0]==bColor[0]&&aColor[1]==bColor[1]){
+                return 1;
             }
-        }        
-    })
+            else{
+                return -1;
+            }
+        })
+        // console.log(myData)
+        
+        let quotient = myData.length/4
+        for(let i = 0; i < myData.length; i+=quotient){
+            arr_of_arrs.push(myData.slice(i,i+quotient))
+        }
+    
+        containers.forEach((container,index) => {
+            for(let j = 0; j < arr_of_arrs.length; j++){
+                if(j==index){
+                    let array = []
+                    let data = arr_of_arrs[j];
+                    // console.log(data)
+                    data.forEach((col,index) => {
+                        const li = document.createElement('li')
+                        li.classList.add('.color-pal-list-item')
+                        li.setAttribute('style',`
+                                background:${col.color};
+                                --webkit-background:${col.color};
+                                height:50px;
+                                width:50px;
+                                border:.5px solid #fff;
+                                transition:.25s;
+                                z-index:999;
+                                `)
+                        // push li into arrow
+                            array.push(li)
+                        if(!detectMob()){
+                            li.addEventListener('mouseover',e=>{
+                                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                                // // console.log(rgbColor)
+                                idCount=index+1
+                                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                                    setRGBAndHex(res,e.target,rgbColor,true)
+                                // identify rgb input
+                                const input = document.createElement('input')
+                                input.style.background = col.color;
+                                createInput(input,col,idCount,true)
+                                // listenValue(input)
+                                spot.append(input)
+                                clickInput(input)
+                                shaveUl(spot)
+                                makeWhiteColor(col.color,input,copy)
+                                    
+                            })
+                        }
+                        else{
+                            li.addEventListener('touchstart',e=>{
+                                let rgbColor = e.target.style.background.replace(/\(|\)|rgb/g,'').split(",")
+                                // // console.log(rgbColor)
+                                idCount=index+1
+                                // rgbToHex(rgbColor[0],rgbColor[1],rgbColor[2])
+                                    setRGBAndHex(res,e.target,rgbColor,true)
+                                // identify rgb input
+                                const input = document.createElement('input')
+                                input.style.background = col.color;
+                                createInput(input,col,idCount,true)
+                                // listenValue(input)
+            
+                                spot.append(input)
+                                clickInput(input)
+                                shaveUl(spot)
+                                makeWhiteColor(col.color,input,copy)
+                                    
+                            })
+                        }
+                        
+                        li.addEventListener('click',async e=>{
+                            // identify rgb input
+                            const input = document.createElement('input')
+                            input.style.background = col.color;
+                            createInput(input,col,idCount,true)
+                            // listenValue(input)
+                            spot.append(input)
+                            clickInput(input)
+                            shaveUl(spot)
+                            makeWhiteColor(col.color,input,copy)
+                            copyColor(input)
+                            copyMessagePop(midline,spot,copy_message)
+                        })
+                    
+                    }) 
+                    // console.log(array)
+                    for(let k=0;k<array.length;k++){
+                        container.appendChild(array[k])
+                    }
+                }
+            }        
+        })
+    }
+    fs.readAsText(stringTest)
 }
+// onload
 if(window.innerWidth >= 1000){
-    xml.onload = () => parse()   
+    xml.onload = () => {
+        let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+        console.log(blob.size)
+        stringTest = blob
+        parse()
+        
+
+
+    }  
 }
 else{
-    xml.onload = () => partialParse(allContainers)
+    xml.onload = () => {
+        let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+        console.log(blob.size)
+        stringTest = blob
+        partialParse(allContainers)
+    }
 }
 pal_container.onscroll = (e) => {
     let top = e.target.scrollTop;
