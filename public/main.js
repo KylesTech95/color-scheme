@@ -413,17 +413,17 @@ const partialParse = arr => {
 // onload
 if(window.innerWidth >= 1000){
     xml.onload = () => {
-        console.log(xml.response)
+        // console.log(xml.response)
         // blob instance below is not necessary because the xml.responseType is set to 'blob'.
         // blob instance is set for alternative.
         // setting response type to 'blob' & creating a [new Blob] will not change the data.
         let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
         stringTest = blob
-        console.log(blob)
+        // console.log(blob)
         // console.log(xml.response)
         let fs = new FileReader
         fs.onload=e=>{
-            console.log(e.target.result)
+            // console.log(e.target.result)
         }
         fs.readAsText(xml.response)
         parse()

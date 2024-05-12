@@ -24,12 +24,34 @@ setTimeout(()=>{
 // set media src's
 const media_features = document.querySelectorAll('.feat')
 const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.png']
-console.log(media_features)
-console.log(mediaArr)
+// console.log(media_features)
+// console.log(mediaArr)
 media_features.forEach((feat,index)=>{
-    let path = 'media/'+ mediaArr[index];
+    const directory = 'media/'
+    let path = directory + mediaArr[index];
     let ext = mediaArr[index].slice(-3)
+    // let blob = new Blob([path],{type:/mp4/.test(ext) ? 'video/mp4' : 'image/png'})
 
+// const xml = new XMLHttpRequest()
+// xml.open('GET',path,true)
+// xml.responseType='blob'
+// xml.onload = e =>{ 
+// let blob = new Blob([xml.response],{type:/mp4/.test(ext) ? 'video/mp4' : 'image/png'})
+
+// // console.log(file)
+// // console.log(blob)
+// let URL = window.URL||window.webkitURL
+// const blobURL = URL.createObjectURL(blob)//replace(/http/,'https')
+// console.log(blobURL)
+// feat.src = blobURL
+    feat.src = path;
+// xml.send();
+// xml.onreadystatechange = () => {
+//     if(xml.readyState == xml.HEADERS_RECEIVED){
+//         let contentType = xml.getResponseHeader("Content-Type")
+//         console.log(contentType)
+//     }
+// }
     // videos in array
     if(/mp4/.test(ext)){
         // feat.autoplay=true;
