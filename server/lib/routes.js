@@ -75,10 +75,13 @@ module.exports = function(app,pool,sequelize,router){
         //http://localhost:7671/colors/
         let colors;
         colors = await pool.query('select * from colors')
-        res.json({colors:colors.rows.map(c=>{
+        let result = {colors:colors.rows.map(c=>{
             return c
-        })})
+        })}
+        res.json(result)
     })
+
+
     // about message
     app.route('/about').get((req,res)=>{
         res.sendFile(path.resolve('public/about.html'))
@@ -159,6 +162,67 @@ module.exports = function(app,pool,sequelize,router){
     //     res.redirect('/')
     // })
 
+// playing with file system
+    // app.route('/fs-open').get(async (req,res)=>{
+    //     // fs.writeFile
+    //     fs.writeFile('newText.txt','Same File but Different Text!',(err)=>{
+    //         return err ? console.log(err) : console.log('saved')
+    //     })
+    //     // fs.writeFile('newText.txt','Same File but Different Text!',(err)=>{
+    //     //     return err ? console.log(err) : console.log('saved')
+    //     // })
+    //     // create & name new file within the Directory 
+    //     fs.appendFile('newfile.txt','Hello new file!',(err)=>{
+    //         return err ? console.log(err) : console.log('saved')
+    //     })
+    //     // create & open an html file
+    //     fs.writeFile('public/random.html','random text',(err)=>{
+    //         return err ? console.log(err) : console.log('saved')
+    //     })
+    //     // fs.appendFile('newfile.txt',' This text is appended in a new function (appendFile).',(err)=>{
+    //     //     return err ? console.log(err) : console.log('saved')
+    //     // })
+    //     // fs.appendFile('newfile.txt','\nSo is this!',(err)=>{
+    //     //     return err ? console.log(err) : console.log('saved')
+    //     // })
+    //     // fs.open('secondnewfile.txt','w+',(err)=>{
+    //     //     // flags - Operation in "how" the file is opened
+    //     //     // r	To open the file to read and throws an exception if the file doesn’t exist.
+    //     //     // r+	Open the file to read and write. Throws an exception if the file doesn’t exist.
+    //     //     // rs+	Open files in synchronous mode to read and write.
+    //     //     // w	Open file for writing. A file is created if it doesn’t exist.
+    //     //     // wx	It is the same as ‘w’ but fails if the path exists.
+    //     //     // w+	Open the file to read and write. A file is created if it doesn’t exist.
+    //     //     // wx+	It is the same as ‘w+’ but fails if the path exists.
+    //     //     // a	Open the file to append. A file is created if it doesn’t exist.
+    //     //     // ax	It is the same as a but fails if the path exists.
+    //     //     // a+	Open the file for reading and appending. A file is created if it doesn’t exist.
+    //     //     // ax+	It is the same as ‘a+’ but fails if the path exists.
 
+    //     //     //r-read, w-write, r+ -readwrite. It sets to default as readwrite.
+    //     //     return err ? console.log(err) : console.log('saved')
+    //     // })
+    // })
+    // app.route('/fs-delete').get((req,res)=>{
+    //     // delete or unlink a file from the fs
+    //     let directory = fs.readdirSync('.',(err,d)=>{
+    //         return err ? console.log(err) : d
+    //     })
+    //     console.log(directory)
+
+    //     return [...directory].forEach(dir=>{
+    //         if(/txt/g.test(dir)){
+    //             fs.unlink(dir,(err)=>{
+    //                 return err ? console.log(err) : console.log(`${dir} is deleted`)
+    //             })
+    //         }
+    //     })
+    // })
+    // app.route('/fs-rename').get((req,res)=>{
+    //     // delete or unlink a file from the fs
+    //     fs.rename('newfile.txt','renamedfile.txt',(err)=>{
+    //         return err ? console.log(err) : console.log('File has been renamed')
+    //     })
+    // })
 }   
 
