@@ -22,6 +22,7 @@ setTimeout(()=>{
 
 
 // set media src's
+const labels = document.querySelectorAll('.label-container')
 const media_features = document.querySelectorAll('.feat')
 const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.png']
 // console.log(media_features)
@@ -30,8 +31,7 @@ media_features.forEach((feat,index)=>{
     const directory = 'media/'
     let path = directory + mediaArr[index];
     let ext = mediaArr[index].slice(-3)
-    // let blob = new Blob([path],{type:/mp4/.test(ext) ? 'video/mp4' : 'image/png'})
-
+// let blob = new Blob([path],{type:/mp4/.test(ext) ? 'video/mp4' : 'image/png'})
 // const xml = new XMLHttpRequest()
 // xml.open('GET',path,true)
 // xml.responseType='blob'
@@ -64,7 +64,9 @@ media_features.forEach((feat,index)=>{
         if(/mp4/.test(ext)&&e.target.muted){
             e.target.play();
             e.target.classList.remove('video-paused');
-            e.target.style.opacity = 1;
+            e.target.style='z-index:999;opacity:1;transform:scale(1.5)'
+            // console.log(labels[index])
+            labels[index].classList.add(index==2?'drop-down-label-mobile' : 'drop-down-label')
         }
     }
     feat.onmouseover=e=>{
@@ -77,7 +79,10 @@ media_features.forEach((feat,index)=>{
         if(/mp4/.test(ext)){
             e.target.pause();
             e.target.classList.add('video-paused')
-            e.target.style.opacity = 1;
+            e.target.style='z-index:998;opacity:.5;transform:scale(1)';
+            labels[index].classList.remove(index==2?'drop-down-label-mobile' : 'drop-down-label')
+
+
         }
     }      
 })
