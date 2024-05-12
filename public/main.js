@@ -414,18 +414,13 @@ const partialParse = arr => {
 if(window.innerWidth >= 1000){
     xml.onload = () => {
         let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        console.log(blob.size)
         stringTest = blob
         parse()
-        
-
-
     }  
 }
 else{
     xml.onload = () => {
         let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        console.log(blob.size)
         stringTest = blob
         partialParse(allContainers)
     }
