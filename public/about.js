@@ -32,14 +32,30 @@ media_features.forEach((feat,index)=>{
 
     // videos in array
     if(/mp4/.test(ext)){
-        feat.autoplay=true;
-        feat.look=true;
+        // feat.autoplay=true;
+        feat.loop=true;
         feat.muted=true;
     }
     //result 
     feat.src = path;
-    if(/mp4/.test(ext)&&feat.muted){
-        feat.play()
+    feat.onclick=e=>{
+        if(/mp4/.test(ext)&&e.target.muted){
+            e.target.play();
+            e.target.classList.remove('video-paused');
+            e.target.style.opacity = 1;
+        }
     }
-    
+    feat.onmouseover=e=>{
+        if(/mp4/.test(ext)){
+            e.target.style.opacity = .5;
+        }
+ 
+    }
+    feat.onmouseout=e=>{
+        if(/mp4/.test(ext)){
+            e.target.pause();
+            e.target.classList.add('video-paused')
+            e.target.style.opacity = 1;
+        }
+    }      
 })

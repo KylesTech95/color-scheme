@@ -107,12 +107,15 @@ transition: .75s;
     height:100vh;
     border:2px solid red;
 }
-
+.video-paused{
+    cursor:pointer;
+}
 .video-feature,
 .img-feature{
-height:250px;
-width:250px;
+height:350px;
+width:450px;
 border:3px solid red;
+transition:.25s;
 }
 /* .feature-label{
 
