@@ -108,7 +108,8 @@ transition: .75s;
     border:2px solid red;
 }
 
-.video-feature{
+.video-feature,
+.img-feature{
 height:250px;
 width:250px;
 border:3px solid red;

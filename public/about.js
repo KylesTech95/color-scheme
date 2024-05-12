@@ -19,3 +19,27 @@ return [...array].map(daddy=>daddy.classList.remove('hidden'))
 setTimeout(()=>{
     showDaddyContainers(daddys)
 },1250)
+
+
+// set media src's
+const media_features = document.querySelectorAll('.feat')
+const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.png']
+console.log(media_features)
+console.log(mediaArr)
+media_features.forEach((feat,index)=>{
+    let path = 'media/'+ mediaArr[index];
+    let ext = mediaArr[index].slice(-3)
+
+    // videos in array
+    if(/mp4/.test(ext)){
+        feat.autoplay=true;
+        feat.look=true;
+        feat.muted=true;
+    }
+    //result 
+    feat.src = path;
+    if(/mp4/.test(ext)&&feat.muted){
+        feat.play()
+    }
+    
+})
