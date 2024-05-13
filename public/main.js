@@ -35,7 +35,7 @@ let scroll_dir;
 
 mainTitle.style.left = document.body.clientWidth/2+"px"
 function detectMob() {
-    return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+    return ( ( window.innerWidth <= 1000 ) );
   }
 //____________________________
 // objects
@@ -321,9 +321,7 @@ const partialParse = arr => {
             else{
                 return -1;
             }
-        })
-        // console.log(myData)
-        
+        })        
         let quotient = myData.length/4
         for(let i = 0; i < myData.length; i+=quotient){
             arr_of_arrs.push(myData.slice(i,i+quotient))
@@ -415,12 +413,11 @@ const partialParse = arr => {
     // fs.readAsText(stringTest)
 // }
 // onload
-if(window.innerWidth >= 1000){
+if(!detectMob()){
     xml.onload = () => {
         // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
         let string = JSON.stringify(xml.response)
         stringTest = string
-        console.log(stringTest)
         parse()
     }  
 }
@@ -454,7 +451,7 @@ pal_container.onscroll = (e) => {
     // if top scroll is less than array's 2nd-to-last index, GO DOWN
     if(downward()){
         if(((top) >= height*(control))){
-            if(window.innerWidth >= 1000){parse()}
+            if(!detectMob()){parse()}
             bringTilesBack(pal_container)
         }
     }
@@ -568,7 +565,7 @@ navArr.forEach((item,i)=>{
     }
 })
 const result_container = document.getElementById('result-container')
-if(window.innerWidth < 1000){
+if(detectMob()){
     btnPal.classList.remove('no-item')
     wrapper.removeChild(palID)
      ch_container.appendChild(palID)
