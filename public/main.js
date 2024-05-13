@@ -200,14 +200,18 @@ let deviceTypeControl = .5
 
 // open xml & send
 xml.open(method,url,true)
-xml.responseType='blob' // convert type to blob
+// xml.responseType='blob' // convert type to blob
+xml.responseType='text' // convert type to text
+
 xml.send()
 
 // parse xml data
 function parse(){
-    let fs = new FileReader()
-    fs.onload = e => {
-    const data = JSON.parse(e.target.result)
+    // let fs = new FileReader()
+    // fs.onload = e => {
+    // const data = JSON.parse(e.target.result)
+    // const data = JSON.parse(JSON.parse(stringTest))
+    const data = JSON.parse(JSON.parse(stringTest))
         const myData = (data.colors)
         current_index = [...myData].length * percentage
         let d1 = [...myData].slice(last_index,current_index)
@@ -288,8 +292,8 @@ function parse(){
         }
         rang = []
     }
-    fs.readAsText(stringTest)    
-}
+    // fs.readAsText(stringTest)    
+// }
 const restoreTile = elem => {
     elem.classList.remove('no-pointer')
     elem.style.opacity=1;
@@ -304,9 +308,9 @@ const bringTilesBack =  (container) => {
 // parse xml data
 const partialParse = arr => {
     let containers = [...arr];
-    let fs = new FileReader();
-    fs.onload = e => {
-        const data = JSON.parse(e.target.result) // response is already in blob format
+    // let fs = new FileReader();
+    // fs.onload = e => {
+        const data = JSON.parse(JSON.parse(stringTest)) // response is already in blob format
         let myData = (data.colors)
         myData = myData.sort((a,b)=>{
             let aColor = a.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
@@ -408,34 +412,23 @@ const partialParse = arr => {
             }        
         })
     }
-    fs.readAsText(stringTest)
-}
+    // fs.readAsText(stringTest)
+// }
 // onload
 if(window.innerWidth >= 1000){
     xml.onload = () => {
-        // console.log(xml.response)
-        // blob instance below is not necessary because the xml.responseType is set to 'blob'.
-        // blob instance is set for alternative.
-        // setting response type to 'blob' & creating a [new Blob] will not change the data.
-        let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        stringTest = blob
-        // console.log(blob)
-        // console.log(xml.response)
-        let fs = new FileReader
-        fs.onload=e=>{
-            // console.log(e.target.result)
-        }
-        fs.readAsText(xml.response)
+        // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+        let string = JSON.stringify(xml.response)
+        stringTest = string
+        console.log(stringTest)
         parse()
     }  
 }
 else{
     xml.onload = () => {
-        // blob instance below is not necessary because the xml.responseType is set to 'blob'.
-        // blob instance is set for alternative.
-        // setting response type to 'blob' & creating a [new Blob] will not change the data.
-        let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        stringTest = blob
+        // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+        let string = JSON.stringify(xml.response)
+        stringTest = string
         partialParse(allContainers)
     }
 }
