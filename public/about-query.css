@@ -1,5 +1,33 @@
 @media screen and (max-width:1000px){
-*{
-    display:none;
+    /* display:none; */
+    .feature-div-container{
+        flex-direction: column;
+        height:100%;
+        width:100%;
+        overflow:visible;
+    }
+    #explanation-container{
+        height:100%;
+    }
+    .video-feature,
+    .img-feature{
+    height:250px;
+    width:250px;
+    /* border:3px solid red; */
+    }
+    .feature-div{
+        width:unset;
+
+    }
+    
+
+.video-feature,.img-feature{
+height:100%;
+width:100%;
+}
+
+.feature-div:hover{
+    transform:scale(1.05);
+    transition: .25s;
 }
 }

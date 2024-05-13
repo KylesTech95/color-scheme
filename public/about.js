@@ -64,9 +64,9 @@ media_features.forEach((feat,index)=>{
         if(/mp4/.test(ext)&&e.target.muted){
             e.target.play();
             e.target.classList.remove('video-paused');
-            e.target.style='z-index:999;opacity:1;transform:scale(1.5)'
+            e.target.style=`z-index:999;opacity:1;${window.innerWidth >= 1000 ?'transform:scale(1.5)' : 'transform:scale(.8)'};border:2rem solid #333;`
             // console.log(labels[index])
-            labels[index].classList.add(index==2?'drop-down-label-mobile' : 'drop-down-label')
+            labels[index].classList.add(index==2 && window.innerWidth > 1000 ? 'drop-down-label' : null)
         }
     }
     feat.onmouseover=e=>{
