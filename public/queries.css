@@ -27,6 +27,11 @@
     width:75%;
     transition:.5s;
     top:-5.25rem;
+    margin-bottom: -2rem;
+    }
+    #result-container,
+    .choice-spot{
+     transform:translate(0,-115px)
     }
     .color-input{
       font-size:20px;
@@ -112,9 +117,6 @@
     transform:scale(4)
  }   
 
-.choice-spot{
-  margin-bottom:-2rem;
-}
  .res-item{
   width:75%;
   height:44px;
@@ -175,8 +177,9 @@ body{
   transform:translate(0,30  0px);
   font-size:26px;
 }
+
 .choice-spot{
-width:75%;
+  width:300px;
 transition:.5s;
 top:-5.5rem;
 
@@ -231,9 +234,7 @@ width:200px;
  .res-item>div{
   display:none;
  }
-.choice-spot{
-  width:300px;
-}
+
 #lookup-color{
   margin-bottom:0;
   position:absolute;

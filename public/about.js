@@ -79,7 +79,7 @@ media_features.forEach((feat,index)=>{
             if(/mp4/.test(ext)&&e.target.paused){
                 e.target.play();
                 e.target.classList.remove('video-paused');
-                e.target.style=`z-index:999;opacity:1;${'transform:scale(1.25)'};`
+                e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
             }
         }
         feat.onmouseover=e=>{
