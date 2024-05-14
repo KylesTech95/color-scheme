@@ -532,6 +532,7 @@ window.addEventListener('scroll',e=>{
             window.scrollTo(0,0)   
         }
 })
+// navigation config
 let btn_top = document.querySelector('.nav-btn-top')
 const nav = document.querySelector('#nav-container')
 const navActual = nav.children[0]

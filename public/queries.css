@@ -98,16 +98,15 @@
      }
      
 .nav-list-container{
-  justify-content: center;
+  justify-content: end;
   align-items: center;
-  margin-top:2rem;
 }
 
 .full{
   height:300px;
 }
 .nav-link{
-  padding:1rem 0;
+  padding:2rem 0;
 }
  .play-icon{
     transform:scale(4)

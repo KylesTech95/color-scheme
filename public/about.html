@@ -14,8 +14,20 @@
 
     <title>About Page</title>
 </head>
-<!--body background changes on keyframe-->
+<!--body-->
 <body>
+    
+<!--Navigation menu-->
+<div class="nav-btn-top hidden-item"></div>
+<div id="nav-container" class="base">
+    <nav id="nav" class="hidden-item">
+        <ul class="nav-list-container">
+            <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#footer" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+    
 <!--Title/Animated Heading-->
 <section id="title-container">
     <div id="title-container-actual">
@@ -47,7 +59,7 @@
      <p>The color pallette supplies four-thouand and ninety-six (4096) of those colors by <em>fetching</em> or <em>getting</em> the list of colors from the <a target="_blank" href="/colors" style="text-decoration: none; cursor:pointer;"><code style="color: #f00; padding:.25rem;text-decoration:underline">/colors</code></a> endpoint.</p>
      <br>
      <p>
-        Data formatted in <b>r</b>,<b>g</b>&<b>b</b> bring three colors colors together, 
+        Data formatted in <b>r</b>,<b>g</b>&<b>b</b> bring three colors together, 
         each ranging between 0 & 255, <em>as a multiple of 17</em>.
         <br>
         <code><b style="font-size:20px;">(number) % 17 is equal to 0 </b></code>
@@ -66,7 +78,7 @@
     <div class="feature-div-container">
         <div class="feature-div">
             <div class="video-container">
-                <video src="" class="video-feature feat video-paused"></video>
+                <video src="" class="video-feature feat no_highlights video-paused"></video>
                 <div class="label-container">
                     <h3 class="feature-label">Copy & paste with ease</h3>
                 </div>
@@ -74,7 +86,7 @@
         </div>
         <div class="feature-div">
             <div class="video-container">
-                <video src="" class="video-feature feat video-paused"></video>
+                <video src="" class="video-feature feat no_highlights video-paused"></video>
                 <div class="label-container">
                     <h3 class="feature-label">Search colors in Hex & RGB format</h3>
                 </div>
@@ -82,7 +94,7 @@
         </div>
         <div class="feature-div">
             <div class="video-container">
-                <video src="" class=" mobile-vid video-feature feat video-paused"></video>
+                <video src="" class=" mobile-vid video-feature feat no_highlights video-paused"></video>
                 <div class="label-container">
                     <h3 class="feature-label">Mobile Use</h3>
                 </div>

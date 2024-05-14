@@ -16,7 +16,7 @@ html{
 #mid-line{
     position:absolute;
     width:100%;
-    bordeR:3px solid #f00;
+    bordeR:3px solid transparent;
 }
 /* left and right scroll buttons */
 .section-scroll-btn{
