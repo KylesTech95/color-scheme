@@ -4,8 +4,14 @@
         margin:5rem 0 0 0;
         height:100vh;
     }
+
     .test-div-wrapper{
         overflow:visible;
+    }
+    .paragraph-container>p{
+        font-size:18px;
+        margin-top:2rem;
+    line-height:1.5rem;
     }
     .feature-div-container{
         flex-direction: column;
@@ -17,16 +23,20 @@
         gap:0;
         justify-content: center;
     }
+    #controls-container{
+        height:100vh;
+    }
     #explanation-container{
         height:100%;
         margin:0 0 5rem 0;
     }
     
+    
     .feature-div{
         width:100%;
         /* border:2px solid purple; */
-        margin-top:2rem;
-        padding-top:2rem;
+        /* margin-top:2rem;
+        padding-top:2rem; */
     }
     .video-container{
         flex-direction:row;
@@ -37,8 +47,8 @@
     
 
 .video-feature,.img-feature{
-height:33%;
-width:33%;
+height:200px;
+width:200px;
 margin-left:1rem;
 }
 
