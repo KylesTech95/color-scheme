@@ -815,3 +815,12 @@ z-index:999;
 }
 
 /* contact */
+footer#footer{
+    height:20vh;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    border-top:1px solid #333;
+    background:rgb(76, 76, 76);
+}
