@@ -352,8 +352,18 @@ footer#footer{
     border-top:1px solid #333;
     background:rgb(76, 76, 76);
 }
-
+.custom-vid-control{
+    z-index:2147483647;
+}
 video::-webkit-media-controls{
+    display:none !important;
+    opacity: 0;
+}
+video::-webkit-media-controls-enclosure{
+    display:none !important;
+    opacity: 0;
+}
+video::-webkit-media-controls-panel{
     display:none !important;
     opacity: 0;
 }

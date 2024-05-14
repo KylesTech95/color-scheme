@@ -40,15 +40,11 @@ const toggle = (e) => {
         e.play();
         e.classList.remove('video-paused');
         e.style='z-index:999;opacity:1;';
-        e.target.controls=false;
-
     }
     else{
         e.pause();
         e.classList.add('video-paused');
         e.style='z-index:999;opacity:.75;';
-        e.target.controls=false;
-
     }
 }
 //_____________________________________
@@ -73,7 +69,6 @@ media_features.forEach((feat,index)=>{
 
     // videos in array
     if(/mp4/.test(ext)){
-        // feat.autoplay=true;
         feat.loop=true;
         feat.muted=true;
     }
@@ -86,8 +81,7 @@ media_features.forEach((feat,index)=>{
             console.log(ext)
             if(/mp4/.test(ext)&&e.target.paused){
                 e.target.play();
-                e.target.controls=false;
-                e.target.classList.remove('video-paused');
+                    e.target.classList.remove('video-paused');
                 e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
             }
         }
@@ -99,8 +93,7 @@ media_features.forEach((feat,index)=>{
         feat.onmouseout=e=>{
             if(/mp4/.test(ext)){
                 e.target.pause();
-                e.target.controls=false;
-                e.target.classList.add('video-paused')
+                    e.target.classList.add('video-paused')
                 e.target.style='z-index:998;opacity:1';
     
             }
