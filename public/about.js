@@ -64,7 +64,7 @@ media_features.forEach((feat,index)=>{
         if(/mp4/.test(ext)&&e.target.muted){
             e.target.play();
             e.target.classList.remove('video-paused');
-            e.target.style=`z-index:999;opacity:1;${'transform:scale(.8)'};border:2rem solid #333;`
+            e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
             // console.log(labels[index])
         }
     }
@@ -84,4 +84,23 @@ media_features.forEach((feat,index)=>{
     }      
 })
 
-// keep scrollbar to the left
+
+const controlParts = document.querySelectorAll('.control-part')
+
+controlParts.forEach((part,index)=>{
+    // icons appear
+    setTimeout(()=>{
+        part.classList.remove('part-hidden')
+    },1000*(index+1))
+
+    // icons appear at a set interval
+    setInterval(()=>{
+        // remove icons before timeout
+        part.classList.add('part-hidden')
+        // set timeout to have icons appear
+        setTimeout(()=>{
+            part.classList.remove('part-hidden')
+        },1000*(index+1))
+    
+    },5250)
+})
