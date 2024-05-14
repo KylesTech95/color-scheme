@@ -13,7 +13,41 @@ body{
     height:100%;
     gap:3rem;
 }
-
+#controls-container{
+    height:40vh;
+    width:100%;
+    /* border:2px solid yellow; */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.control-part{
+    padding:1.25rem;
+    transition:.5s;
+}
+.control-part>span{
+    font-size:40px;
+}
+.control-div-container{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}
+.part-hidden{
+    opacity:0;
+    pointer-events: none;
+}
+.control-wrapper-init{
+    display:flex;
+    width:100%;
+    gap:10rem;
+    align-items: center;
+    justify-content: center;
+}
 .keyboard-video{
     height:400px;
     width:400px;
@@ -66,6 +100,9 @@ p{
     text-indent: 1in;
     margin-top:2rem;
     line-height:2rem;
+}
+.title-actual{
+    text-decoration:underline;
 }
 #title-div{
     height:100%;

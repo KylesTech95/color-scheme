@@ -84,4 +84,23 @@ media_features.forEach((feat,index)=>{
     }      
 })
 
-// keep scrollbar to the left
+
+const controlParts = document.querySelectorAll('.control-part')
+
+controlParts.forEach((part,index)=>{
+    // icons appear
+    setTimeout(()=>{
+        part.classList.remove('part-hidden')
+    },1000*(index+1))
+
+    // icons appear at a set interval
+    setInterval(()=>{
+        // remove icons before timeout
+        part.classList.add('part-hidden')
+        // set timeout to have icons appear
+        setTimeout(()=>{
+            part.classList.remove('part-hidden')
+        },1000*(index+1))
+    
+    },5250)
+})
