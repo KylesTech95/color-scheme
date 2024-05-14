@@ -26,7 +26,12 @@ setTimeout(()=>{
 const labels = document.querySelectorAll('.label-container')
 const media_features = document.querySelectorAll('.feat')
 const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.png']
-
+// remove controls for ios
+const videos = document.querySelectorAll('.video-feature')
+console.log(videos)
+videos.forEach(vid=>{
+    vid.controls=false
+})
 
 
 
@@ -35,11 +40,15 @@ const toggle = (e) => {
         e.play();
         e.classList.remove('video-paused');
         e.style='z-index:999;opacity:1;';
+        e.target.controls=false;
+
     }
     else{
         e.pause();
         e.classList.add('video-paused');
         e.style='z-index:999;opacity:.75;';
+        e.target.controls=false;
+
     }
 }
 //_____________________________________
@@ -50,7 +59,6 @@ const handleMobileClick = e =>{
         toggle(e.target)
     }
 }
-
 const mobileEvents = (ev) => {
     if(ev){
         ev.addEventListener(window.innerWidth > 1000 ? 'click' : 'touchstart',handleMobileClick)
@@ -78,6 +86,7 @@ media_features.forEach((feat,index)=>{
             console.log(ext)
             if(/mp4/.test(ext)&&e.target.paused){
                 e.target.play();
+                e.target.controls=false;
                 e.target.classList.remove('video-paused');
                 e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
             }
@@ -90,6 +99,7 @@ media_features.forEach((feat,index)=>{
         feat.onmouseout=e=>{
             if(/mp4/.test(ext)){
                 e.target.pause();
+                e.target.controls=false;
                 e.target.classList.add('video-paused')
                 e.target.style='z-index:998;opacity:1';
     
@@ -141,3 +151,4 @@ navArr.forEach((item,i)=>{
         })
     }
 })
+
