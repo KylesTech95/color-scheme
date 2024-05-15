@@ -103,8 +103,9 @@
      }
      
 .nav-list-container{
-  justify-content: end;
+  justify-content: center;
   align-items: center;
+  border:2px solid green;
 }
 
 .full{
@@ -159,7 +160,7 @@
  }
  .nav-btn-top{
   right:10px;
-  top:10px
+  top:5px
 }
  #nav-container{
   top:0;

@@ -50,7 +50,15 @@
         margin:0 0 5rem 0;
     }
     
-    
+    #nav-container{
+        top:0;
+        right:0;
+      
+       }
+    .nav-list-container{
+        justify-content: center;
+        
+    }
     .feature-div{
         width:100%;
     }
