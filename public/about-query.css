@@ -53,15 +53,19 @@
     #nav-container{
         top:0;
         right:0;
-      
+        
        }
        .nav-btn-top{
         right:10px;
         top:-1rem;
       }
+      .nav-link{
+        padding:.25rem;
+      }
     .nav-list-container{
-        justify-content: center;
-        margin-top:1rem;
+        justify-content: end;
+        margin-top:0;
+        margin-bottom:1.5rem;
     }
     .feature-div{
         width:100%;

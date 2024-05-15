@@ -5,6 +5,10 @@
 }
 
 body{
+    scroll-behavior: smooth;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    width:100%;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +16,7 @@ body{
     background:ghostwhite;
     height:100%;
     gap:3rem;
-    overflow-x:hidden
+    overflow-x:hidden;
 }
 #title-container{
     background:#919191;
@@ -276,7 +280,7 @@ position:relative;
     transition:.25s;
     position:fixed;
     right:12px;
-    top:25px;
+    top:-10px;
 }
 #nav{
     transition:.25s;
@@ -316,7 +320,7 @@ position:relative;
 .nav-link{
     height:100%;
     width:100%;
-    padding:2rem 0;
+    padding:1rem 0;
     text-align: center;
     text-decoration:none;
     color:#000;
