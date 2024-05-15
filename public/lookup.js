@@ -214,7 +214,6 @@ const addInput = e => {
             if(index==inputsUpdated.length-1 && (/([a-fA-F0-9]{3,6})/.test(e.target.value) || 
             /rgb\((\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?,(\s{0,5})?(\d{1,3})(\s{0,5})?\)/i.test(e.target.value))){
                 lastInput = e.target.value
-                console.log(lastInput)
             }
         })
     })
@@ -226,12 +225,11 @@ const addInput = e => {
     subtract.addEventListener('click',subtractInput)
     
     parent.style = 'width:100%;'
-    setCursorPosition(n_input, 4 )
     const inputHandle = e =>{
         setCursorPosition(e.target,4)
     }   
-    inputs.forEach(inp=>inp.addEventListener('click',inputHandle))
-    inputs.forEach(inp=>inp.addEventListener('keydown',handleKeydown))
+    inputsUpdated.forEach(inp=>inp.addEventListener('click',inputHandle))
+    inputsUpdated.forEach(inp=>inp.addEventListener('keydown',handleKeydown))
 
 }
 addBtn.forEach(btn=>btn.addEventListener('click',addInput))
