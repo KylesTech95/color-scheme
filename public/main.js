@@ -211,7 +211,7 @@ function parse(){
     // fs.onload = e => {
     // const data = JSON.parse(e.target.result)
     // const data = JSON.parse(JSON.parse(stringTest))
-    const data = JSON.parse(JSON.parse(stringTest))
+    const data = stringTest
         const myData = (data.colors)
         current_index = [...myData].length * percentage
         let d1 = [...myData].slice(last_index,current_index)
@@ -310,7 +310,7 @@ const partialParse = arr => {
     let containers = [...arr];
     // let fs = new FileReader();
     // fs.onload = e => {
-        const data = JSON.parse(JSON.parse(stringTest)) // response is already in blob format
+        const data = stringTest // response is already in blob format
         let myData = (data.colors)
         myData = myData.sort((a,b)=>{
             let aColor = a.color.split(/\(|\)/).filter(x=>x&&x!=='rgb')
@@ -414,20 +414,31 @@ const partialParse = arr => {
 // }
 // onload
 if(!detectMob()){
-    xml.onload = () => {
-        // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        let string = JSON.stringify(xml.response)
+    fetch(url).then(res=>res.json()).then(data=>{
+        let string = data
         stringTest = string
         parse()
-    }  
+    })
+    // xml.onload = () => {
+    //     // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+    //     let string = JSON.stringify(xml.response)
+    //     stringTest = string
+    //     parse()
+    // }  
 }
 else{
-    xml.onload = () => {
-        // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
-        let string = JSON.stringify(xml.response)
-        stringTest = string
-        partialParse(allContainers)
-    }
+    fetch(url).then(res=>res.json()).then(data=>{
+    // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+    let string = data
+    stringTest = string
+    partialParse(allContainers)
+    })
+    // xml.onload = () => {
+    //     // let blob = new Blob([xml.response],{type:'text/\plain',ending:'native'})
+    //     let string = JSON.stringify(xml.response)
+    //     stringTest = string
+    //     partialParse(allContainers)
+    // }
 }
 pal_container.onscroll = (e) => {
     let top = e.target.scrollTop;
@@ -451,7 +462,7 @@ pal_container.onscroll = (e) => {
     // if top scroll is less than array's 2nd-to-last index, GO DOWN
     if(downward()){
         if(((top) >= height*(control))){
-            if(!detectMob()){parse()}
+            if(!detectMob()){parse(stringTest)}
             bringTilesBack(pal_container)
         }
     }
