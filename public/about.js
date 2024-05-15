@@ -41,14 +41,14 @@ const toggle = (e) => {
     if(e.paused) {
         e.play();
         e.classList.remove('video-paused');
-        e.style='z-index:999;opacity:1;';
+        e.parentElement.style='z-index:999;opacity:1; border:.25rem double lime; transition:.25s;';
         e.controls=false;
 
     }
     else{
         e.pause();
         e.classList.add('video-paused');
-        e.style='z-index:999;opacity:.75;';
+        e.parentElement.style='z-index:999;opacity:.75;border:.25rem double red; transition:.75s;';
         e.controls=false;
 
     }
@@ -63,7 +63,7 @@ const handleMobileClick = e =>{
 }
 const mobileEvents = (ev) => {
     if(ev){
-        ev.addEventListener(window.innerWidth > 1000 ? 'click' : 'touchstart',handleMobileClick)
+        ev.addEventListener('touchstart',handleMobileClick)
    }
     
 }
@@ -89,6 +89,7 @@ media_features.forEach((feat,index)=>{
                 e.target.play();
                 e.target.controls=false;
                 e.target.classList.remove('video-paused');
+                e.target.parentElement.style='z-index:999;opacity:1; border:.25rem double lime; transition:.25s;';
                 e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
             }
         }
@@ -102,6 +103,7 @@ media_features.forEach((feat,index)=>{
                 e.target.pause();
                 e.target.controls=false;
                 e.target.classList.add('video-paused')
+                e.target.parentElement.style='z-index:998;opacity:.75; border:.25rem double red; transition:.25s;';
                 e.target.style='z-index:998;opacity:1';
     
             }

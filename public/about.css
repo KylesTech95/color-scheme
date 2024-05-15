@@ -186,10 +186,20 @@ transition: .75s;
     cursor:pointer;
 }
 
+.video-encloser{
+    height:550px;
+    width: 550px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    overflow:hidden;
+}
 .video-feature,
 .img-feature{
-height:350px;
-width:350px;
+height:275px;
+width:275px;
 transition:.25s;
 transform:scale(1.25)
 }
@@ -207,9 +217,9 @@ height:80vh;
 position:relative;
 
 }
-.adjust-text{
+/* .adjust-text{
     transform:translate(0,70px)
-}
+} */
 .test-div-wrapper{
     width:100%;
     padding:.5rem 0;
@@ -223,6 +233,7 @@ position:relative;
     overflow-x:scroll;
 
 }
+
 .feature-div-container{
     height:100%;
     width:2500px;
