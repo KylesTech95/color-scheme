@@ -329,12 +329,12 @@ position:relative;
 }
 .full{
     height:400px;
-    opacity:.9;    
+    opacity:1;    
 }
 
 .base{
     height:75px;
-    opacity:.75;    
+    opacity:.75;   
 }
 .base:hover{
 /* animation:pulse .75s infinite alternate ease; */

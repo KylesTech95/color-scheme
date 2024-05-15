@@ -1,12 +1,12 @@
 import configureMidLine from './components/midline.js'
 import createInput from './components/createinput.js'
 import shaveUl from './components/shaveul.js';
-import blink from './components/blink.js';
 import { rgbToHex, setRGBAndHex } from './components/rgbconversions.js';
 import { copyColor,copyMessagePop } from './components/copymachine.js';
 import { clickInput } from './components/clickinput.js';
 import { makeWhiteColor } from './components/makewhite.js';
 import {postFn,postfetch} from './components/post.js'
+import { closeNavWindowClick } from './components/closenav.js';
 
 const newHR = document.createElement('hr')
 const wrapper = document.getElementById('wrapper')
@@ -20,7 +20,6 @@ const hashPal = document.getElementById('color-pal')
 const copy = document.querySelector('.copy-icon')
 const copy_message = document.querySelector('#copy-message')
 const midline = document.getElementById('mid-line');
-const fingers = document.querySelectorAll('.hover-span')
 const btnPal = document.querySelector('.option-2')
 const allBtns = document.querySelectorAll('.pal-btn')
 const mainTitle = document.getElementById('title-main')
@@ -547,6 +546,7 @@ window.addEventListener('scroll',e=>{
 let btn_top = document.querySelector('.nav-btn-top')
 const nav = document.querySelector('#nav-container')
 const navActual = nav.children[0]
+closeNavWindowClick(nav,navActual,btn_top)
 function toggleFn(){
     if(nav.classList.contains('base')){
         nav.classList.remove('base')
@@ -567,15 +567,14 @@ const navArr = document.querySelectorAll('.nav-item>a')
 navArr.forEach((item,i)=>{
     if(i==0){
         item.addEventListener('click',e=>{
-            blink(fingers[0])
         })
     }
     if(i==1){
         item.addEventListener('click',e=>{
-            blink(fingers[1])
         })
     }
 })
+
 const result_container = document.getElementById('result-container')
 if(detectMob()){
     btnPal.classList.remove('no-item')

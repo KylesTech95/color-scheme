@@ -1,4 +1,6 @@
 import {animateControlParts} from './components/control.js'
+import { closeNavWindowClick } from './components/closenav.js'
+
 const h2s = document.querySelectorAll('.h2-class')
 const daddys = document.querySelectorAll('.daddy-container')
 const video = {
@@ -121,6 +123,7 @@ animateControlParts(controlParts)
 let btn_top = document.querySelector('.nav-btn-top')
 const nav = document.querySelector('#nav-container')
 const navActual = nav.children[0]
+closeNavWindowClick(nav,navActual,btn_top)
 function toggleFn(){
     if(nav.classList.contains('base')){
         nav.classList.remove('base')
