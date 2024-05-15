@@ -224,5 +224,9 @@ module.exports = function(app,pool,sequelize,router){
     //         return err ? console.log(err) : console.log('File has been renamed')
     //     })
     // })
+
+    app.route('/get-device-type').get((req,res)=>{
+        res.sendFile(path.resolve('public/dev-info.html'))
+    })
 }   
 
