@@ -13,10 +13,10 @@
         height:40vh
     }
     .features-title-margin{
-        transform:translate(0,-100px)
+        transform:translate(0,-175px);
     }
     .full{
-        height:300px;
+        height:470px;
       }
     /* display:none; */
     #features-container{
@@ -60,12 +60,12 @@
         top:-1rem;
       }
       .nav-link{
-        padding:.25rem;
+        padding:1.25rem;
       }
     .nav-list-container{
         justify-content: center;
         margin-top:0;
-        margin-bottom:1.5rem;
+        margin-bottom:-1rem;
     }
     .feature-div{
         width:100%;
@@ -94,6 +94,9 @@ margin-left:1rem;
     /* #features-container{
         bordeR:3px solid green;
     } */
+    .nav-link{
+        padding:.75rem;
+      }
     .test-div-wrapper{
         width:100%;
         padding:.5rem 0;
@@ -106,6 +109,9 @@ margin-left:1rem;
         overflow-x:scroll;
         /* border:2px solid red; */
     
+    }
+    .features-title-margin{
+        transform:translate(0,0px);
     }
     .feature-div-container{
         /* border:2px solid blue; */
