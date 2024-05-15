@@ -23,7 +23,6 @@ const handleTypeChange = (ev) => {
     let inputsTemp = document.querySelectorAll('.search-input')
         if(ev.target.textContent == 'RGB'){
             ev.target.textContent = 'HEX'
-            console.log(inputsTemp)
             inputsTemp.forEach(inp=>{
                 inp.value=''
                 inp.placeholder='Ex: 44550, 000, 99ddcc'
@@ -185,6 +184,7 @@ const addInput = e => {
     n_input.setAttribute('type','text')
     n_input.setAttribute('value','rgb()')
     n_input.classList.add('search-input')
+    n_input.placeHolder = /RGB/.test(typeBtn.textContent) ? 'Ex: rgb(255,255,0)' : 'Ex: 44550, 000, 99ddcc'
     newDiv.classList.add('input-div')
     newAdd.classList.add('add')
     newAdd.classList.add('add-input')
