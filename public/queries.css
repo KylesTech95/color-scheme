@@ -20,6 +20,9 @@
   form#form{
     transform:translate(0,30px)
   }
+  footer#footer{
+    transform:translate(0,100px)
+  }
 }
 
 @media screen and (max-width:1000px){
@@ -160,7 +163,7 @@
  }
  .nav-btn-top{
   right:10px;
-  top:5px
+  top:-1rem;
 }
  #nav-container{
   top:0;
@@ -310,12 +313,17 @@ transition:.25s;
   transition:.25s;
   position:fixed;
   right:10px;
-  top:0px
+  top:-1rem;
 
 }
 #nav-container{
   top:0;
   right:0;
 }
-
+footer#footer{
+  position:absolute;
+  right:0;
+  bottom:-100%;
+  width:100%;
+}
 }

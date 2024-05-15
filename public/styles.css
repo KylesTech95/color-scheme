@@ -259,7 +259,7 @@ body{
     justify-content: center;
 }
 #wrapper{
-    height:100vh;
+    height:100%;
     width:100%;
 }
 #nav-container{
@@ -816,6 +816,7 @@ z-index:999;
 
 /* contact */
 footer#footer{
+    border:2px solid red;
     height:20vh;
     display:flex;
     flex-direction: column;
