@@ -142,41 +142,6 @@
     </div>
     
 </body>
-<!-- <script type="module">
-    import {onCLS, onFID, onLCP, onFCP} from 'https://unpkg.com/web-vitals@3?module'
-    import {postFn} from './components/post.js'
-    const vitality = {}
-    let traceVitals = [];
-
-    function logDelta({name, id, delta}) {
-    let ress = `${name} - Difference from last: ${delta}`
-    console.log(ress)
-}
-    onFID(e=>{
-    console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
-        })
-    onCLS(e=>{
-    console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
-    })
-    onFCP(e=>{
-    console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
-    })
-    onLCP(e=>{
-    console.log(e.name+"\n"+e.value+"\n"+e.rating+" shit!")
-    })
-    let events = ['click','resize','scroll','change','load','loadstart','loadend','progress','error']
-
-    events.forEach(event => {
-        window.addEventListener(event,()=>{
-            onFID(logDelta)
-            onCLS(logDelta)
-            onFCP(logDelta)
-            onLCP(logDelta)
-        })
-    })
-    
-    
-</script> -->
 <script type="module" src="main.js"></script>
 <script type="module" src="lookup.js"></script>
 </html>
