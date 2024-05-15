@@ -55,9 +55,13 @@
         right:0;
       
        }
+       .nav-btn-top{
+        right:10px;
+        top:-1rem;
+      }
     .nav-list-container{
         justify-content: center;
-        
+        margin-top:1rem;
     }
     .feature-div{
         width:100%;
