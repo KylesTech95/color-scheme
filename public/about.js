@@ -154,3 +154,7 @@ navArr.forEach((item,i)=>{
     }
 })
 
+// scroll window to top of webpage on load
+window.onbeforeunload = function () {
+    window.scrollTo(0,0);
+};
