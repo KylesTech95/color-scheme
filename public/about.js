@@ -27,10 +27,9 @@ setTimeout(()=>{
 // set media src's
 const labels = document.querySelectorAll('.label-container')
 const media_features = document.querySelectorAll('.feat')
-const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.png']
+const mediaArr = ['keyboard-vid.mp4','hex-vid.mp4','mobile-vid.mp4','desktop-view.mp4']
 // remove controls for ios
 const videos = document.querySelectorAll('.video-feature')
-console.log(videos)
 videos.forEach(vid=>{
     vid.controls=false
 })
@@ -90,22 +89,25 @@ media_features.forEach((feat,index)=>{
                 e.target.controls=false;
                 e.target.classList.remove('video-paused');
                 e.target.parentElement.style='z-index:999;opacity:1; border:.25rem double lime; transition:.25s;';
-                e.target.style=`z-index:999;opacity:1;${'transform:scale(1.5)'};`
+                e.target.style=`${'transform:scale(1.5)'};`
             }
         }
         feat.onmouseover=e=>{
             if(/mp4/.test(ext)){
-                e.target.style.opacity = .75;
+                e.target.parentElement.style.opacity = .75;
             }
         }
         feat.onmouseout=e=>{
-            if(/mp4/.test(ext)){
+            if(/mp4/.test(ext) && !feat.paused){
                 e.target.pause();
                 e.target.controls=false;
                 e.target.classList.add('video-paused')
-                e.target.parentElement.style='z-index:998;opacity:.75; border:.25rem double red; transition:.25s;';
-                e.target.style='z-index:998;opacity:1';
+                e.target.parentElement.style='z-index:998;opacity:1; border:.25rem double red; transition:.25s;';
+                e.target.style='transform:scale(1);'
     
+            }
+            else{
+                e.target.parentElement.style.opacity = 1;
             }
         }  
     }   

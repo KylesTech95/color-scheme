@@ -23,7 +23,6 @@
     <nav id="nav" class="hidden-item">
         <ul class="nav-list-container">
             <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="#explanation-container" class="nav-link">About</a></li>
             <li class="nav-item"><a href="#features-container" class="nav-link">Features</a></li>
             <li class="nav-item"><a href="#controls-container" class="nav-link">Controls</a></li>
             <li class="nav-item"><a href="#footer" class="nav-link">Contact</a></li>
@@ -113,7 +112,7 @@
         <div class="feature-div">
             <div class="video-container">
                 <div class="video-encloser">
-                    <img src="" class="img-feature feat"></img>
+                    <video src="" class=" mobile-vid video-feature custom-vid-control playsinline feat no_highlights video-paused"></video>
                 </div>
                 <div class="label-container">
                     <h3 class="feature-label adjust-text">Desktop Use</h3>
@@ -131,28 +130,35 @@
             <b>Controls</b>
         </h2>
     </div>
+    <!--flex into a column-->
     <div class="control-div-container">
         <div class="control-wrapper-init">
+            <!--display flex row-->
             <div class="control-part part-hidden">
-                <span class="material-symbols-outlined">keyboard_alt</span>
+                <span class="material-symbols-outlined icon-pos">keyboard_alt</span>
                 <h3 class="control-label">Keyboard</h3>
             </div>
             <div class="control-part part-hidden">
-                <span class="material-symbols-outlined">mouse</span>
-                <span class="material-symbols-outlined">arrow_selector_tool</span>
+                <span class="material-symbols-outlined icon-pos">mouse</span>
+                <span class="material-symbols-outlined icon-pos">arrow_selector_tool</span>
 
                 <h3 class="control-label">Mouse & Click</h3>
             </div>
         </div>
+        <!--div is below flex at the top-->
         <div class="control-part part-hidden">
-            <span class="material-symbols-outlined">touch_app</span>
+            <span class="material-symbols-outlined icon-pos">touch_app</span>
             <h3 class="control-label">Touch</h3>
         </div>
     </div>
+
 </section>
 
 <footer id="footer">
-    <h1>Hello World</h1>
+    <div id="contact-container">
+        <div class="icon-container github"><span>Github</span></div>
+        <div class="icon-container insta"><span>Insta</span></div>
+    </div>
 </footer>
     
 </body>
