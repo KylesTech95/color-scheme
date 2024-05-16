@@ -164,3 +164,10 @@ if(window.location.href==window.location.origin+'/about'){
         window.scrollTo(0,0);
     };
 }
+
+
+// scroll & shift'
+const features_container = document.querySelector('.feature-div-container')
+window.onload = e =>{
+    features_container.parentElement.scrollTo(0,0)
+}

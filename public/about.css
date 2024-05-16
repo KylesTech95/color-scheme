@@ -402,3 +402,14 @@ video::-webkit-media-controls-panel{
 video::-webkit-media-controls-start-playback-button {
     display: none !important;
 }
+
+/* icons for contact (footer) */
+
+.icon-container>a{
+ transition:.75s;
+}
+.icon-container>a:hover{
+    transform:scale(.9);
+    cursor:pointer;
+    transition:.25s;
+}

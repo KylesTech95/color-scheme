@@ -834,3 +834,14 @@ footer#footer{
     border-top:1px solid #333;
     background:rgb(76, 76, 76);
 }
+
+/* icons for contact (footer) */
+
+.icon-container>a{
+    transition:.75s;
+   }
+   .icon-container>a:hover{
+       font-size:20px;
+       cursor:pointer;
+       transition:.25s;
+   }
