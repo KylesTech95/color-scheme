@@ -12,7 +12,9 @@
     section#title-container{
         height:40vh
     }
-
+.title-container-margin{
+    padding-top:1rem;
+}
 
     .features-title-margin{
         transform:translate(0,-175px);

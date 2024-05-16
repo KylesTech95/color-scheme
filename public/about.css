@@ -75,7 +75,8 @@ height:100vh;
    width:100%;
    /* border-top:3px solid #333; */
    box-shadow:inset 0 .5rem 8px .5px #3333337f;
-   padding-top:1rem;
+   padding-top:1.5rem;
+   
     }
 .daddy-container{
     width:100%;
@@ -87,6 +88,7 @@ height:100vh;
     gap:1rem;
     transition:1s;
     margin-top:3rem;
+    height:100%;
 }
 .hidden{
     opacity:0;
